@@ -19,11 +19,11 @@ dependencies {
 // https://docs.freefair.io/gradle-plugins/4.1.6/reference/#_lombok_plugins
 lombok {
     config["lombok.addJavaxGeneratedAnnotation"] = "true"
-    config["lombok.experimental.flagUsage"] = "WARN"
+    config["lombok.experimental.flagUsage"] = "WARNING"
     config["lombok.extensionMethod.flagUsage"] = "ERROR"
-    config["lombok.fieldDefaults.flagUsage"] = "WARN"
+    config["lombok.fieldDefaults.flagUsage"] = "WARNING"
     config["lombok.nonNull.exceptionType"] = "IllegalArgumentException"
-    config["lombok.sneakyThrows.flagUsage"] = "WARN"
+    config["lombok.sneakyThrows.flagUsage"] = "WARNING"
     config["lombok.toString.doNotUseGetters"] = "true"
 }
 
