@@ -1,0 +1,41 @@
+plugins {
+    id "io.freefair.lombok" version "4.1.6"
+    id "java"
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+group = "org.frontear"
+version = "0.1"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+}
+
+// https://docs.freefair.io/gradle-plugins/4.1.6/reference/#_lombok_plugins
+lombok {
+    config["lombok.addJavaxGeneratedAnnotation"] = "true"
+    config["lombok.experimental.flagUsage"] = "WARN"
+    config["lombok.extensionMethod.flagUsage"] = "ERROR"
+    config["lombok.fieldDefaults.flagUsage"] = "WARN"
+    config["lombok.nonNull.exceptionType"] = "IllegalArgumentException"
+    config["lombok.sneakyThrows.flagUsage"] = "WARN"
+    config["lombok.toString.doNotUseGetters"] = "true"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = "6.0.1"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
