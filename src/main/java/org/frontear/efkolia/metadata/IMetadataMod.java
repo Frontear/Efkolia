@@ -5,7 +5,7 @@ import org.frontear.internal.*;
 /**
  * This interface is designated to contain all the metadata information about a mod. Any metadata
  * marked with {@link Nullable} is not mandatory, and can be safely skipped/not contained. Anything
- * else MUST be a part of the metadata, and accessible
+ * else MUST be a part of the metadata, and accessible through their respective getters
  */
 public interface IMetadataMod {
     /**
