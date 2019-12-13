@@ -22,5 +22,6 @@ public interface IConfigurable<E> {
      *
      * @return The property name of the object
      */
+    @NotNull
     String getPropertyName();
 }

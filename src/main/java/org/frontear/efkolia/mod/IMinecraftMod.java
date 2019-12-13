@@ -1,6 +1,7 @@
 package org.frontear.efkolia.mod;
 
 import org.frontear.efkolia.logging.ILogger;
+import org.frontear.internal.NotNull;
 
 /**
  * The interface which defines a minecraft mod. This should ideally contain all of your objects, and
@@ -14,5 +15,6 @@ public interface IMinecraftMod {
      *
      * @return An instance of {@link ILogger}
      */
+    @NotNull
     ILogger getLogger();
 }
