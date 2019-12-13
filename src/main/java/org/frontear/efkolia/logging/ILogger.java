@@ -27,7 +27,7 @@ public interface ILogger {
      * The invocation to output a warning entry to the logging system. This should be used to raise
      * awareness that something outside of the norm has occurred, but it is within the realm of
      * expectation, and has been handled by the code. Ideally, you should be as precise as possible
-     * to allow the user to fix/correct their behaviour
+     * to allow the user to fix/correct their behaviour.
      *
      * @param to_string   An object that will be converted into a {@link String}, then passed into
      *                    {@link String#format(String, Object...)}
@@ -54,7 +54,7 @@ public interface ILogger {
      * The invocation to output a debug entry to the logging system. This should NOT be visible in
      * normal environments, and only visible if certain conditions are met, ie the application is in
      * a debugging state. This does not follow any specific convention beyond that, as each dev has
-     * a different perspective on debugging
+     * a different perspective on debugging.
      *
      * @param to_string   An object that will be converted into a {@link String}, then passed into
      *                    {@link String#format(String, Object...)}
