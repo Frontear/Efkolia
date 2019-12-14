@@ -2,11 +2,10 @@ package org.frontear.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.*;
+import java.io.BufferedReader;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -31,16 +30,14 @@ class LoggerTest {
         assertEquals(lines, debug ? 8 : 6);
     }
 
-    @SneakyThrows(IOException.class)
     @BeforeEach
     void setUp() {
-        reader = Files.newBufferedReader(log);
+        assertDoesNotThrow(() -> reader = Files.newBufferedReader(log));
     }
 
-    @SneakyThrows(IOException.class)
     @AfterEach
     void tearDown() {
-        reader.close();
+        assertDoesNotThrow(reader::close);
     }
 
     @Test
