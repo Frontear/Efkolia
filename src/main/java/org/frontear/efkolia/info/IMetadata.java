@@ -30,5 +30,5 @@ public interface IMetadata {
      * @return The authors responsible for developing the mod
      */
     @NotNull
-    String[] getAuthors();
+    String getAuthors();
 }
