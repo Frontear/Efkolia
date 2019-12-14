@@ -26,10 +26,9 @@ class LoggerTest {
         lines = 0;
     }
 
-    @SneakyThrows(IOException.class)
     @AfterAll
     static void afterAll() {
-        Files.delete(log);
+        assertEquals(lines, debug ? 8 : 6);
     }
 
     @SneakyThrows(IOException.class)
