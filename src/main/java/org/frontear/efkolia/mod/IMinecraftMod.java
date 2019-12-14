@@ -1,8 +1,8 @@
 package org.frontear.efkolia.mod;
 
 import org.frontear.efkolia.configuration.IConfig;
+import org.frontear.efkolia.info.IMetadata;
 import org.frontear.efkolia.logging.ILogger;
-import org.frontear.efkolia.metadata.IMetadataMod;
 import org.frontear.internal.*;
 
 /**
@@ -16,10 +16,10 @@ public interface IMinecraftMod {
      * information that it claims to provide actually exists, as some may be marked {@link
      * Nullable}
      *
-     * @return An instance of {@link IMetadataMod}
+     * @return An instance of {@link IMetadata}
      */
     @NotNull
-    IMetadataMod getMetadata();
+    IMetadata getMetadata();
 
     /**
      * The config of the mod. This will synchronize and manage all objects that are configured

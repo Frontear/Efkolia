@@ -1,4 +1,4 @@
-package org.frontear.efkolia.metadata;
+package org.frontear.efkolia.info;
 
 import org.frontear.internal.*;
 
@@ -7,7 +7,7 @@ import org.frontear.internal.*;
  * marked with {@link Nullable} is not mandatory, and can be safely skipped/not contained. Anything
  * else MUST be a part of the metadata, and accessible through their respective getters
  */
-public interface IMetadataMod {
+public interface IMetadata {
     /**
      * @return The name of the mod
      */
