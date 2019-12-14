@@ -2,6 +2,7 @@ package org.frontear.impl.logging;
 
 import static org.apache.logging.log4j.Level.*;
 
+import java.util.function.BooleanSupplier;
 import lombok.val;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -45,9 +46,11 @@ public class Logger implements ILogger {
     }
 
     private final org.apache.logging.log4j.Logger logger;
+    private final BooleanSupplier debug;
 
-    public Logger(final String name) {
+    public Logger(@NotNull final String name, @NotNull final BooleanSupplier debug) {
         this.logger = context.getLogger(name);
+        this.debug = debug;
     }
 
     @Override
@@ -67,6 +70,8 @@ public class Logger implements ILogger {
 
     @Override
     public void debug(@NotNull final Object to_string, final Object... format_args) {
-        logger.debug(String.format(to_string.toString(), format_args));
+        if (debug.getAsBoolean()) {
+            logger.debug(String.format(to_string.toString(), format_args));
+        }
     }
 }
