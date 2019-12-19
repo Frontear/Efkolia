@@ -7,7 +7,6 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.*;
-import org.opentest4j.AssertionFailedError;
 
 @SuppressWarnings("ConstantConditions")
 class LoggerTest {

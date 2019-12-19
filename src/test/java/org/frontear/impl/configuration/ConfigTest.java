@@ -11,23 +11,14 @@ import org.junit.jupiter.api.*;
 class ConfigTest {
     static Path file;
     static Config config;
-    TestObject object;
+    static TestObject object;
 
     @BeforeAll
     static void beforeAll() {
         file = Paths.get(System.getProperty("java.io.tmpdir"), "test.json");
         config = new Config(new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean()),
             file);
-    }
-
-    @BeforeEach
-    void setUp() {
         object = new TestObject();
-    }
-
-    @AfterEach
-    void tearDown() {
-        object = null;
     }
 
     @Test

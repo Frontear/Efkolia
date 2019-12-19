@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import java.util.concurrent.ThreadLocalRandom;
 import org.frontear.internal.NotNull;
 
-public class TestObject extends Configurable<TestObject> {
+class TestObject extends Configurable<TestObject> {
     @Expose
     int number = ThreadLocalRandom.current().nextInt();
 
