@@ -2,16 +2,15 @@ package org.frontear.impl.info;
 
 import lombok.val;
 import org.frontear.efkolia.info.IMetadata;
-import org.frontear.internal.*;
+import org.frontear.internal.NotNull;
 
 public final class Metadata implements IMetadata {
-    private final String name, version, description, authors;
+    private final String name, version, authors;
 
     public Metadata(@NotNull final String name, @NotNull final String version,
-        @Nullable final String description, @NotNull final String... authors) {
+        @NotNull final String... authors) {
         this.name = name;
         this.version = version;
-        this.description = description;
 
         val joined = String.join(", ", authors);
         val index = joined.lastIndexOf(", ");
@@ -29,12 +28,6 @@ public final class Metadata implements IMetadata {
     @Override
     public String getVersion() {
         return version;
-    }
-
-    @Nullable
-    @Override
-    public String getDescription() {
-        return description;
     }
 
     @NotNull

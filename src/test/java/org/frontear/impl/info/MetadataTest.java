@@ -25,13 +25,6 @@ class MetadataTest {
     }
 
     @Test
-    void getDescription() {
-        if (metadata.getDescription() != null) {
-            assertEquals(metadata.getDescription(), "This is just a test");
-        }
-    }
-
-    @Test
     void getAuthors() {
         assertNotNull(metadata.getAuthors());
         assertEquals(metadata.getAuthors(), "Frontear, and N/A");

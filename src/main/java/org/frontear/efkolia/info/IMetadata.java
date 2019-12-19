@@ -1,11 +1,10 @@
 package org.frontear.efkolia.info;
 
-import org.frontear.internal.*;
+import org.frontear.internal.NotNull;
 
 /**
- * This interface is designated to contain all the metadata information about a mod. Any metadata
- * marked with {@link Nullable} is not mandatory, and can be safely skipped/not contained. Anything
- * else MUST be a part of the metadata, and accessible through their respective getters
+ * This interface is designated to contain all the metadata information about a mod. None of the
+ * information should be null
  */
 public interface IMetadata {
     /**
@@ -19,12 +18,6 @@ public interface IMetadata {
      */
     @NotNull
     String getVersion();
-
-    /**
-     * @return The description about the mod's functionality
-     */
-    @Nullable
-    String getDescription();
 
     /**
      * @return The authors responsible for developing the mod
