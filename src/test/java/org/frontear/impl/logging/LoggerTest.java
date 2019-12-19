@@ -110,11 +110,6 @@ class LoggerTest {
     }
 
     private void assertLines() {
-        try {
-            assertEquals(reader.lines().count(), lines);
-        }
-        catch (AssertionFailedError e) {
-            e.printStackTrace();
-        }
+        assertEquals(reader.lines().count(), lines);
     }
 }
