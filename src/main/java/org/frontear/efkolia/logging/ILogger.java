@@ -62,4 +62,17 @@ public interface ILogger {
      *                    Object...)}
      */
     void debug(@NotNull final Object to_string, final Object... format_args);
+
+    /**
+     * Creates a child logger which inherits the name of the current logger. This allows you to
+     * create more specific logging instances which functionally still tie back to a greater logger
+     * instance, and by proxy, a specific mod. This should be preferred over creating differing
+     * instances for each area you need an {@link ILogger}
+     *
+     * @param name The name of the new logger. This should contain a part of the current logger
+     *             name
+     *
+     * @return A new instance of {@link ILogger}, which is semantically tied back to this logger
+     */
+    ILogger child(@NotNull final String name);
 }

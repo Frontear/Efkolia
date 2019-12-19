@@ -102,4 +102,11 @@ class LoggerTest {
         lines += debug ? 2 : 0;
         assertEquals(reader.lines().count(), lines);
     }
+
+    @Test
+    void child() {
+        assertThrows(NullPointerException.class, () -> logger.child(null));
+
+        assertDoesNotThrow(() -> logger.child("Test"));
+    }
 }

@@ -47,10 +47,12 @@ public class Logger implements ILogger {
 
     private final org.apache.logging.log4j.Logger logger;
     private final BooleanSupplier debug;
+    private final String name;
 
     public Logger(@NotNull final String name, @NotNull final BooleanSupplier debug) {
         this.logger = context.getLogger(name);
         this.debug = debug;
+        this.name = name;
     }
 
     @Override
@@ -73,5 +75,10 @@ public class Logger implements ILogger {
         if (debug.getAsBoolean()) {
             logger.debug(String.format(to_string.toString(), format_args));
         }
+    }
+
+    @Override
+    public Logger child(@NotNull final String name) {
+        return new Logger(this.name + "/" + name, this.debug);
     }
 }
