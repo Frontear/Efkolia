@@ -25,12 +25,10 @@ public interface IMinecraftMod {
      * The config of the mod. This will synchronize and manage all objects that are configured
      * through an external file
      *
-     * @param <E> The config type that each configurable conforms to
-     *
      * @return An instance of {@link IConfig}
      */
     @NotNull
-    <E> IConfig<E> getConfig();
+    IConfig getConfig();
 
     /**
      * The logging system of the mod. All logging pertaining to the mod and its functionality should

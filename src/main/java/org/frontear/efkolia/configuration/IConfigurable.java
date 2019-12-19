@@ -6,9 +6,9 @@ import org.frontear.internal.NotNull;
  * The interface given to all items that are willing to be internally modified via {@link IConfig}.
  *
  * @param <E> The value {@link IConfig#load()} will give to your object. You then set the state
- *            through {@link IConfigurable#load(Object)}
+ *            through {@link IConfigurable#load(IConfigurable)}
  */
-public interface IConfigurable<E> {
+public interface IConfigurable<E extends IConfigurable<E>> {
     /**
      * Loading information from the configuration file, and passing it to the {@link IConfigurable}
      * in order to allow it to extract the data it needs.
