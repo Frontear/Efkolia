@@ -2,10 +2,9 @@ package org.frontear.impl.configuration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.nio.file.*;
 import java.util.concurrent.ThreadLocalRandom;
-import lombok.*;
+import lombok.val;
 import org.frontear.impl.logging.Logger;
 import org.junit.jupiter.api.*;
 
@@ -19,12 +18,6 @@ class ConfigTest {
         file = Paths.get(System.getProperty("java.io.tmpdir"), "test.json");
         config = new Config(new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean()),
             file);
-    }
-
-    @SneakyThrows(IOException.class)
-    @AfterAll
-    static void afterAll() {
-        Files.delete(file);
     }
 
     @BeforeEach

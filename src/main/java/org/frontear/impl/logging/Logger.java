@@ -45,14 +45,14 @@ public final class Logger implements ILogger {
         context = Configurator.initialize(builder.build());
     }
 
-    private final org.apache.logging.log4j.Logger logger;
-    private final BooleanSupplier debug;
     private final String name;
+    private final BooleanSupplier debug;
+    private final org.apache.logging.log4j.Logger logger;
 
     public Logger(@NotNull final String name, @NotNull final BooleanSupplier debug) {
-        this.logger = context.getLogger(name);
-        this.debug = debug;
         this.name = name;
+        this.debug = debug;
+        this.logger = context.getLogger(name);
     }
 
     @Override

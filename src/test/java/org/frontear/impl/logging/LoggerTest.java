@@ -2,11 +2,10 @@ package org.frontear.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.*;
+import java.io.BufferedReader;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -26,12 +25,9 @@ class LoggerTest {
         lines = 0;
     }
 
-    @SneakyThrows(IOException.class)
     @AfterAll
     static void afterAll() {
         assertEquals(lines, debug ? 8 : 6);
-
-        Files.delete(log);
     }
 
     @BeforeEach
