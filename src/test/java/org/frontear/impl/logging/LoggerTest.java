@@ -105,8 +105,6 @@ class LoggerTest {
 
     @Test
     void child() {
-        assertThrows(NullPointerException.class, () -> logger.child(null));
-
         assertDoesNotThrow(() -> logger.child("Test"));
     }
 }
