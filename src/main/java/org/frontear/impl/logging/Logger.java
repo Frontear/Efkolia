@@ -12,7 +12,7 @@ import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFact
 import org.frontear.efkolia.logging.ILogger;
 import org.frontear.internal.NotNull;
 
-public class Logger implements ILogger {
+public final class Logger implements ILogger {
     private static final LoggerContext context;
 
     static {

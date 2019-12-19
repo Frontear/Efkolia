@@ -10,7 +10,7 @@ import org.frontear.efkolia.configuration.*;
 import org.frontear.impl.logging.Logger;
 import org.frontear.internal.NotNull;
 
-public class Config implements IConfig {
+public final class Config implements IConfig {
     private static final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
         .enableComplexMapKeySerialization().serializeNulls().setPrettyPrinting().create();
     private final Set<IConfigurable<?>> configurables = new LinkedHashSet<>();

@@ -4,7 +4,7 @@ import lombok.val;
 import org.frontear.efkolia.info.IMetadata;
 import org.frontear.internal.*;
 
-public class Metadata implements IMetadata {
+public final class Metadata implements IMetadata {
     private final String name, version, description, authors;
 
     public Metadata(@NotNull final String name, @NotNull final String version,
