@@ -2,12 +2,11 @@ package org.frontear.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.*;
+import java.io.BufferedReader;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.*;
-import org.opentest4j.AssertionFailedError;
 
 @SuppressWarnings("ConstantConditions")
 class LoggerTest {
@@ -52,13 +51,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.info("Hello, world!"));
 
         lines += 2;
-
-        try {
-            assertEquals(reader.lines().count(), lines);
-        }
-        catch (AssertionFailedError e) {
-            e.printStackTrace();
-        }
+        assertEquals(reader.lines().count(), lines);
     }
 
     @Test
@@ -72,12 +65,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.warn("Hello, world!"));
 
         lines += 2;
-        try {
-            assertEquals(reader.lines().count(), lines);
-        }
-        catch (AssertionFailedError e) {
-            e.printStackTrace();
-        }
+        assertEquals(reader.lines().count(), lines);
     }
 
     @Test
@@ -91,12 +79,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.error("Hello, world!"));
 
         lines += 2;
-        try {
-            assertEquals(reader.lines().count(), lines);
-        }
-        catch (AssertionFailedError e) {
-            e.printStackTrace();
-        }
+        assertEquals(reader.lines().count(), lines);
     }
 
     @Test
@@ -117,12 +100,7 @@ class LoggerTest {
         }
 
         lines += debug ? 2 : 0;
-        try {
-            assertEquals(reader.lines().count(), lines);
-        }
-        catch (AssertionFailedError e) {
-            e.printStackTrace();
-        }
+        assertEquals(reader.lines().count(), lines);
     }
 
     @Test
