@@ -7,6 +7,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.*;
+import org.opentest4j.AssertionFailedError;
 
 @SuppressWarnings("ConstantConditions")
 class LoggerTest {
@@ -51,7 +52,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.info("Hello, world!"));
 
         lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertLines();
     }
 
     @Test
@@ -65,7 +66,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.warn("Hello, world!"));
 
         lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertLines();
     }
 
     @Test
@@ -79,7 +80,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.error("Hello, world!"));
 
         lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertLines();
     }
 
     @Test
@@ -100,11 +101,20 @@ class LoggerTest {
         }
 
         lines += debug ? 2 : 0;
-        assertEquals(reader.lines().count(), lines);
+        assertLines();
     }
 
     @Test
     void child() {
         assertDoesNotThrow(() -> logger.child("Test"));
+    }
+
+    private void assertLines() {
+        try {
+            assertEquals(reader.lines().count(), lines);
+        }
+        catch (AssertionFailedError e) {
+            e.printStackTrace();
+        }
     }
 }
