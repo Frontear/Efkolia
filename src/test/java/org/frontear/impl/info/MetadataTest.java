@@ -9,7 +9,7 @@ class MetadataTest {
 
     @BeforeAll
     static void beforeAll() {
-        metadata = new Metadata("Test", "0.1", "This is just a test", "Frontear", "N/A");
+        metadata = new Metadata("Test", "0.1", "Frontear", "N/A");
     }
 
     @Test
