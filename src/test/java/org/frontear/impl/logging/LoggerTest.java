@@ -51,7 +51,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.info("Hello, world!"));
 
         lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertEquals(reader.lines().count(), lines, reader.lines().count() + ":" + lines);
     }
 
     @Test
@@ -65,7 +65,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.warn("Hello, world!"));
 
         lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertEquals(reader.lines().count(), lines, reader.lines().count() + ":" + lines);
     }
 
     @Test
@@ -79,7 +79,7 @@ class LoggerTest {
         assertDoesNotThrow(() -> logger.error("Hello, world!"));
 
         lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertEquals(reader.lines().count(), lines, reader.lines().count() + ":" + lines);
     }
 
     @Test
@@ -100,7 +100,7 @@ class LoggerTest {
         }
 
         lines += debug ? 2 : 0;
-        assertEquals(reader.lines().count(), lines);
+        assertEquals(reader.lines().count(), lines, reader.lines().count() + ":" + lines);
     }
 
     @Test
