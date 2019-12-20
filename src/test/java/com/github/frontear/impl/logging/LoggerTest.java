@@ -2,7 +2,6 @@ package com.github.frontear.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.*;

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.impl.logging.Logger;
 import java.util.concurrent.ThreadLocalRandom;
-import lombok.val;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -13,12 +12,16 @@ class EventExecutorTest {
     static TestEvent event;
     static TestObject object;
 
+    static boolean cancel_normal;
+
     @BeforeAll
     static void beforeAll() {
         executor = new EventExecutor(
             new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean()));
         event = new TestEvent("Test", 123);
         object = new TestObject();
+
+        cancel_normal = ThreadLocalRandom.current().nextBoolean();
     }
 
     @Test
@@ -34,12 +37,15 @@ class EventExecutorTest {
 
     @Test
     void fire() {
-        val last_string = event.string;
-        val last_number = event.number;
-
         assertDoesNotThrow(() -> executor.fire(event));
 
-        assertNotSame(event.string, last_string);
-        assertNotSame(event.number, last_number);
+        if (cancel_normal) {
+            assertSame(event.string, "HIGH");
+            assertSame(event.number, 0);
+        }
+        else { // run last
+            assertSame(event.string, "LOW");
+            assertSame(event.number, 2);
+        }
     }
 }
