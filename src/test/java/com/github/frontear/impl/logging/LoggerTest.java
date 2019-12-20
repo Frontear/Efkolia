@@ -2,9 +2,9 @@ package com.github.frontear.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import lombok.*;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -74,14 +74,6 @@ class LoggerTest {
     }
 
     private String rand() {
-        val random = ThreadLocalRandom.current();
-        var len = random.nextInt(10, 20);
-        val string = new StringBuilder(len);
-
-        while (len-- > 0) {
-            string.append((char) (random.nextInt(26) + 'a'));
-        }
-
-        return string.toString();
+        return PseudoRandom.nextString(PseudoRandom.nextInt(10, 30), true);
     }
 }
