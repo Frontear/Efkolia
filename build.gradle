@@ -1,10 +1,12 @@
 plugins {
+    id "io.codearte.nexus-staging" version "0.21.1"
+    id "com.bmuschko.nexus" version "2.3.1"
     id "io.freefair.lombok" version "4.1.6"
     id "java"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
-group = "org.frontear"
+group = "com.github.frontear"
 version = "0.1"
 
 repositories {
@@ -29,6 +31,36 @@ lombok {
     config["lombok.nonNull.flagUsage"] = "ERROR"
     config["lombok.sneakyThrows.flagUsage"] = "WARNING"
     config["lombok.toString.doNotUseGetters"] = "true"
+}
+
+modifyPom {
+    //noinspection GroovyAssignabilityCheck
+    project {
+        name = "Efkolia"
+        description = "A simple framework designed for Minecraft modding"
+        url = "https://github.com/frontear/efkolia"
+
+        scm {
+            url = "https://github.com/frontear/efkolia"
+            connection = "scm:https://frontear@github.com/frontear/efkolia.git"
+            developerConnection = "scm:git://github.com/frontear/efkolia.git"
+        }
+
+        licenses {
+            license {
+                name = "GNU General Public License v3.0"
+                url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
+                distribution = "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id = "Frontear"
+                name = "Ali Rizvi"
+            }
+        }
+    }
 }
 
 test {

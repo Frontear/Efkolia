@@ -110,4 +110,5 @@ gradle-app.setting
 
 ### Frontear ###
 lombok.config
+gradle.properties
 logs/
