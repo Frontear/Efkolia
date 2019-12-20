@@ -4,8 +4,9 @@ import com.github.frontear.efkolia.events.Listener;
 import com.github.frontear.efkolia.events.Listener.Priority;
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.*;
-import lombok.SneakyThrows;
+import lombok.*;
 
+@EqualsAndHashCode
 final class EventMethod implements Comparable<EventMethod> {
     final Object instance;
     private final Method method;
