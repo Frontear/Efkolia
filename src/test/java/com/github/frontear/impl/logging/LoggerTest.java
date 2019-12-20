@@ -2,42 +2,21 @@ package com.github.frontear.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.BufferedReader;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import lombok.*;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
 class LoggerTest {
     static boolean debug;
     static Logger logger;
-    static int lines;
-    static Path log;
-
-    BufferedReader reader;
 
     @BeforeAll
     static void beforeAll() {
-        log = Paths.get("logs", "efkolia.log");
         debug = ThreadLocalRandom.current().nextBoolean();
         logger = new Logger("Test", () -> debug);
-        lines = 0;
-    }
-
-    @AfterAll
-    static void afterAll() {
-        assertEquals(lines, debug ? 8 : 6);
-    }
-
-    @BeforeEach
-    void setUp() {
-        assertDoesNotThrow(() -> reader = Files.newBufferedReader(log));
-    }
-
-    @AfterEach
-    void tearDown() {
-        assertDoesNotThrow(reader::close);
     }
 
     @Test
@@ -47,11 +26,8 @@ class LoggerTest {
         assertThrows(MissingFormatArgumentException.class, () -> logger.info("Hello, %s!"));
         assertThrows(NullPointerException.class, () -> logger.info(null));
 
-        assertDoesNotThrow(() -> logger.info("Hello, %s!", "world"));
-        assertDoesNotThrow(() -> logger.info("Hello, world!"));
-
-        lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertDoesNotThrow(() -> logger.info("%s", rand()));
+        assertDoesNotThrow(() -> logger.info(rand()));
     }
 
     @Test
@@ -61,11 +37,8 @@ class LoggerTest {
         assertThrows(MissingFormatArgumentException.class, () -> logger.warn("Hello, %s!"));
         assertThrows(NullPointerException.class, () -> logger.warn(null));
 
-        assertDoesNotThrow(() -> logger.warn("Hello, %s!", "world"));
-        assertDoesNotThrow(() -> logger.warn("Hello, world!"));
-
-        lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertDoesNotThrow(() -> logger.warn("%s", rand()));
+        assertDoesNotThrow(() -> logger.warn(rand()));
     }
 
     @Test
@@ -75,11 +48,8 @@ class LoggerTest {
         assertThrows(MissingFormatArgumentException.class, () -> logger.error("Hello, %s!"));
         assertThrows(NullPointerException.class, () -> logger.error(null));
 
-        assertDoesNotThrow(() -> logger.error("Hello, %s!", "world"));
-        assertDoesNotThrow(() -> logger.error("Hello, world!"));
-
-        lines += 2;
-        assertEquals(reader.lines().count(), lines);
+        assertDoesNotThrow(() -> logger.error("%s", rand()));
+        assertDoesNotThrow(() -> logger.error(rand()));
     }
 
     @Test
@@ -89,22 +59,30 @@ class LoggerTest {
                 () -> logger.debug("Hello, %d!", "world"));
             assertThrows(MissingFormatArgumentException.class, () -> logger.debug("Hello, %s!"));
             assertThrows(NullPointerException.class, () -> logger.debug(null));
-
-            assertDoesNotThrow(() -> logger.debug("Hello, %s!", "world"));
-            assertDoesNotThrow(() -> logger.debug("Hello, world!"));
         }
         else { // logger isn't meant to execute internally
-            assertDoesNotThrow(() -> logger.debug("Hello, %d!", "world"));
-            assertDoesNotThrow(() -> logger.debug("Hello, %s!"));
             assertDoesNotThrow(() -> logger.debug(null));
         }
 
-        lines += debug ? 2 : 0;
-        assertEquals(reader.lines().count(), lines);
+        assertDoesNotThrow(() -> logger.debug("%s", rand()));
+        assertDoesNotThrow(() -> logger.debug(rand()));
     }
 
     @Test
     void child() {
-        Assertions.assertDoesNotThrow(() -> logger.child("Test"));
+        assertDoesNotThrow(() -> logger.child("Test"));
+        assertNotNull(logger.child("Test"));
+    }
+
+    private String rand() {
+        val random = ThreadLocalRandom.current();
+        var len = random.nextInt(10, 20);
+        val string = new StringBuilder(len);
+
+        while (len-- > 0) {
+            string.append((char) (random.nextInt(26) + 'a'));
+        }
+
+        return string.toString();
     }
 }
