@@ -18,9 +18,10 @@ class TestObject {
         if (cancel_normal) {
             event.cancel();
         }
-
-        event.string = "NORMAL";
-        event.number = 1;
+        else {
+            event.string = "NORMAL";
+            event.number = 1;
+        }
     }
 
     @Listener(Priority.LOW)
