@@ -33,6 +33,7 @@ lombok {
     config["lombok.toString.doNotUseGetters"] = "true"
 }
 
+//noinspection GroovyAssignabilityCheck
 modifyPom {
     //noinspection GroovyAssignabilityCheck
     project {

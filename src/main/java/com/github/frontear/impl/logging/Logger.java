@@ -6,7 +6,7 @@ import com.github.frontear.efkolia.logging.ILogger;
 import com.github.frontear.internal.NotNull;
 import java.util.function.BooleanSupplier;
 import lombok.val;
-import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender.Target;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -27,8 +27,8 @@ public final class Logger implements ILogger {
             builder.add(console);
 
             val file = builder.newAppender("File", "RollingRandomAccessFile");
-            file.addAttribute("fileName", "logs/efkolia.log")
-                .addAttribute("filePattern", "logs/%d{yyyy-MM-dd}-efkolia.log.gz");
+            file.addAttribute("fileName", "logs/latest.log")
+                .addAttribute("filePattern", "logs/%d{yyyy-MM-dd}.log.gz");
             file.add(builder.newLayout("PatternLayout")
                 .addAttribute("pattern", "[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n"));
             file.add(builder.newLayout("Policies")
@@ -42,6 +42,7 @@ public final class Logger implements ILogger {
             builder.add(root);
         }
 
+        LogManager.shutdown(); // destroys any previous configuration
         context = Configurator.initialize(builder.build());
     }
 
