@@ -11,6 +11,7 @@ final class EventMethod implements Comparable<EventMethod> {
     final Object instance;
     private final Method method;
     private final Priority priority;
+    boolean remove;
 
     EventMethod(final Method method, final Object instance) {
         (this.method = method).setAccessible(true);
@@ -21,6 +22,10 @@ final class EventMethod implements Comparable<EventMethod> {
     @SneakyThrows({ IllegalAccessException.class, InvocationTargetException.class })
     void invoke(@NotNull final Event event) {
         method.invoke(instance, event);
+    }
+    
+    void flag() {
+        this.remove = true;
     }
 
     @Override

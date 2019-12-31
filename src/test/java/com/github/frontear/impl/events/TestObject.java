@@ -1,12 +1,17 @@
 package com.github.frontear.impl.events;
 
-import static com.github.frontear.impl.events.EventExecutorTest.unregister;
-
 import com.github.frontear.efkolia.events.Listener;
 import com.github.frontear.efkolia.events.Listener.Priority;
 import com.github.frontear.internal.NotNull;
+import java.util.concurrent.ThreadLocalRandom;
 
 class TestObject {
+    final boolean unregister;
+
+    public TestObject() {
+        this.unregister = ThreadLocalRandom.current().nextBoolean();
+    }
+
     @Listener(Priority.HIGH)
     private void onTestHigh(@NotNull final TestEvent event) {
         event.logger.info("HIGH!");

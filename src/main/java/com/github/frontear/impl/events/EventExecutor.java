@@ -43,7 +43,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
     @Override
     public void unregister(@NotNull final Object instance) {
         logger.debug("Unregistering %s", instance.getClass().getSimpleName());
-        listeners.forEach((k, v) -> v.removeIf(x -> x.instance.equals(instance)));
+        listeners.forEach((k, v) -> v.stream().filter(x -> x.instance.equals(instance)).forEach(
+            EventMethod::flag));
     }
 
     @Override
@@ -52,7 +53,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
 
         logger.debug("Firing listeners for %s", key.getSimpleName());
         if (listeners.containsKey(key)) {
-            for (val listener : listeners.get(key)) {
+            val set = listeners.get(key);
+            for (val listener : set) {
                 logger.debug("Invoking %s", listener);
                 try {
                     listener.invoke(event);
@@ -67,6 +69,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
                     break;
                 }
             }
+
+            set.removeIf(x -> x.remove);
         }
         else {
             logger.debug("No listeners found");

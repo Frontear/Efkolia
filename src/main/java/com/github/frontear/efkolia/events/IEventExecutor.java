@@ -20,7 +20,9 @@ public interface IEventExecutor<E> {
     void register(@NotNull final Object instance);
 
     /**
-     * Removes any methods marked with {@link Listener} from the current executor.
+     * Removes any methods marked with {@link Listener} from the current executor. If an event is
+     * currently being executed, the instance must be marked for unregistering, and be finalized
+     * once the events are finished executing
      *
      * @param instance The instance to search, and unregister methods from
      */

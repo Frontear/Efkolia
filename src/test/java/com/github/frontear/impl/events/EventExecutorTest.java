@@ -3,7 +3,6 @@ package com.github.frontear.impl.events;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.impl.logging.Logger;
-import java.util.ConcurrentModificationException;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.val;
 import org.junit.jupiter.api.*;
@@ -14,8 +13,6 @@ class EventExecutorTest {
     static TestEvent event;
     static TestObject object;
 
-    static boolean unregister;
-
     @BeforeAll
     static void beforeAll() {
         val logger = new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean());
@@ -23,7 +20,6 @@ class EventExecutorTest {
         executor = new EventExecutor(logger);
         event = new TestEvent(executor, logger);
         object = new TestObject();
-        unregister = ThreadLocalRandom.current().nextBoolean();
     }
 
     @Test
@@ -39,11 +35,6 @@ class EventExecutorTest {
 
     @Test
     void fire() {
-        if (unregister) {
-            assertThrows(ConcurrentModificationException.class, () -> executor.fire(event));
-        }
-        else {
-            assertDoesNotThrow(() -> executor.fire(event));
-        }
+        assertDoesNotThrow(() -> executor.fire(event));
     }
 }
