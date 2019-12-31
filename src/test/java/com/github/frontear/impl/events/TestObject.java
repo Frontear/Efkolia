@@ -2,16 +2,16 @@ package com.github.frontear.impl.events;
 
 import com.github.frontear.efkolia.events.Listener;
 import com.github.frontear.efkolia.events.Listener.Priority;
+import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import com.github.frontear.internal.NotNull;
-import java.util.concurrent.ThreadLocalRandom;
 
 class TestObject {
     final boolean unregister;
     final boolean throwing;
 
     public TestObject() {
-        this.unregister = ThreadLocalRandom.current().nextBoolean();
-        this.throwing = ThreadLocalRandom.current().nextBoolean();
+        this.unregister = PseudoRandom.nextBoolean();
+        this.throwing = PseudoRandom.nextBoolean();
     }
 
     @Listener(Priority.HIGH)

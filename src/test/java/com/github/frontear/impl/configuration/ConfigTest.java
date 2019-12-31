@@ -2,9 +2,9 @@ package com.github.frontear.impl.configuration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import com.github.frontear.impl.logging.Logger;
 import java.nio.file.*;
-import java.util.concurrent.ThreadLocalRandom;
 import lombok.val;
 import org.junit.jupiter.api.*;
 
@@ -16,7 +16,7 @@ class ConfigTest {
     @BeforeAll
     static void beforeAll() {
         file = Paths.get(System.getProperty("java.io.tmpdir"), "test.json");
-        config = new Config(new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean()),
+        config = new Config(new Logger("Test", PseudoRandom::nextBoolean),
             file);
         object = new TestObject();
     }

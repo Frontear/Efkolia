@@ -2,8 +2,8 @@ package com.github.frontear.impl.events;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import com.github.frontear.impl.logging.Logger;
-import java.util.concurrent.ThreadLocalRandom;
 import lombok.val;
 import org.junit.jupiter.api.*;
 
@@ -15,7 +15,7 @@ class EventExecutorTest {
 
     @BeforeAll
     static void beforeAll() {
-        val logger = new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean());
+        val logger = new Logger("Test", PseudoRandom::nextBoolean);
 
         executor = new EventExecutor(logger);
         event = new TestEvent(executor, logger);

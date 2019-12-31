@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -14,7 +13,7 @@ class LoggerTest {
 
     @BeforeAll
     static void beforeAll() {
-        debug = ThreadLocalRandom.current().nextBoolean();
+        debug = PseudoRandom.nextBoolean();
         logger = new Logger("Test/Logger", () -> debug);
     }
 
@@ -60,6 +59,8 @@ class LoggerTest {
             assertThrows(NullPointerException.class, () -> logger.debug(null));
         }
         else { // logger isn't meant to execute internally
+            assertDoesNotThrow(() -> logger.debug("Hello, %d!", "world"));
+            assertDoesNotThrow(() -> logger.debug("Hello, %s!"));
             assertDoesNotThrow(() -> logger.debug(null));
         }
 
