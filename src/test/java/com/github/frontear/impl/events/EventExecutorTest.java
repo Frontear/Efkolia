@@ -3,7 +3,9 @@ package com.github.frontear.impl.events;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.impl.logging.Logger;
+import java.util.ConcurrentModificationException;
 import java.util.concurrent.ThreadLocalRandom;
+import lombok.val;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -12,16 +14,16 @@ class EventExecutorTest {
     static TestEvent event;
     static TestObject object;
 
-    static boolean cancel_normal;
+    static boolean unregister;
 
     @BeforeAll
     static void beforeAll() {
-        executor = new EventExecutor(
-            new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean()));
-        event = new TestEvent("Test", 123);
-        object = new TestObject();
+        val logger = new Logger("Test", () -> ThreadLocalRandom.current().nextBoolean());
 
-        cancel_normal = ThreadLocalRandom.current().nextBoolean();
+        executor = new EventExecutor(logger);
+        event = new TestEvent(executor, logger);
+        object = new TestObject();
+        unregister = ThreadLocalRandom.current().nextBoolean();
     }
 
     @Test
@@ -37,15 +39,11 @@ class EventExecutorTest {
 
     @Test
     void fire() {
-        assertDoesNotThrow(() -> executor.fire(event));
-
-        if (cancel_normal) {
-            assertSame(event.string, "HIGH");
-            assertSame(event.number, 0);
+        if (unregister) {
+            assertThrows(ConcurrentModificationException.class, () -> executor.fire(event));
         }
-        else { // run last
-            assertSame(event.string, "LOW");
-            assertSame(event.number, 2);
+        else {
+            assertDoesNotThrow(() -> executor.fire(event));
         }
     }
 }

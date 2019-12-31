@@ -15,7 +15,7 @@ class LoggerTest {
     @BeforeAll
     static void beforeAll() {
         debug = ThreadLocalRandom.current().nextBoolean();
-        logger = new Logger("Test", () -> debug);
+        logger = new Logger("Test/Logger", () -> debug);
     }
 
     @Test

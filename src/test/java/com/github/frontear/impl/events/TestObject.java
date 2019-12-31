@@ -1,6 +1,6 @@
 package com.github.frontear.impl.events;
 
-import static com.github.frontear.impl.events.EventExecutorTest.cancel_normal;
+import static com.github.frontear.impl.events.EventExecutorTest.unregister;
 
 import com.github.frontear.efkolia.events.Listener;
 import com.github.frontear.efkolia.events.Listener.Priority;
@@ -9,24 +9,19 @@ import com.github.frontear.internal.NotNull;
 class TestObject {
     @Listener(Priority.HIGH)
     private void onTestHigh(@NotNull final TestEvent event) {
-        event.string = "HIGH";
-        event.number = 0;
+        event.logger.info("HIGH!");
+        if (unregister) {
+            event.executor.unregister(this);
+        }
     }
 
     @Listener(Priority.NORMAL)
     private void onTestNormal(@NotNull final TestEvent event) {
-        if (cancel_normal) {
-            event.cancel();
-        }
-        else {
-            event.string = "NORMAL";
-            event.number = 1;
-        }
+        event.logger.info("NORMAL!");
     }
 
     @Listener(Priority.LOW)
     private void onTestLow(@NotNull final TestEvent event) {
-        event.string = "LOW";
-        event.number = 2;
+        event.logger.info("LOW!");
     }
 }
