@@ -8,7 +8,9 @@ import lombok.*;
 
 /**
  * A utility class that allows the generation of pseudo-random numbers in a fully thread-safe
- * manner. It internally uses {@link ThreadLocalRandom} to generate these values
+ * manner. It internally uses {@link ThreadLocalRandom} to generate these values. Due to the fact
+ * that this is pseudo random, the values created through this are NOT guaranteed to be completely
+ * unique.
  */
 @UtilityClass
 public class PseudoRandom {

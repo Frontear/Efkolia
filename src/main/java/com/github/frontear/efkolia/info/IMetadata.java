@@ -4,7 +4,7 @@ import com.github.frontear.internal.NotNull;
 
 /**
  * This interface is designated to contain all the metadata information about a mod. None of the
- * information should be null
+ * information should be null, and all of it should be valid and easily accessible.
  */
 public interface IMetadata {
     /**

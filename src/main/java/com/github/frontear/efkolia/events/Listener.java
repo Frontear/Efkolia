@@ -10,10 +10,4 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Listener {
     Priority value() default Priority.NORMAL;
-
-    enum Priority {
-        LOW,
-        NORMAL,
-        HIGH
-    }
 }
