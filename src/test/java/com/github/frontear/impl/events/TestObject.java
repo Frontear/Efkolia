@@ -1,7 +1,6 @@
 package com.github.frontear.impl.events;
 
-import com.github.frontear.efkolia.events.Listener;
-import com.github.frontear.efkolia.events.Listener.Priority;
+import com.github.frontear.efkolia.events.*;
 import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import com.github.frontear.internal.NotNull;
 
