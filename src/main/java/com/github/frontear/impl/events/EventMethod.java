@@ -23,7 +23,7 @@ final class EventMethod implements Comparable<EventMethod> {
     void invoke(@NotNull final Event event) {
         method.invoke(instance, event);
     }
-    
+
     void flag() {
         this.remove = true;
     }

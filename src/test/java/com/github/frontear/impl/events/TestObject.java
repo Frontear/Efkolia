@@ -7,9 +7,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 class TestObject {
     final boolean unregister;
+    final boolean throwing;
 
     public TestObject() {
         this.unregister = ThreadLocalRandom.current().nextBoolean();
+        this.throwing = ThreadLocalRandom.current().nextBoolean();
     }
 
     @Listener(Priority.HIGH)
@@ -23,6 +25,9 @@ class TestObject {
     @Listener(Priority.NORMAL)
     private void onTestNormal(@NotNull final TestEvent event) {
         event.logger.info("NORMAL!");
+        if (throwing) {
+            throw new RuntimeException();
+        }
     }
 
     @Listener(Priority.LOW)
