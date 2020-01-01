@@ -10,8 +10,8 @@ import lombok.experimental.UtilityClass;
 import lombok.val;
 
 /**
- * A utility class which allows easy access to detect operating system and architecture information.
- * The values are guaranteed to not be tampered with, and should be accurate.
+ * A utility class which allows easy access to detect operating system and architecture
+ * information.
  */
 @UtilityClass
 public class LocalMachine {
@@ -42,20 +42,20 @@ public class LocalMachine {
     /**
      * Checks if the operating system is equivalent to what is expected.
      *
-     * @param system The expected operating system
+     * @param system The expected operating system.
      *
-     * @return If the operating system is supported and equivalent.
+     * @return If the operating system has support and is equivalent.
      */
     public boolean equalsOS(@NotNull final OperatingSystem system) {
         return system.isSupported() && os == system;
     }
 
     /**
-     * Checks if the architecture is equivalent to what is expected
+     * Checks if the architecture is equivalent to what is expected.
      *
-     * @param architecture The expected system architecture
+     * @param architecture The expected system architecture.
      *
-     * @return If the system architecture is supported and equivalent.
+     * @return If the system architecture has support and is equivalent.
      */
     public boolean equalsArch(@NotNull final SystemArchitecture architecture) {
         return architecture.isSupported() && arch == architecture;

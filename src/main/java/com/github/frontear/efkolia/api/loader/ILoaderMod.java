@@ -8,7 +8,7 @@ import com.github.frontear.efkolia.api.mod.IMinecraftMod;
  */
 public interface ILoaderMod {
     /**
-     * The initialization of the mod. This is where the mod should begin to load it's functionality.
+     * The initialization of the mod. This is where the mod should begin loading its functionality.
      * It should be treated like the main method of a class, an entry-point for your mod. This
      * should ideally be setting up your {@link IMinecraftMod}, and nothing more.
      */

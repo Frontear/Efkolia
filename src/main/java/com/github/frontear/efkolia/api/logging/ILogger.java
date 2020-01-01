@@ -12,14 +12,14 @@ import com.github.frontear.internal.NotNull;
  */
 public interface ILogger {
     /**
-     * The invocation to simply output a informative entry to the logging system. This is only to
+     * The invocation to simply output an informative entry to the logging system. This is only to
      * raise awareness of changes that may have occurred internally. This should NOT be used to
      * inform the user of problematic changes.
      *
      * @param to_string   An object that will be converted into a {@link String}, then passed into
-     *                    {@link String#format(String, Object...)}
+     *                    {@link String#format(String, Object...)}.
      * @param format_args The arguments that will be given to {@link String#format(String,
-     *                    Object...)}
+     *                    Object...)}.
      */
     void info(@NotNull final Object to_string, final Object... format_args);
 
@@ -30,9 +30,9 @@ public interface ILogger {
      * to allow the user to fix/correct their behaviour.
      *
      * @param to_string   An object that will be converted into a {@link String}, then passed into
-     *                    {@link String#format(String, Object...)}
+     *                    {@link String#format(String, Object...)}.
      * @param format_args The arguments that will be given to {@link String#format(String,
-     *                    Object...)}
+     *                    Object...)}.
      */
     void warn(@NotNull final Object to_string, final Object... format_args);
 
@@ -44,35 +44,35 @@ public interface ILogger {
      * to fix the issue.
      *
      * @param to_string   An object that will be converted into a {@link String}, then passed into
-     *                    {@link String#format(String, Object...)}
+     *                    {@link String#format(String, Object...)}.
      * @param format_args The arguments that will be given to {@link String#format(String,
-     *                    Object...)}
+     *                    Object...)}.
      */
     void error(@NotNull final Object to_string, final Object... format_args);
 
     /**
-     * The invocation to output a debug entry to the logging system. This should NOT be visible in
-     * normal environments, and only visible if certain conditions are met, ie the application is in
-     * a debugging state. This does not follow any specific convention beyond that, as each dev has
-     * a different perspective on debugging.
+     * The invocation to output a debugging entry to the logging system. This should NOT be visible
+     * in normal environments, and only visible if certain conditions occur, ie the application is
+     * in a debugging state. This does not follow any specific convention beyond such, as each dev
+     * has a different perspective on debugging.
      *
      * @param to_string   An object that will be converted into a {@link String}, then passed into
-     *                    {@link String#format(String, Object...)}
+     *                    {@link String#format(String, Object...)}.
      * @param format_args The arguments that will be given to {@link String#format(String,
-     *                    Object...)}
+     *                    Object...)}.
      */
     void debug(@NotNull final Object to_string, final Object... format_args);
 
     /**
      * Creates a child logger which inherits the name of the current logger. This allows you to
-     * create more specific logging instances which functionally still tie back to a greater logger
+     * create more specific logging instances whose functionally still tie back to a greater logger
      * instance, and by proxy, a specific mod. This should be preferred over creating differing
-     * instances for each area you need an {@link ILogger}
+     * instances for each area you need an {@link ILogger}.
      *
      * @param name The name of the new logger. This should contain a part of the current logger
-     *             name
+     *             name.
      *
-     * @return A new instance of {@link ILogger}, which is semantically tied back to this logger
+     * @return An instance of {@link ILogger}, which is semantically tied back to this logger.
      */
     @NotNull
     ILogger child(@NotNull final String name);

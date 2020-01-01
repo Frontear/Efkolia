@@ -8,14 +8,14 @@ import com.github.frontear.internal.NotNull;
 /**
  * The interface which defines a minecraft mod. This should ideally contain all of your objects, and
  * pass around safe references to the object. It is your global container, which all the
- * functionality of your mod depends and derives from the data managed here.
+ * functionality of your mod depends upon and derives from.
  */
 public interface IMinecraftMod {
     /**
-     * The metadata of the mod. This contains all of the information that would be necessary to
-     * display to the user.
+     * The metadata of the mod. This contains all the information that would be necessary to display
+     * to the user.
      *
-     * @return An instance of {@link IMetadata}
+     * @return An instance of {@link IMetadata}.
      */
     @NotNull
     IMetadata getMetadata();
@@ -25,7 +25,7 @@ public interface IMinecraftMod {
      * ILogger}, and will provide the user with it. This does NOT return the original instance,
      * rather it uses {@link ILogger#child(String)}.
      *
-     * @param name The name of the child logger
+     * @param name The name of the child logger.
      *
      * @return A logger that is semantically linked to a parent.
      */
@@ -34,9 +34,9 @@ public interface IMinecraftMod {
 
     /**
      * The config of the mod. This will synchronize and manage all objects that are configured
-     * through an external file
+     * through an external file.
      *
-     * @return An instance of {@link IConfig}
+     * @return An instance of {@link IConfig}.
      */
     @NotNull
     IConfig getConfig();
