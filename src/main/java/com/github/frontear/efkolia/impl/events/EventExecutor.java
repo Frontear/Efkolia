@@ -5,10 +5,12 @@ import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.function.Predicate;
 import lombok.val;
 
 public final class EventExecutor implements IEventExecutor<Event> {
     private final Map<Class<? extends Event>, Set<EventMethod>> listeners = new HashMap<>();
+    private boolean firing = false;
     private final Logger logger;
 
     public EventExecutor(@NotNull final Logger logger) {
@@ -43,8 +45,16 @@ public final class EventExecutor implements IEventExecutor<Event> {
     @Override
     public void unregister(@NotNull final Object instance) {
         logger.debug("Unregistering %s", instance.getClass().getSimpleName());
-        listeners.forEach((k, v) -> v.stream().filter(x -> x.instance.equals(instance)).forEach(
-            EventMethod::flag));
+        listeners.forEach((k, v) -> {
+            final Predicate<? super EventMethod> predicate = x -> x.instance.equals(instance);
+
+            if (firing) {
+                v.stream().filter(predicate).forEach(EventMethod::flag);
+            }
+            else {
+                v.removeIf(predicate);
+            }
+        });
     }
 
     @NotNull
@@ -54,6 +64,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
 
         logger.debug("Firing listeners for %s", key.getSimpleName());
         if (listeners.containsKey(key)) {
+            firing = true;
+
             val set = listeners.get(key);
             for (val listener : set) {
                 logger.debug("Invoking %s", listener);
@@ -72,6 +84,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
             }
 
             set.removeIf(x -> x.remove);
+            firing = false;
         }
         else {
             logger.debug("No listeners found");
