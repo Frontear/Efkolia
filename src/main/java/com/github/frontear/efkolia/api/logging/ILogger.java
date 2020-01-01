@@ -1,6 +1,6 @@
 package com.github.frontear.efkolia.api.logging;
 
-import com.github.frontear.internal.NotNull;
+import com.github.frontear.internal.*;
 
 /**
  * The common interface for an implementation of logging. The logger should be able to ideally run
@@ -21,7 +21,7 @@ public interface ILogger {
      * @param format_args The arguments that will be given to {@link String#format(String,
      *                    Object...)}.
      */
-    void info(@NotNull final Object to_string, final Object... format_args);
+    void info(@NotNull final Object to_string, @Nullable final Object... format_args);
 
     /**
      * The invocation to output a warning entry to the logging system. This should be used to raise
@@ -34,7 +34,7 @@ public interface ILogger {
      * @param format_args The arguments that will be given to {@link String#format(String,
      *                    Object...)}.
      */
-    void warn(@NotNull final Object to_string, final Object... format_args);
+    void warn(@NotNull final Object to_string, @Nullable final Object... format_args);
 
     /**
      * The invocation to output an error entry to the logging system, This should be used when
@@ -48,7 +48,7 @@ public interface ILogger {
      * @param format_args The arguments that will be given to {@link String#format(String,
      *                    Object...)}.
      */
-    void error(@NotNull final Object to_string, final Object... format_args);
+    void error(@NotNull final Object to_string, @Nullable final Object... format_args);
 
     /**
      * The invocation to output a debugging entry to the logging system. This should NOT be visible
@@ -61,7 +61,7 @@ public interface ILogger {
      * @param format_args The arguments that will be given to {@link String#format(String,
      *                    Object...)}.
      */
-    void debug(@NotNull final Object to_string, final Object... format_args);
+    void debug(@NotNull final Object to_string, @Nullable final Object... format_args);
 
     /**
      * Creates a child logger which inherits the name of the current logger. This allows you to

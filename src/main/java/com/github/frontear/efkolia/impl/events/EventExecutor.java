@@ -10,8 +10,8 @@ import lombok.val;
 
 public final class EventExecutor implements IEventExecutor<Event> {
     private final Map<Class<? extends Event>, Set<EventMethod>> listeners = new HashMap<>();
-    private boolean firing = false;
     private final Logger logger;
+    private boolean firing = false;
 
     public EventExecutor(@NotNull final Logger logger) {
         this.logger = logger.child("EventExecutor");

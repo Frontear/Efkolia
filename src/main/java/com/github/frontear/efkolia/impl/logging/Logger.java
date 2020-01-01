@@ -3,7 +3,7 @@ package com.github.frontear.efkolia.impl.logging;
 import static org.apache.logging.log4j.Level.*;
 
 import com.github.frontear.efkolia.api.logging.ILogger;
-import com.github.frontear.internal.NotNull;
+import com.github.frontear.internal.*;
 import java.util.function.BooleanSupplier;
 import lombok.val;
 import org.apache.logging.log4j.*;
@@ -57,22 +57,22 @@ public final class Logger implements ILogger {
     }
 
     @Override
-    public void info(@NotNull final Object to_string, final Object... format_args) {
+    public void info(@NotNull final Object to_string, @Nullable final Object... format_args) {
         logger.info(String.format(to_string.toString(), format_args));
     }
 
     @Override
-    public void warn(@NotNull final Object to_string, final Object... format_args) {
+    public void warn(@NotNull final Object to_string, @Nullable final Object... format_args) {
         logger.warn(String.format(to_string.toString(), format_args));
     }
 
     @Override
-    public void error(@NotNull final Object to_string, final Object... format_args) {
+    public void error(@NotNull final Object to_string, @Nullable final Object... format_args) {
         logger.error(String.format(to_string.toString(), format_args));
     }
 
     @Override
-    public void debug(@NotNull final Object to_string, final Object... format_args) {
+    public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
         if (debug.getAsBoolean()) {
             logger.debug(String.format(to_string.toString(), format_args));
         }
