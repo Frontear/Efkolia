@@ -3,7 +3,7 @@ package com.github.frontear.efkolia.api.mod;
 import com.github.frontear.efkolia.api.configuration.IConfig;
 import com.github.frontear.efkolia.api.info.IMetadata;
 import com.github.frontear.efkolia.api.logging.ILogger;
-import com.github.frontear.internal.*;
+import com.github.frontear.internal.NotNull;
 
 /**
  * The interface which defines a minecraft mod. This should ideally contain all of your objects, and
@@ -12,9 +12,8 @@ import com.github.frontear.internal.*;
  */
 public interface IMinecraftMod {
     /**
-     * The metadata of the mod. This should be carefully considered, as not necessarily all the
-     * information that it claims to provide actually exists, as some may be marked {@link
-     * Nullable}
+     * The metadata of the mod. This contains all of the information that would be necessary to
+     * display to the user.
      *
      * @return An instance of {@link IMetadata}
      */

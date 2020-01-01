@@ -2,8 +2,8 @@ package com.github.frontear.efkolia.impl.configuration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import com.github.frontear.efkolia.impl.logging.Logger;
+import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import java.nio.file.*;
 import lombok.val;
 import org.junit.jupiter.api.*;

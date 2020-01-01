@@ -83,6 +83,7 @@ public class PseudoRandom {
      *
      * @return The random string
      */
+    @NotNull
     public String nextString(final int len, final boolean random_case) {
         val string = new StringBuilder(len);
 

@@ -47,6 +47,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
             EventMethod::flag));
     }
 
+    @NotNull
     @Override
     public <E1 extends Event> E1 fire(@NotNull final E1 event) {
         val key = event.getClass();

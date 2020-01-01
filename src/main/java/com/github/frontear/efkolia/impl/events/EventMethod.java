@@ -12,7 +12,7 @@ final class EventMethod implements Comparable<EventMethod> {
     private final Priority priority;
     boolean remove;
 
-    EventMethod(final Method method, final Object instance) {
+    EventMethod(@NotNull final Method method, @NotNull final Object instance) {
         (this.method = method).setAccessible(true);
         this.instance = instance;
         this.priority = method.getAnnotation(Listener.class).value();
@@ -32,6 +32,7 @@ final class EventMethod implements Comparable<EventMethod> {
         return other.priority.compareTo(this.priority);
     }
 
+    @NotNull
     @Override
     public String toString() {
         return instance.getClass().getSimpleName() + "#" + method.getName() + "()";

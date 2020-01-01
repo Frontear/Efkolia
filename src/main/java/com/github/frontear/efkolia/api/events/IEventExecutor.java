@@ -37,5 +37,6 @@ public interface IEventExecutor<E> {
      *
      * @return The instance of the event passed in through the parameter, for convenience
      */
+    @NotNull
     <E1 extends E> E1 fire(@NotNull final E1 event);
 }

@@ -78,6 +78,7 @@ public final class Logger implements ILogger {
         }
     }
 
+    @NotNull
     @Override
     public Logger child(@NotNull final String name) {
         return new Logger(this.name + "/" + name, this.debug);

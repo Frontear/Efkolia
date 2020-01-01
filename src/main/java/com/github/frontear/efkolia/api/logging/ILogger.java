@@ -74,5 +74,6 @@ public interface ILogger {
      *
      * @return A new instance of {@link ILogger}, which is semantically tied back to this logger
      */
+    @NotNull
     ILogger child(@NotNull final String name);
 }
