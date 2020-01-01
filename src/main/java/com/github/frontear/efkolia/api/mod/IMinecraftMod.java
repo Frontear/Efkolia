@@ -33,8 +33,18 @@ public interface IMinecraftMod {
      * The logging system of the mod. All logging pertaining to the mod and its functionality should
      * go through here, and NOT through individual log instances.
      *
-     * @return An instance of {@link ILogger}
+     * @return A new instance of {@link ILogger}
+     */
+
+    /**
+     * The logging system of the mod. This creates a "child" of a previously configured {@link
+     * ILogger}, and will provide the user with it. This does NOT return the original instance,
+     * rather it uses {@link ILogger#child(String)}.
+     *
+     * @param name The name of the child logger
+     *
+     * @return A logger that is semantically linked to a parent.
      */
     @NotNull
-    ILogger getLogger();
+    ILogger getLogger(@NotNull final String name);
 }
