@@ -38,7 +38,7 @@ public class PseudoRandom {
      * @return A random value between the bounds
      */
     public double nextDouble(final double min, final double max) {
-        return random.nextDouble(min, max + 1);
+        return random.nextDouble(min, max + 1.0);
     }
 
     /**

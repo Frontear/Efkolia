@@ -9,9 +9,7 @@ class PseudoRandomTest {
     @Test
     void nextInt() {
         assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextInt(100, 0));
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom
-            .nextInt(Integer.MIN_VALUE, Integer.MAX_VALUE)); // MAX_VALUE will underflow
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextInt(0, 0));
+        assertDoesNotThrow(() -> PseudoRandom.nextInt(0, 0));
 
         assertTrue(() -> {
             val ret = assertDoesNotThrow(() -> PseudoRandom.nextInt(0, 10));
@@ -26,13 +24,11 @@ class PseudoRandomTest {
     @Test
     void nextDouble() {
         assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextDouble(100, 0));
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom
-            .nextDouble(Double.MIN_VALUE, Double.MAX_VALUE)); // MAX_VALUE will underflow
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextDouble(0, 0));
+        assertDoesNotThrow(() -> PseudoRandom.nextDouble(0, 0));
 
         assertTrue(() -> {
             val ret = assertDoesNotThrow(() -> PseudoRandom.nextDouble(-10, 10));
-            return ret >= -10 && ret <= 10;
+            return ret >= -10.0 && ret <= 10.0;
         });
     }
 
@@ -70,7 +66,7 @@ class PseudoRandomTest {
     @Test
     void nextString() {
         assertTrue(() -> {
-            val len = PseudoRandom.nextInt(0, Integer.MAX_VALUE - 1);
+            val len = PseudoRandom.nextInt(0, 10);
             val ret = assertDoesNotThrow(
                 () -> PseudoRandom.nextString(len, PseudoRandom.nextBoolean()));
 
