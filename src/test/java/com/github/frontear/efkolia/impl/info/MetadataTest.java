@@ -25,8 +25,8 @@ class MetadataTest {
     }
 
     @Test
-    void getAuthors() {
-        assertNotNull(metadata.getAuthors());
-        assertEquals(metadata.getAuthors(), "Frontear, and N/A");
+    void getDevelopers() {
+        assertNotNull(metadata.getDevelopers());
+        assertEquals(metadata.getDevelopers(), "Frontear, and N/A");
     }
 }

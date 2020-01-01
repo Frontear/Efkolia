@@ -20,8 +20,9 @@ public interface IMetadata {
     String getVersion();
 
     /**
-     * @return The authors responsible for developing the mod
+     * @return The developers responsible for developing the mod. This includes the authors and any
+     * contributors.
      */
     @NotNull
-    String getAuthors();
+    String getDevelopers();
 }

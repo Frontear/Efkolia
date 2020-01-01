@@ -5,7 +5,7 @@ import com.github.frontear.internal.*;
 import lombok.val;
 
 public final class Metadata implements IMetadata {
-    private final String name, version, authors;
+    private final String name, version, developers;
 
     public Metadata(@NotNull final String name, @NotNull final String version,
         @NotNull final String author, @Nullable final String... contributors) {
@@ -13,7 +13,7 @@ public final class Metadata implements IMetadata {
         this.version = version;
 
         if (contributors == null) {
-            this.authors = author;
+            this.developers = author;
         }
         else {
             val authors = new String[contributors.length + 1]; // + 1 for the 'author'
@@ -22,7 +22,7 @@ public final class Metadata implements IMetadata {
 
             val joined = String.join(", ", authors);
             val index = joined.lastIndexOf(", ");
-            this.authors = index != -1 ? joined.substring(0, index) + ", and " + joined
+            this.developers = index != -1 ? joined.substring(0, index) + ", and " + joined
                 .substring(index + ", ".length()) : joined;
         }
     }
@@ -41,7 +41,7 @@ public final class Metadata implements IMetadata {
 
     @NotNull
     @Override
-    public String getAuthors() {
-        return authors;
+    public String getDevelopers() {
+        return developers;
     }
 }
