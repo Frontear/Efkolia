@@ -30,18 +30,6 @@ public class PseudoRandom {
     }
 
     /**
-     * Generates a random double value between min and max, inclusive
-     *
-     * @param min The minimum value to generate at or higher
-     * @param max The maximum value to generate at or lower
-     *
-     * @return A random value between the bounds
-     */
-    public double nextDouble(final double min, final double max) {
-        return random.nextDouble(min, max + 1.0);
-    }
-
-    /**
      * Generates a random index value based on the length of the specified array
      *
      * @param array The array to generate a random index for

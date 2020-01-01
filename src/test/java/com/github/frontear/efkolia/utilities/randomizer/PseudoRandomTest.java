@@ -22,17 +22,6 @@ class PseudoRandomTest {
     }
 
     @Test
-    void nextDouble() {
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextDouble(100, 0));
-        assertDoesNotThrow(() -> PseudoRandom.nextDouble(0, 0));
-
-        assertTrue(() -> {
-            val ret = assertDoesNotThrow(() -> PseudoRandom.nextDouble(-10, 10));
-            return ret >= -10.0 && ret <= 10.0;
-        });
-    }
-
-    @Test
     void nextIndex() {
         assertThrows(NullPointerException.class, () -> PseudoRandom.nextIndex(null));
         assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextIndex(new Object()));
