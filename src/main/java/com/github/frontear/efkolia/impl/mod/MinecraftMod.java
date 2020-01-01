@@ -1,38 +1,43 @@
 package com.github.frontear.efkolia.impl.mod;
 
-import com.github.frontear.efkolia.api.configuration.IConfig;
-import com.github.frontear.efkolia.api.info.IMetadata;
-import com.github.frontear.efkolia.api.logging.ILogger;
 import com.github.frontear.efkolia.api.mod.IMinecraftMod;
-import com.github.frontear.internal.NotNull;
+import com.github.frontear.efkolia.impl.configuration.Config;
+import com.github.frontear.efkolia.impl.info.Metadata;
+import com.github.frontear.efkolia.impl.logging.Logger;
+import com.github.frontear.internal.*;
+import java.nio.file.Paths;
 
 public abstract class MinecraftMod implements IMinecraftMod {
-    private final IMetadata metadata;
-    private final IConfig config;
-    private final ILogger logger;
+    private static final boolean DEBUG = Boolean.getBoolean("efkolia.debug");
 
-    public MinecraftMod(@NotNull final IMetadata metadata, @NotNull final IConfig config,
-        @NotNull final ILogger logger) {
-        this.metadata = metadata;
-        this.config = config;
-        this.logger = logger;
+    private final Metadata metadata;
+    private final Logger logger;
+    private final Config config;
+
+    public MinecraftMod(@NotNull final String name, @NotNull final String version,
+        @NotNull final String author, @Nullable final String... authors) {
+        this.metadata = new Metadata(name, version, author, authors);
+        this.logger = new Logger(name, () -> DEBUG);
+        this.config = new Config(logger,
+            Paths.get(System.getProperty("user.dir"), name.toLowerCase() + ".json"));
     }
 
     @NotNull
     @Override
-    public IMetadata getMetadata() {
+    public Metadata getMetadata() {
         return metadata;
     }
 
     @NotNull
     @Override
-    public IConfig getConfig() {
-        return config;
+    public Logger getLogger(@NotNull final String name) {
+        return logger.child(name);
     }
+
 
     @NotNull
     @Override
-    public ILogger getLogger(@NotNull final String name) {
-        return logger.child(name);
+    public Config getConfig() {
+        return config;
     }
 }

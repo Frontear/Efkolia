@@ -21,22 +21,6 @@ public interface IMinecraftMod {
     IMetadata getMetadata();
 
     /**
-     * The config of the mod. This will synchronize and manage all objects that are configured
-     * through an external file
-     *
-     * @return An instance of {@link IConfig}
-     */
-    @NotNull
-    IConfig getConfig();
-
-    /**
-     * The logging system of the mod. All logging pertaining to the mod and its functionality should
-     * go through here, and NOT through individual log instances.
-     *
-     * @return A new instance of {@link ILogger}
-     */
-
-    /**
      * The logging system of the mod. This creates a "child" of a previously configured {@link
      * ILogger}, and will provide the user with it. This does NOT return the original instance,
      * rather it uses {@link ILogger#child(String)}.
@@ -47,4 +31,13 @@ public interface IMinecraftMod {
      */
     @NotNull
     ILogger getLogger(@NotNull final String name);
+
+    /**
+     * The config of the mod. This will synchronize and manage all objects that are configured
+     * through an external file
+     *
+     * @return An instance of {@link IConfig}
+     */
+    @NotNull
+    IConfig getConfig();
 }
