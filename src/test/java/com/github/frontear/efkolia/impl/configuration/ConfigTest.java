@@ -16,7 +16,7 @@ class ConfigTest {
     @BeforeAll
     static void beforeAll() {
         file = Paths.get(System.getProperty("java.io.tmpdir"), "test.json");
-        config = new Config(new Logger("Test", PseudoRandom::nextBoolean),
+        config = new Config(new Logger("Test"),
             file);
         object = new TestObject();
     }

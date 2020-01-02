@@ -8,8 +8,6 @@ import com.github.frontear.internal.*;
 import java.nio.file.Paths;
 
 public abstract class MinecraftMod implements IMinecraftMod {
-    private static final boolean DEBUG = Boolean.getBoolean("efkolia.debug");
-
     private final Metadata metadata;
     private final Logger logger;
     private final Config config;
@@ -17,7 +15,7 @@ public abstract class MinecraftMod implements IMinecraftMod {
     public MinecraftMod(@NotNull final String name, @NotNull final String version,
         @NotNull final String author, @Nullable final String... authors) {
         this.metadata = new Metadata(name, version, author, authors);
-        this.logger = new Logger(name, () -> DEBUG);
+        this.logger = new Logger(name);
         this.config = new Config(logger,
             Paths.get(System.getProperty("user.dir"), name.toLowerCase() + ".json"));
     }

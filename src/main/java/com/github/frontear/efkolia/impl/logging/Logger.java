@@ -3,6 +3,7 @@ package com.github.frontear.efkolia.impl.logging;
 import static org.apache.logging.log4j.Level.*;
 
 import com.github.frontear.efkolia.api.logging.ILogger;
+import com.github.frontear.efkolia.impl.loader.LoaderMod;
 import com.github.frontear.internal.*;
 import java.util.function.BooleanSupplier;
 import lombok.val;
@@ -47,12 +48,10 @@ public final class Logger implements ILogger {
     }
 
     private final String name;
-    private final BooleanSupplier debug;
     private final org.apache.logging.log4j.Logger logger;
 
-    public Logger(@NotNull final String name, @NotNull final BooleanSupplier debug) {
+    public Logger(@NotNull final String name) {
         this.name = name;
-        this.debug = debug;
         this.logger = context.getLogger(name);
     }
 
@@ -73,7 +72,7 @@ public final class Logger implements ILogger {
 
     @Override
     public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
-        if (debug.getAsBoolean()) {
+        if (LoaderMod.DEBUG) {
             logger.debug(String.format(to_string.toString(), format_args));
         }
     }
@@ -81,6 +80,6 @@ public final class Logger implements ILogger {
     @NotNull
     @Override
     public Logger child(@NotNull final String name) {
-        return new Logger(this.name + "/" + name, this.debug);
+        return new Logger(this.name + "/" + name);
     }
 }

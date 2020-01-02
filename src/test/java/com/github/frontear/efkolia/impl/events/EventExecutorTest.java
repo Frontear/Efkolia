@@ -15,7 +15,7 @@ class EventExecutorTest {
 
     @BeforeAll
     static void beforeAll() {
-        val logger = new Logger("Test", PseudoRandom::nextBoolean);
+        val logger = new Logger("Test");
 
         executor = new EventExecutor(logger);
         event = new TestEvent(executor, logger);

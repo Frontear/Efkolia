@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import java.util.*;
+import lombok.val;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -14,7 +15,9 @@ class LoggerTest {
     @BeforeAll
     static void beforeAll() {
         debug = PseudoRandom.nextBoolean();
-        logger = new Logger("Test/Logger", () -> debug);
+        System.setProperty("efkolia.debug", Boolean.toString(debug));
+
+        logger = new Logger("Test/Logger");
     }
 
     @Test
