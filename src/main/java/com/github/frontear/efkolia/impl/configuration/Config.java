@@ -19,8 +19,8 @@ public final class Config implements IConfig {
 
     @SneakyThrows(IOException.class)
     public Config(@NotNull final Logger logger, @NotNull final Path config) {
-        this.config = config;
         this.logger = logger.child("Config");
+        this.config = config;
 
         if (!Files.exists(config)) {
             Files.createFile(config);
@@ -42,7 +42,7 @@ public final class Config implements IConfig {
     @SneakyThrows(IOException.class)
     @Override
     public void load() {
-        logger.debug("Loading config at %s", config);
+        logger.debug("Loading the config from %s", config);
         try (val reader = Files.newBufferedReader(config)) {
             logger.debug("Parsing via JsonParser");
             val config = new JsonParser().parse(reader).getAsJsonObject();
@@ -69,7 +69,7 @@ public final class Config implements IConfig {
     @SneakyThrows(IOException.class)
     @Override
     public void save() {
-        logger.debug("Saving config to %s", config);
+        logger.debug("Saving the config to %s", config);
         try (val writer = Files.newBufferedWriter(config)) {
             val config = new JsonObject();
 

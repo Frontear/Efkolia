@@ -49,7 +49,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
             final Predicate<? super EventMethod> predicate = x -> x.instance.equals(instance);
 
             if (firing) {
-                v.stream().filter(predicate).forEach(EventMethod::flag);
+                v.stream().filter(predicate).forEach(x -> x.remove = true);
             }
             else {
                 v.removeIf(predicate);

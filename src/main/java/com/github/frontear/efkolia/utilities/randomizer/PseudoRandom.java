@@ -4,7 +4,7 @@ import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Array;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.experimental.UtilityClass;
-import lombok.*;
+import lombok.val;
 
 /**
  * A utility class which generates pseudo-random numbers in a fully thread-safe manner. It
@@ -71,10 +71,10 @@ public class PseudoRandom {
      * @return The random string.
      */
     @NotNull
-    public String nextString(final int len, final boolean random_case) {
+    public String nextString(int len, final boolean random_case) {
         val string = new StringBuilder(len);
 
-        for (var i = 0; i < len; ++i) {
+        while (len-- > 0) {
             string.append(nextChar(random_case && nextBoolean()));
         }
 

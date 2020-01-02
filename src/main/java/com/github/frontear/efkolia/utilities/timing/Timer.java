@@ -52,7 +52,7 @@ public final class Timer {
 
     /**
      * Converts the elapsed nanosecond time into a time string. By default, this will return the
-     * format "HH:mm:ss:SSSS".
+     * format "HH:mm:ss:SSS".
      *
      * @return A formatted time string.
      */

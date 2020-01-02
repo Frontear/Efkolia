@@ -23,10 +23,6 @@ final class EventMethod implements Comparable<EventMethod> {
         method.invoke(instance, event);
     }
 
-    void flag() {
-        this.remove = true;
-    }
-
     @Override
     public int compareTo(@NotNull final EventMethod other) {
         return other.priority.compareTo(this.priority);
