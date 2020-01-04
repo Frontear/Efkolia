@@ -15,8 +15,7 @@ class ConfigTest {
     @BeforeAll
     static void beforeAll() {
         file = Paths.get(System.getProperty("java.io.tmpdir"), "test.json");
-        config = new Config(DummyMod.getInstance(),
-            file);
+        config = new Config(DummyMod.getInstance(), System.getProperty("java.io.tmpdir"));
         object = new TestObject();
     }
 

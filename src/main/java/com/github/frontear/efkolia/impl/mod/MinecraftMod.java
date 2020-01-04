@@ -6,7 +6,6 @@ import com.github.frontear.efkolia.impl.events.EventExecutor;
 import com.github.frontear.efkolia.impl.info.Metadata;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.internal.*;
-import java.nio.file.Paths;
 
 public abstract class MinecraftMod implements IMinecraftMod {
     private final Metadata metadata;
@@ -19,8 +18,7 @@ public abstract class MinecraftMod implements IMinecraftMod {
         this.metadata = new Metadata(name, version, author, contributors);
         this.logger = new Logger(name);
         this.executor = new EventExecutor(this);
-        this.config = new Config(this,
-            Paths.get(System.getProperty("user.dir"), name.toLowerCase() + ".json"));
+        this.config = new Config(this, System.getProperty("user.dir"));
     }
 
     @NotNull

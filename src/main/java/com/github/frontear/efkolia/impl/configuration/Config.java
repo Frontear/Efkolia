@@ -19,9 +19,9 @@ public final class Config implements IConfig {
     private final Path config;
 
     @SneakyThrows(IOException.class)
-    public Config(@NotNull final MinecraftMod mod, @NotNull final Path config) {
+    public Config(@NotNull final MinecraftMod mod, @NotNull final String parent) {
         this.logger = mod.getLogger("Config");
-        this.config = config;
+        this.config = Paths.get(parent, mod.getMetadata().getName().toLowerCase() + ".json");
 
         if (!Files.exists(config)) {
             Files.createFile(config);
