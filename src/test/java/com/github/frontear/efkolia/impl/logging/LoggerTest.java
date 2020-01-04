@@ -2,7 +2,7 @@ package com.github.frontear.efkolia.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
+import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import java.util.*;
 import org.junit.jupiter.api.*;
 
@@ -13,7 +13,7 @@ class LoggerTest {
 
     @BeforeAll
     static void beforeAll() {
-        debug = PseudoRandom.nextBoolean();
+        debug = LocalRandom.nextBoolean();
         System.setProperty("efkolia.debug", Boolean.toString(debug));
 
         logger = new Logger("Test/Logger");
@@ -77,6 +77,6 @@ class LoggerTest {
     }
 
     private String rand() {
-        return PseudoRandom.nextString(PseudoRandom.nextInt(10, 30), true);
+        return LocalRandom.nextString(LocalRandom.nextInt(10, 30), true);
     }
 }

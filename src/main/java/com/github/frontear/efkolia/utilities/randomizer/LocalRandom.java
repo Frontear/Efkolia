@@ -2,18 +2,22 @@ package com.github.frontear.efkolia.utilities.randomizer;
 
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Array;
+import java.security.SecureRandom;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.experimental.UtilityClass;
 import lombok.val;
 
 /**
- * A utility class which generates pseudo-random numbers in a fully thread-safe manner. It
- * internally uses {@link ThreadLocalRandom} to generate these values. Due to the fact that this is
- * pseudo random, the values created through this will NOT be completely unique.
+ * A utility class which generates random numbers in a fully thread-safe manner. By default, it will
+ * internally use {@link ThreadLocalRandom} to generate pseudo-random, however setting the property
+ * "efkolia.secure.random" to true will enable the usage of {@link SecureRandom}.
  */
 @UtilityClass
-public class PseudoRandom {
-    private final ThreadLocalRandom random = ThreadLocalRandom.current();
+public class LocalRandom {
+    private final Random random =
+        Boolean.getBoolean("efkolia.secure.random") ? new SecureRandom(SecureRandom.getSeed(512))
+            : ThreadLocalRandom.current();
     private final char[] alphas = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     /**
@@ -25,7 +29,7 @@ public class PseudoRandom {
      * @return A random value between the bounds.
      */
     public int nextInt(final int min, final int max) {
-        return random.nextInt(min, max + 1);
+        return random.nextInt((max - min) + 1) + min;
     }
 
     /**
@@ -63,7 +67,7 @@ public class PseudoRandom {
 
     /**
      * Generates a random string based on a specified length. It internally makes use of {@link
-     * PseudoRandom#nextChar(boolean)} to achieve this.
+     * LocalRandom#nextChar(boolean)} to achieve this.
      *
      * @param len         The length of the string.
      * @param random_case Whether the string should have randomized casing or not.

@@ -1,7 +1,7 @@
 package com.github.frontear.efkolia.impl.events;
 
 import com.github.frontear.efkolia.api.events.*;
-import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
+import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import com.github.frontear.internal.NotNull;
 
 class TestObject {
@@ -9,8 +9,8 @@ class TestObject {
     final boolean throwing;
 
     public TestObject() {
-        this.unregister = PseudoRandom.nextBoolean();
-        this.throwing = PseudoRandom.nextBoolean();
+        this.unregister = LocalRandom.nextBoolean();
+        this.throwing = LocalRandom.nextBoolean();
     }
 
     @Listener(Priority.HIGH)

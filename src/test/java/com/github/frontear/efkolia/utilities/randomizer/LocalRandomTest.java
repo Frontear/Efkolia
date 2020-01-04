@@ -5,48 +5,48 @@ import static org.junit.jupiter.api.Assertions.*;
 import lombok.*;
 import org.junit.jupiter.api.Test;
 
-class PseudoRandomTest {
+class LocalRandomTest {
     @Test
     void nextInt() {
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextInt(100, 0));
-        assertDoesNotThrow(() -> PseudoRandom.nextInt(0, 0));
+        assertThrows(IllegalArgumentException.class, () -> LocalRandom.nextInt(100, 0));
+        assertDoesNotThrow(() -> LocalRandom.nextInt(0, 0));
 
         assertTrue(() -> {
-            val ret = assertDoesNotThrow(() -> PseudoRandom.nextInt(0, 10));
+            val ret = assertDoesNotThrow(() -> LocalRandom.nextInt(0, 10));
             return ret >= 0 && ret <= 10;
         });
         assertTrue(() -> {
-            val ret = assertDoesNotThrow(() -> PseudoRandom.nextInt(-10, 10));
+            val ret = assertDoesNotThrow(() -> LocalRandom.nextInt(-10, 10));
             return ret >= -10 && ret <= 10;
         });
     }
 
     @Test
     void nextIndex() {
-        assertThrows(NullPointerException.class, () -> PseudoRandom.nextIndex(null));
-        assertThrows(IllegalArgumentException.class, () -> PseudoRandom.nextIndex(new Object()));
+        assertThrows(NullPointerException.class, () -> LocalRandom.nextIndex(null));
+        assertThrows(IllegalArgumentException.class, () -> LocalRandom.nextIndex(new Object()));
 
         val array = new int[100];
         for (var i = 0; i < array.length; i++) {
-            array[i] = PseudoRandom.nextInt(0, 100);
+            array[i] = LocalRandom.nextInt(0, 100);
         }
 
         assertTrue(() -> {
-            val ret = assertDoesNotThrow(() -> PseudoRandom.nextIndex(array));
+            val ret = assertDoesNotThrow(() -> LocalRandom.nextIndex(array));
             return ret >= 0 && ret <= array.length;
         });
     }
 
     @Test
     void nextBoolean() {
-        assertDoesNotThrow(PseudoRandom::nextBoolean);
+        assertDoesNotThrow(LocalRandom::nextBoolean);
     }
 
     @Test
     void nextChar() {
         assertTrue(() -> {
-            val upper = PseudoRandom.nextBoolean();
-            val ret = assertDoesNotThrow(() -> PseudoRandom.nextChar(upper));
+            val upper = LocalRandom.nextBoolean();
+            val ret = assertDoesNotThrow(() -> LocalRandom.nextChar(upper));
 
             return upper ? ret >= 'A' && ret <= 'Z' : ret >= 'a' && ret <= 'z';
         });
@@ -55,9 +55,9 @@ class PseudoRandomTest {
     @Test
     void nextString() {
         assertTrue(() -> {
-            val len = PseudoRandom.nextInt(0, 10);
+            val len = LocalRandom.nextInt(0, 10);
             val ret = assertDoesNotThrow(
-                () -> PseudoRandom.nextString(len, PseudoRandom.nextBoolean()));
+                () -> LocalRandom.nextString(len, LocalRandom.nextBoolean()));
 
             return ret.length() == len && ret.matches("[A-z]*");
         });
