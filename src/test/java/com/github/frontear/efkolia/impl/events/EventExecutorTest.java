@@ -3,7 +3,6 @@ package com.github.frontear.efkolia.impl.events;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.efkolia.impl.logging.Logger;
-import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import lombok.val;
 import org.junit.jupiter.api.*;
 

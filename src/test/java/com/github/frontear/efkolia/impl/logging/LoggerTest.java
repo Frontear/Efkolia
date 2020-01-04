@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.efkolia.utilities.randomizer.PseudoRandom;
 import java.util.*;
-import lombok.val;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")

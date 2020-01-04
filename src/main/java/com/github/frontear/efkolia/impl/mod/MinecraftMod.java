@@ -13,8 +13,8 @@ public abstract class MinecraftMod implements IMinecraftMod {
     private final Config config;
 
     public MinecraftMod(@NotNull final String name, @NotNull final String version,
-        @NotNull final String author, @Nullable final String... authors) {
-        this.metadata = new Metadata(name, version, author, authors);
+        @NotNull final String author, @Nullable final String... contributors) {
+        this.metadata = new Metadata(name, version, author, contributors);
         this.logger = new Logger(name);
         this.config = new Config(logger,
             Paths.get(System.getProperty("user.dir"), name.toLowerCase() + ".json"));

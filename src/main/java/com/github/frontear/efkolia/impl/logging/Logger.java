@@ -5,7 +5,6 @@ import static org.apache.logging.log4j.Level.*;
 import com.github.frontear.efkolia.api.logging.ILogger;
 import com.github.frontear.efkolia.impl.loader.LoaderMod;
 import com.github.frontear.internal.*;
-import java.util.function.BooleanSupplier;
 import lombok.val;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.LoggerContext;
