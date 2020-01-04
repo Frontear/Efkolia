@@ -25,7 +25,7 @@ class TestObject {
     private void onTestNormal(@NotNull final TestEvent event) {
         event.logger.info("NORMAL!");
         if (throwing) {
-            throw new RuntimeException();
+            throw new TestEventException();
         }
     }
 

@@ -35,7 +35,7 @@ public class LocalMachine {
         }
         else {
             throw new UnsupportedOperationException(
-                "Properties \"os.name\" or \"os.arch\" have been overwritten in the jvm arguments");
+                "Properties \"os.name\" and/or \"os.arch\" have been overwritten in the jvm arguments");
         }
     }
 
