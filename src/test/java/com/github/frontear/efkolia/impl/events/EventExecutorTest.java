@@ -2,8 +2,7 @@ package com.github.frontear.efkolia.impl.events;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.impl.logging.Logger;
-import lombok.val;
+import com.github.frontear.efkolia.common.DummyMod;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -14,10 +13,8 @@ class EventExecutorTest {
 
     @BeforeAll
     static void beforeAll() {
-        val logger = new Logger("Test");
-
-        executor = new EventExecutor(logger);
-        event = new TestEvent(executor, logger);
+        executor = new EventExecutor(DummyMod.getInstance());
+        event = new TestEvent(executor, DummyMod.getInstance());
         object = new TestObject();
     }
 

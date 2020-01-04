@@ -1,6 +1,7 @@
 package com.github.frontear.efkolia.api.mod;
 
 import com.github.frontear.efkolia.api.configuration.IConfig;
+import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.api.info.IMetadata;
 import com.github.frontear.efkolia.api.logging.ILogger;
 import com.github.frontear.internal.NotNull;
@@ -31,6 +32,15 @@ public interface IMinecraftMod {
      */
     @NotNull
     ILogger getLogger(@NotNull final String name);
+
+    /**
+     * The event registration and execution system for the mod. This allows you to easily and
+     * effectively register and link certain objects to invoke {@link Listener} methods.
+     *
+     * @return An instance of {@link IEventExecutor}.
+     */
+    @NotNull
+    IEventExecutor<?> getExecutor();
 
     /**
      * The config of the mod. This will synchronize and manage all objects that are configured

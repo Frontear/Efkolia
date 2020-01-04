@@ -2,6 +2,7 @@ package com.github.frontear.efkolia.impl.events;
 
 import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
+import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Modifier;
 import java.util.*;
@@ -13,8 +14,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
     private final Logger logger;
     private boolean firing = false;
 
-    public EventExecutor(@NotNull final Logger logger) {
-        this.logger = logger.child("EventExecutor");
+    public EventExecutor(@NotNull final MinecraftMod mod) {
+        this.logger = mod.getLogger("EventExecutor");
     }
 
     @Override

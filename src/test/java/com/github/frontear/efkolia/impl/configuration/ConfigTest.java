@@ -2,7 +2,7 @@ package com.github.frontear.efkolia.impl.configuration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.impl.logging.Logger;
+import com.github.frontear.efkolia.common.DummyMod;
 import java.nio.file.*;
 import lombok.val;
 import org.junit.jupiter.api.*;
@@ -15,7 +15,7 @@ class ConfigTest {
     @BeforeAll
     static void beforeAll() {
         file = Paths.get(System.getProperty("java.io.tmpdir"), "test.json");
-        config = new Config(new Logger("Test"),
+        config = new Config(DummyMod.getInstance(),
             file);
         object = new TestObject();
     }
