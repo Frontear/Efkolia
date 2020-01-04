@@ -109,6 +109,7 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/gradle,intellij+all
 
 ### Frontear ###
+test.json
 lombok.config
 gradle.properties
 logs/
