@@ -1,3 +1,5 @@
+import java.util.concurrent.ThreadLocalRandom
+
 plugins {
     id "io.codearte.nexus-staging" version "0.21.1"
     id "com.bmuschko.nexus" version "2.3.1"
@@ -7,7 +9,7 @@ plugins {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 group = "com.github.frontear"
-version = "0.1.4"
+version = "0.1.5"
 
 repositories {
     mavenCentral()
@@ -65,6 +67,9 @@ modifyPom {
 }
 
 test {
+    final rand = { ThreadLocalRandom.current().nextBoolean() }
+
+    jvmArgs "-Defkolia.debug=${rand()}", "-Defkolia.secure.random=${rand()}"
     useJUnitPlatform()
 }
 
