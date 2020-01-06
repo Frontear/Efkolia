@@ -5,17 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.github.frontear.efkolia.impl.loader.LoaderMod;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import java.util.*;
-import lombok.val;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
 class LoggerTest {
-    static boolean debug;
     static Logger logger;
 
     @BeforeAll
     static void beforeAll() {
-        debug = LoaderMod.DEBUG;
         logger = new Logger("Test/Logger");
     }
 
@@ -54,7 +51,7 @@ class LoggerTest {
 
     @Test
     void debug() {
-        if (debug) {
+        if (LoaderMod.DEBUG) {
             assertThrows(IllegalFormatConversionException.class,
                 () -> logger.debug("Hello, %d!", "world"));
             assertThrows(MissingFormatArgumentException.class, () -> logger.debug("Hello, %s!"));
