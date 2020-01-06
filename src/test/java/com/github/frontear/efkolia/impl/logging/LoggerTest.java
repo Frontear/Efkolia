@@ -2,8 +2,10 @@ package com.github.frontear.efkolia.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.frontear.efkolia.impl.loader.LoaderMod;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import java.util.*;
+import lombok.val;
 import org.junit.jupiter.api.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -13,9 +15,7 @@ class LoggerTest {
 
     @BeforeAll
     static void beforeAll() {
-        debug = LocalRandom.nextBoolean();
-        System.setProperty("efkolia.debug", Boolean.toString(debug));
-
+        debug = LoaderMod.DEBUG;
         logger = new Logger("Test/Logger");
     }
 
