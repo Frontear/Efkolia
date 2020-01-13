@@ -67,10 +67,17 @@ modifyPom {
 }
 
 test {
-    final rand = { ThreadLocalRandom.current().nextBoolean() }
+    final props = [
+        "-Defkolia.debug=${ThreadLocalRandom.current().nextBoolean()}",
+        "-Defkolia.secure.random=${ThreadLocalRandom.current().nextBoolean()}"
+    ]
 
-    jvmArgs "-Defkolia.debug=${rand()}", "-Defkolia.secure.random=${rand()}"
+    jvmArgs props
     useJUnitPlatform()
+
+    doFirst {
+        props.each { println it }
+    }
 }
 
 wrapper {
