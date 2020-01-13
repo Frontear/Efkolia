@@ -1,5 +1,6 @@
 package com.github.frontear.efkolia.utilities.randomizer;
 
+import com.github.frontear.efkolia.Properties;
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Array;
 import java.security.SecureRandom;
@@ -16,7 +17,7 @@ import lombok.val;
 @UtilityClass
 public class LocalRandom {
     private final Random random =
-        Boolean.getBoolean("efkolia.secure.random") ? new SecureRandom(SecureRandom.getSeed(512))
+        Properties.SECURE_RANDOM ? new SecureRandom(SecureRandom.getSeed(512))
             : ThreadLocalRandom.current();
     private final char[] alphas = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 

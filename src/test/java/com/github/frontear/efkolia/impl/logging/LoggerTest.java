@@ -2,7 +2,7 @@ package com.github.frontear.efkolia.impl.logging;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.impl.loader.LoaderMod;
+import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import java.util.*;
 import org.junit.jupiter.api.*;
@@ -51,7 +51,7 @@ class LoggerTest {
 
     @Test
     void debug() {
-        if (LoaderMod.DEBUG) {
+        if (Properties.DEBUG) {
             assertThrows(IllegalFormatConversionException.class,
                 () -> logger.debug("Hello, %d!", "world"));
             assertThrows(MissingFormatArgumentException.class, () -> logger.debug("Hello, %s!"));
