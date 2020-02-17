@@ -1,16 +1,12 @@
 package com.github.frontear.efkolia.impl.logging;
 
-import static org.apache.logging.log4j.Level.ALL;
-import static org.apache.logging.log4j.Level.DEBUG;
+import static org.apache.logging.log4j.Level.*;
 
 import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.api.logging.ILogger;
-import com.github.frontear.internal.NotNull;
-import com.github.frontear.internal.Nullable;
-import java.io.IOException;
+import com.github.frontear.internal.*;
 import lombok.val;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender.Target;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -48,7 +44,7 @@ public final class Logger implements ILogger {
 
             val root = builder.newRootLogger(DEBUG);
             root.add(builder.newFilter("MarkerFilter", "DENY", "NEUTRAL")
-                    .addAttribute("marker", "NETWORK_PACKETS"));
+                .addAttribute("marker", "NETWORK_PACKETS"));
             root.add(builder.newAppenderRef("SysOut"))
                 .add(builder.newAppenderRef("File").addAttribute("level", ALL))
                 .add(builder.newAppenderRef("ServerGuiConsole"));
