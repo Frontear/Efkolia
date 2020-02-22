@@ -9,7 +9,7 @@ plugins {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 group = "com.github.frontear"
-version = "0.1.5"
+version = "0.1.6"
 
 repositories {
     mavenCentral()
@@ -69,7 +69,7 @@ modifyPom {
 test {
     final props = [
         "-Defkolia.debug=${ThreadLocalRandom.current().nextBoolean()}",
-        "-Defkolia.secure.random=${ThreadLocalRandom.current().nextBoolean()}"
+        //"-Defkolia.secure.random=${ThreadLocalRandom.current().nextBoolean()}"
     ]
 
     jvmArgs props
