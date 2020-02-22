@@ -30,14 +30,20 @@ public final class Config implements IConfig {
 
     @Override
     public void register(@NotNull final IConfigurable<?> object) {
-        val status = configurables.add(object);
-        logger.debug("Registering %s, success: %b", object.getPropertyName(), status);
+        val status = object != null && configurables.add(object);
+
+        if (status) {
+            logger.debug("Registering %s", object.getPropertyName());
+        }
     }
 
     @Override
     public void unregister(@NotNull final IConfigurable<?> object) {
-        val status = configurables.remove(object);
-        logger.debug("Unregistering %s, success: %b", object.getPropertyName(), status);
+        val status = object != null && configurables.remove(object);
+
+        if (status) {
+            logger.debug("Unregistering %s", object.getPropertyName());
+        }
     }
 
     @SneakyThrows(IOException.class)
