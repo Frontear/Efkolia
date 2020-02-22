@@ -8,19 +8,19 @@ import lombok.experimental.UtilityClass;
 
 /**
  * A simple utility class that allows you to grab various information from a website. It internally
- * makes use of {@link HttpURLConnection}
+ * makes use of {@link HttpURLConnection}.
  */
 @UtilityClass
 public class Connection {
     /**
      * Performs a GET request to a specific site, and returns a response in a compatible {@link
-     * Response} format
+     * Response} format.
      *
      * @param url  The site URL. This is wrapped with {@link URL} internally.
-     * @param type The response type. This is used to easily convert responses into objects
-     * @param <T>  The type you expect to manipulate
+     * @param type The response type. This is used to easily convert responses into objects.
+     * @param <T>  The type you expect to manipulate.
      *
-     * @return The expected response formatted as the type
+     * @return The expected response formatted as the type.
      */
     @SneakyThrows(IOException.class)
     public <T> T get(@NotNull final String url, @NotNull final Response<T> type) {

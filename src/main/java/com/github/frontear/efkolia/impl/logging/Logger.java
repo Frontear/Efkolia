@@ -15,7 +15,6 @@ import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFact
 public final class Logger implements ILogger {
     private static final LoggerContext context;
 
-    // generates the default Minecraft config, todo: resolve Queue
     static {
         val builder = ConfigurationBuilderFactory.newConfigurationBuilder();
         {
@@ -26,11 +25,6 @@ public final class Logger implements ILogger {
             console.add(builder.newLayout("PatternLayout")
                 .addAttribute("pattern", "[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n"));
             builder.add(console);
-
-            val queue = builder.newAppender("ServerGuiConsole", "Queue");
-            queue.add(builder.newLayout("PatternLayout")
-                .addAttribute("pattern", "[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n"));
-            //builder.add(queue);
 
             val file = builder.newAppender("File", "RollingRandomAccessFile");
             file.addAttribute("fileName", "logs/latest.log")
@@ -46,8 +40,7 @@ public final class Logger implements ILogger {
             root.add(builder.newFilter("MarkerFilter", "DENY", "NEUTRAL")
                 .addAttribute("marker", "NETWORK_PACKETS"));
             root.add(builder.newAppenderRef("SysOut"))
-                .add(builder.newAppenderRef("File").addAttribute("level", ALL))
-            ;//.add(builder.newAppenderRef("ServerGuiConsole"));
+                .add(builder.newAppenderRef("File").addAttribute("level", ALL));
             builder.add(root);
         }
 

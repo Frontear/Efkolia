@@ -21,11 +21,13 @@ class ConfigTest {
 
     @Test
     void register() {
+        assertThrows(NullPointerException.class, () -> config.register(null));
         assertDoesNotThrow(() -> config.register(object));
     }
 
     @Test
     void unregister() {
+        assertThrows(NullPointerException.class, () -> config.unregister(null));
         assertDoesNotThrow(() -> config.unregister(object));
     }
 

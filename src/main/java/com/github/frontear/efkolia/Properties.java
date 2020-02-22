@@ -4,7 +4,7 @@ import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import com.github.frontear.internal.NotNull;
 
 /**
- * A utility class for the properties efkolia supports. All properties must start with "-Defkolia"
+ * A utility class for the properties efkolia supports. All properties must start with "-Defkolia".
  */
 public final class Properties {
     /**
