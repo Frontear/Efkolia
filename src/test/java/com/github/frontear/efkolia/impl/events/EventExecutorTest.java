@@ -26,11 +26,13 @@ class EventExecutorTest {
 
     @Test
     void unregister() {
+        assertThrows(NullPointerException.class, () -> executor.unregister(null));
         assertDoesNotThrow(() -> executor.unregister(object));
     }
 
     @Test
     void fire() {
+        assertThrows(NullPointerException.class, () -> executor.fire(null));
         assertDoesNotThrow(() -> executor.fire(event));
     }
 }
