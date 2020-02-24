@@ -6,7 +6,7 @@ import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Modifier;
 import java.util.*;
-import java.util.function.Predicate;
+import java.util.function.*;
 import lombok.val;
 
 public final class EventExecutor implements IEventExecutor<Event> {
@@ -44,6 +44,18 @@ public final class EventExecutor implements IEventExecutor<Event> {
     }
 
     @Override
+    public <E1 extends Event> void register(@NotNull final Class<E1> event,
+        @NotNull final Consumer<E1> listener) {
+        if (event == null || listener == null) {
+            throw new NullPointerException();
+        }
+
+        listeners.putIfAbsent(event, new TreeSet<>());
+        //noinspection unchecked
+        listeners.get(event).add(new EventMethod((Consumer<Event>) listener));
+    }
+
+    @Override
     public void unregister(@NotNull final Object instance) {
         logger.debug("Unregistering %s", instance.getClass().getSimpleName());
         listeners.forEach((k, v) -> {
@@ -56,6 +68,12 @@ public final class EventExecutor implements IEventExecutor<Event> {
                 v.removeIf(predicate);
             }
         });
+    }
+
+    @Override
+    public <E1 extends Event> void unregister(@NotNull final Class<E1> event,
+        @NotNull final Consumer<E1> listener) {
+        listeners.get(event).removeIf(x -> x.listener.equals(listener));
     }
 
     @NotNull

@@ -69,7 +69,7 @@ modifyPom {
 test {
     final props = [
         "-Defkolia.debug=${ThreadLocalRandom.current().nextBoolean()}",
-        //"-Defkolia.secure.random=${ThreadLocalRandom.current().nextBoolean()}"
+        "-Defkolia.secure.random=${ThreadLocalRandom.current().nextBoolean()}"
     ]
 
     jvmArgs props

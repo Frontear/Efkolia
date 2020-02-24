@@ -3,7 +3,7 @@ package com.github.frontear.efkolia.impl.configuration;
 import com.github.frontear.efkolia.api.configuration.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
-import com.github.frontear.internal.NotNull;
+import com.github.frontear.internal.*;
 import com.google.gson.*;
 import java.io.*;
 import java.lang.reflect.Type;
@@ -29,7 +29,7 @@ public final class Config implements IConfig {
     }
 
     @Override
-    public void register(@NotNull final IConfigurable<?> object) {
+    public void register(@Nullable final IConfigurable<?> object) {
         val status = object != null && configurables.add(object);
 
         if (status) {
@@ -38,7 +38,7 @@ public final class Config implements IConfig {
     }
 
     @Override
-    public void unregister(@NotNull final IConfigurable<?> object) {
+    public void unregister(@Nullable final IConfigurable<?> object) {
         val status = object != null && configurables.remove(object);
 
         if (status) {
