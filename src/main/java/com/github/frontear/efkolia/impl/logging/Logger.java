@@ -18,28 +18,28 @@ public final class Logger implements ILogger {
 
     @Override
     public void info(@NotNull final Object to_string, @Nullable final Object... format_args) {
-        this.log(logger.info, to_string, format_args);
+        this.log(logger::info, to_string, format_args);
     }
 
     @Override
     public void warn(@NotNull final Object to_string, @Nullable final Object... format_args) {
-        this.log(logger.warn, to_string, format_args);
+        this.log(logger::warn, to_string, format_args);
     }
 
     @Override
     public void error(@NotNull final Object to_string, @Nullable final Object... format_args) {
-        this.log(logger.error, to_string, format_args);
+        this.log(logger::error, to_string, format_args);
     }
 
     @Override
     public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.DEBUG) {
-            this.log(logger.debug, to_string, format_args);
+            this.log(logger::debug, to_string, format_args);
         }
     }
     
     private void log(@NotNull Consumer<String> callback, @NonNull final Object to_string, @Nullable final Object... format_args) {
-        callback.accept(name + String.format(to_string.toString(), args));
+        callback.accept(name + String.format(to_string.toString(), format_args));
     }
 
     @NotNull
