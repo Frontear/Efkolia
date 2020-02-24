@@ -37,8 +37,9 @@ public final class Logger implements ILogger {
             this.log(logger::debug, to_string, format_args);
         }
     }
-    
-    private void log(@NotNull Consumer<String> callback, @NonNull final Object to_string, @Nullable final Object... format_args) {
+
+    private void log(@NotNull Consumer<String> callback, @NonNull final Object to_string,
+        @Nullable final Object... format_args) {
         callback.accept(name + String.format(to_string.toString(), format_args));
     }
 
