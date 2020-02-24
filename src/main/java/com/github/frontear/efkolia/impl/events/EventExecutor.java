@@ -41,19 +41,19 @@ public final class EventExecutor implements IEventExecutor<Event> {
     }
 
     @Override
-    public void unregister(@NonNull final Object instance) {
-        logger.debug("Unregistering %s", instance.getClass().getSimpleName());
-
-        listeners.forEach((k, v) -> v.removeIf(x -> x.hash == instance.hashCode()));
-    }
-
-    @Override
     public <E1 extends Event> void register(@NonNull final Class<E1> event,
         @NonNull final Consumer<E1> listener) {
         logger.debug("Registering %s to %s", listener, event.getSimpleName());
 
         listeners.putIfAbsent(event, new TreeSet<>());
         listeners.get(event).add(new EventMethod<>(listener));
+    }
+
+    @Override
+    public void unregister(@NonNull final Object instance) {
+        logger.debug("Unregistering %s", instance.getClass().getSimpleName());
+
+        listeners.forEach((k, v) -> v.removeIf(x -> x.hash == instance.hashCode()));
     }
 
     @Override

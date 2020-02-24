@@ -21,15 +21,6 @@ public interface IEventExecutor<E> {
     void register(@NotNull final Object instance);
 
     /**
-     * Removes any methods marked with {@link Listener} from the current executor. If an event
-     * executing, the instance must be marked for unregistering, and be finalized once the execution
-     * has finished.
-     *
-     * @param instance The instance to search, and unregister methods from.
-     */
-    void unregister(@NotNull final Object instance);
-
-    /**
      * Registers a listener via direct key,value relations. This is significantly easier as it
      * removes the necessity for a wrapper object to contain events. In the same way, its lifecycle
      * is significantly more controllable
@@ -39,6 +30,15 @@ public interface IEventExecutor<E> {
      * @param <E1>     An extended type of your event
      */
     <E1 extends E> void register(@NotNull final Class<E1> event, Consumer<E1> listener);
+
+    /**
+     * Removes any methods marked with {@link Listener} from the current executor. If an event
+     * executing, the instance must be marked for unregistering, and be finalized once the execution
+     * has finished.
+     *
+     * @param instance The instance to search, and unregister methods from.
+     */
+    void unregister(@NotNull final Object instance);
 
     /**
      * Unregisters a listener in a key,value relationship. If the event is currently executing, it
