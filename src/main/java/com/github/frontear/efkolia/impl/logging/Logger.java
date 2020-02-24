@@ -3,6 +3,7 @@ package com.github.frontear.efkolia.impl.logging;
 import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.api.logging.ILogger;
 import com.github.frontear.internal.*;
+import java.util.function.Consumer;
 import lombok.NonNull;
 import org.apache.logging.log4j.LogManager;
 
@@ -16,33 +17,32 @@ public final class Logger implements ILogger {
     }
 
     @Override
-    public void info(@NonNull final Object to_string, @Nullable final Object... format_args) {
-        logger.info(name + String.format(to_string.toString(), format_args));
+    public void info(@NotNull final Object to_string, @Nullable final Object... format_args) {
+        this.log(logger.info, to_string, format_args);
     }
 
     @Override
-    public void warn(@NonNull final Object to_string, @Nullable final Object... format_args) {
-        logger.warn(name + String.format(to_string.toString(), format_args));
+    public void warn(@NotNull final Object to_string, @Nullable final Object... format_args) {
+        this.log(logger.warn, to_string, format_args);
     }
 
     @Override
-    public void error(@NonNull final Object to_string, @Nullable final Object... format_args) {
-        logger.error(name + String.format(to_string.toString(), format_args));
+    public void error(@NotNull final Object to_string, @Nullable final Object... format_args) {
+        this.log(logger.error, to_string, format_args);
     }
 
     @Override
     public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.DEBUG) {
-            if (to_string == null) {
-                throw new NullPointerException(
-                    "to_string is marked @NonNull but is null"); // lombok is generating before the DEBUG check. This is unintended
-            }
-
-            logger.debug(name + String.format(to_string.toString(), format_args));
+            this.log(logger.debug, to_string, format_args);
         }
     }
+    
+    private void log(@NotNull Consumer<String> callback, @NonNull final Object to_string, @Nullable final Object... format_args) {
+        callback.accept(name + String.format(to_string.toString(), args);
+    }
 
-    @NonNull
+    @NotNull
     @Override
     public Logger child(@NonNull final String name) {
         return new Logger(this.name + "/" + name);
