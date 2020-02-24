@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
+import com.github.frontear.internal.NotNull;
 import java.util.*;
 import org.junit.jupiter.api.*;
 
-@SuppressWarnings("ConstantConditions")
 class LoggerTest {
     static Logger logger;
 
@@ -73,6 +73,7 @@ class LoggerTest {
         assertNotNull(logger.child("Test"));
     }
 
+    @NotNull
     private String rand() {
         return LocalRandom.nextString(LocalRandom.nextInt(10, 30), true);
     }

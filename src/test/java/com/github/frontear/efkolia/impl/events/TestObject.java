@@ -2,7 +2,7 @@ package com.github.frontear.efkolia.impl.events;
 
 import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
-import com.github.frontear.internal.NotNull;
+import lombok.NonNull;
 
 class TestObject {
     final boolean unregister;
@@ -14,7 +14,7 @@ class TestObject {
     }
 
     @Listener(Priority.HIGH)
-    private void onTestHigh(@NotNull final TestEvent event) {
+    private void onTestHigh(@NonNull final TestEvent event) {
         event.logger.info("HIGH!");
         if (unregister) {
             event.executor.unregister(this);
@@ -22,7 +22,7 @@ class TestObject {
     }
 
     @Listener(Priority.NORMAL)
-    private void onTestNormal(@NotNull final TestEvent event) {
+    private void onTestNormal(@NonNull final TestEvent event) {
         event.logger.info("NORMAL!");
         if (throwing) {
             throw new TestEventException();
@@ -30,7 +30,7 @@ class TestObject {
     }
 
     @Listener(Priority.LOW)
-    private void onTestLow(@NotNull final TestEvent event) {
+    private void onTestLow(@NonNull final TestEvent event) {
         event.logger.info("LOW!");
     }
 }
