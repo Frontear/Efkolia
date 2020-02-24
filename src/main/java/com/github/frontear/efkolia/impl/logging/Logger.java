@@ -4,7 +4,7 @@ import static org.apache.logging.log4j.Level.*;
 
 import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.api.logging.ILogger;
-import com.github.frontear.internal.Nullable;
+import com.github.frontear.internal.*;
 import lombok.*;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -72,8 +72,13 @@ public final class Logger implements ILogger {
     }
 
     @Override
-    public void debug(@NonNull final Object to_string, @Nullable final Object... format_args) {
+    public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.DEBUG) {
+            if (to_string == null) {
+                throw new NullPointerException(
+                    "to_string is marked @NonNull but is null"); // lombok is generating before the DEBUG check. This is unintended
+            }
+
             logger.debug(String.format(to_string.toString(), format_args));
         }
     }

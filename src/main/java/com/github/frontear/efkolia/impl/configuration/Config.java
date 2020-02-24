@@ -3,7 +3,6 @@ package com.github.frontear.efkolia.impl.configuration;
 import com.github.frontear.efkolia.api.configuration.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
-import com.github.frontear.internal.Nullable;
 import com.google.gson.*;
 import java.io.*;
 import java.lang.reflect.Type;
@@ -29,8 +28,8 @@ public final class Config implements IConfig {
     }
 
     @Override
-    public void register(@Nullable final IConfigurable<?> object) {
-        val status = object != null && configurables.add(object);
+    public void register(@NonNull final IConfigurable<?> object) {
+        val status = configurables.add(object);
 
         if (status) {
             logger.debug("Registering %s", object.getPropertyName());
@@ -38,8 +37,8 @@ public final class Config implements IConfig {
     }
 
     @Override
-    public void unregister(@Nullable final IConfigurable<?> object) {
-        val status = object != null && configurables.remove(object);
+    public void unregister(@NonNull final IConfigurable<?> object) {
+        val status = configurables.remove(object);
 
         if (status) {
             logger.debug("Unregistering %s", object.getPropertyName());
@@ -67,7 +66,7 @@ public final class Config implements IConfig {
                 }
             }
         }
-        catch (FileNotFoundException | IllegalStateException e) {
+        catch (final FileNotFoundException | IllegalStateException e) {
             logger.debug("Config does not exist (will create)");
             this.save(); // creates the file
         }

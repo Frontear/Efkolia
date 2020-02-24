@@ -1,44 +1,43 @@
 package com.github.frontear.efkolia.impl.events;
 
 import com.github.frontear.efkolia.api.events.*;
-import com.github.frontear.internal.NotNull;
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
 import java.util.function.Consumer;
 import lombok.*;
 
-// todo: fix generics
 @EqualsAndHashCode
-final class EventMethod implements Comparable<EventMethod> {
-    final Object instance;
-    final Consumer<Event> listener;
+final class EventMethod<E extends Event> implements Comparable<EventMethod<?>> {
+    final int hash;
+    private final Consumer<Event> listener;
     private final Priority priority;
-    boolean remove;
 
-    EventMethod(@NotNull final Method method, @NotNull final Object instance) {
-        method.setAccessible(true);
+    public EventMethod(@NonNull final Object instance, @NonNull final Method method) {
+        this.hash = instance.hashCode();
         this.listener = new Consumer<Event>() {
             @Override
-            @SneakyThrows({ IllegalAccessException.class, InvocationTargetException.class })
+            @SneakyThrows(ReflectiveOperationException.class)
             public void accept(final Event event) {
                 method.invoke(instance, event);
             }
         };
-        this.instance = instance;
         this.priority = method.getAnnotation(Listener.class).value();
+
+        method.setAccessible(true);
     }
 
-    EventMethod(@NotNull final Consumer<Event> listener) {
-        this.instance = null;
-        this.listener = listener;
-        this.priority = Priority.NORMAL; // todo: custom priority?
+    public EventMethod(@NonNull final Consumer<E> listener) {
+        this.hash = listener.hashCode();
+        //noinspection unchecked
+        this.listener = x -> listener.accept((E) x);
+        this.priority = Priority.NORMAL;
     }
 
-    void invoke(@NotNull final Event event) {
+    public void invoke(@NonNull final Event event) {
         listener.accept(event);
     }
 
     @Override
-    public int compareTo(@NotNull final EventMethod other) {
+    public int compareTo(@NonNull final EventMethod<?> other) {
         return other.priority.compareTo(this.priority);
     }
 }
