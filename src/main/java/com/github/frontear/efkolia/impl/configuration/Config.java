@@ -45,8 +45,8 @@ public final class Config implements IConfig {
         }
     }
 
-    @SneakyThrows(IOException.class)
     @Override
+    @SneakyThrows(IOException.class)
     public void load() {
         logger.debug("Loading the config from %s", config);
         try (val reader = Files.newBufferedReader(config)) {
@@ -72,8 +72,8 @@ public final class Config implements IConfig {
         }
     }
 
-    @SneakyThrows(IOException.class)
     @Override
+    @SneakyThrows(IOException.class)
     public void save() {
         logger.debug("Saving the config to %s", config);
         try (val writer = Files.newBufferedWriter(config)) {

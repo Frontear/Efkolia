@@ -1,6 +1,7 @@
 package com.github.frontear.efkolia.utilities.randomizer;
 
 import com.github.frontear.efkolia.Properties;
+import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -74,7 +75,7 @@ public class LocalRandom {
      *
      * @return The random string.
      */
-    @NonNull
+    @NotNull
     public String nextString(int len, final boolean random_case) {
         val string = new StringBuilder(len);
 

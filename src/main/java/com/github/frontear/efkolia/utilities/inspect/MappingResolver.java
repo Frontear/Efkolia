@@ -23,6 +23,7 @@ public interface MappingResolver {
      *
      * @return The package + class name in its obfuscated form
      */
+    @NotNull
     String resolveClass(@NotNull final String pkg, @NotNull final String name);
 
     /**
@@ -37,6 +38,7 @@ public interface MappingResolver {
      *
      * @return The method name in its obfuscated form
      */
+    @NotNull
     String resolveMethod(@NotNull final String name);
 
     /**
@@ -51,5 +53,6 @@ public interface MappingResolver {
      *
      * @return The field name in its obfuscated form
      */
+    @NotNull
     String resolveField(@NotNull final String name);
 }

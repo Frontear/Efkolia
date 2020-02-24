@@ -1,5 +1,6 @@
 package com.github.frontear.efkolia.utilities.network;
 
+import com.github.frontear.internal.NotNull;
 import java.io.*;
 import java.net.*;
 import lombok.*;
@@ -21,6 +22,7 @@ public class Connection {
      *
      * @return The expected response formatted as the type.
      */
+    @NotNull
     @SneakyThrows(IOException.class)
     public <T> T get(@NonNull final String url, @NonNull final Response<T> type) {
         val connect = (HttpURLConnection) new URL(url).openConnection();

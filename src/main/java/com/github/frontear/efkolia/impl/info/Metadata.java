@@ -1,7 +1,7 @@
 package com.github.frontear.efkolia.impl.info;
 
 import com.github.frontear.efkolia.api.info.IMetadata;
-import com.github.frontear.internal.Nullable;
+import com.github.frontear.internal.*;
 import lombok.*;
 
 public final class Metadata implements IMetadata {
@@ -27,19 +27,19 @@ public final class Metadata implements IMetadata {
         }
     }
 
-    @NonNull
+    @NotNull
     @Override
     public String getName() {
         return name;
     }
 
-    @NonNull
+    @NotNull
     @Override
     public String getVersion() {
         return version;
     }
 
-    @NonNull
+    @NotNull
     @Override
     public String getDevelopers() {
         return developers;

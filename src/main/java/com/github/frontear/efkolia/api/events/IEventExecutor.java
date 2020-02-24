@@ -29,7 +29,8 @@ public interface IEventExecutor<E> {
      * @param listener The listener to invoke when the event is {@link IEventExecutor#fire(Object)}
      * @param <E1>     An extended type of your event
      */
-    <E1 extends E> void register(@NotNull final Class<E1> event, Consumer<E1> listener);
+    <E1 extends E> void register(@NotNull final Class<E1> event,
+        @NotNull final Consumer<E1> listener);
 
     /**
      * Removes any methods marked with {@link Listener} from the current executor. If an event
@@ -48,7 +49,8 @@ public interface IEventExecutor<E> {
      * @param listener The listener to be removed
      * @param <E1>     An extended type of your event
      */
-    <E1 extends E> void unregister(@NotNull final Class<E1> event, Consumer<E1> listener);
+    <E1 extends E> void unregister(@NotNull final Class<E1> event,
+        @NotNull final Consumer<E1> listener);
 
     /**
      * Grabs all methods that are bound to the specific event, and executes them. It should handle

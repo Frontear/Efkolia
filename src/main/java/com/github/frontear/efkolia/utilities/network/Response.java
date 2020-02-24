@@ -15,5 +15,6 @@ public interface Response<T> {
      *
      * @return The converted response as an object.
      */
+    @NotNull
     T parse(@NotNull final String response);
 }

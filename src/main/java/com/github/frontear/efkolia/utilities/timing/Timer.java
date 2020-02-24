@@ -1,5 +1,6 @@
 package com.github.frontear.efkolia.utilities.timing;
 
+import com.github.frontear.internal.NotNull;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 
@@ -56,7 +57,7 @@ public final class Timer {
      *
      * @return A formatted time string.
      */
-    @NonNull
+    @NotNull
     @Override
     public String toString() {
         return String.format("%02d:%02d:%02d:%03d", getElapsed(TimeUnit.HOURS) % 24,

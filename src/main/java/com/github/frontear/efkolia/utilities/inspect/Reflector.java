@@ -1,5 +1,6 @@
 package com.github.frontear.efkolia.utilities.inspect;
 
+import com.github.frontear.internal.NotNull;
 import java.lang.reflect.*;
 import java.util.Arrays;
 import lombok.*;
@@ -26,6 +27,7 @@ public class Reflector {
      *
      * @throws NoSuchFieldException If no field matching the name is found
      */
+    @NotNull
     public Field getField(@NonNull Class<?> type, @NonNull final String name,
         @NonNull final MappingResolver resolver)
         throws NoSuchFieldException {
@@ -59,6 +61,7 @@ public class Reflector {
      *
      * @throws NoSuchMethodException If no method matching the name is found
      */
+    @NotNull
     public Method getMethod(@NonNull Class<?> type, @NonNull final String name,
         @NonNull final MappingResolver resolver)
         throws NoSuchMethodException {
@@ -91,6 +94,7 @@ public class Reflector {
      *
      * @throws ClassNotFoundException If no class matching the signature is found
      */
+    @NotNull
     public Class<?> getClass(@NonNull final String pkg, @NonNull final String name,
         @NonNull final MappingResolver resolver) throws ClassNotFoundException {
         val obf_name = resolver.resolveClass(pkg, name);

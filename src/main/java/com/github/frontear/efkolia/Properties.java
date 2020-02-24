@@ -1,7 +1,7 @@
 package com.github.frontear.efkolia;
 
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
-import com.github.frontear.internal.NotNull;
+import lombok.NonNull;
 
 /**
  * A utility class for the properties efkolia supports. All properties must start with "-Defkolia".
@@ -19,7 +19,7 @@ public final class Properties {
      */
     public static final boolean SECURE_RANDOM = get("secure.random");
 
-    private static boolean get(@NotNull final String prop) {
+    private static boolean get(@NonNull final String prop) {
         return Boolean.getBoolean("efkolia." + prop);
     }
 }

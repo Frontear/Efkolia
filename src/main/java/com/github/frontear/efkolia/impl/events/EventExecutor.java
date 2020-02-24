@@ -3,6 +3,7 @@ package com.github.frontear.efkolia.impl.events;
 import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
+import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.function.Consumer;
@@ -66,6 +67,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
         }
     }
 
+    @NotNull
     @Override
     public <E1 extends Event> E1 fire(@NonNull final E1 event) {
         val key = event.getClass();
