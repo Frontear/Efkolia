@@ -8,10 +8,10 @@ import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.internal.*;
 
 public abstract class MinecraftMod implements IMinecraftMod {
-    private final Metadata metadata;
-    private final Logger logger;
-    private final EventExecutor executor;
-    private final Config config;
+    protected final Metadata metadata;
+    protected final Logger logger;
+    protected final EventExecutor executor;
+    protected final Config config;
 
     public MinecraftMod(@NotNull final String name, @NotNull final String version,
         @NotNull final String author, @Nullable final String... contributors) {
