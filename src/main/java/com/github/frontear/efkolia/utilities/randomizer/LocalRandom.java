@@ -1,13 +1,12 @@
 package com.github.frontear.efkolia.utilities.randomizer;
 
 import com.github.frontear.efkolia.Properties;
-import com.github.frontear.internal.NotNull;
 import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import lombok.*;
 import lombok.experimental.UtilityClass;
-import lombok.val;
 
 /**
  * A utility class which generates random numbers in a fully thread-safe manner. By default, it will
@@ -40,7 +39,7 @@ public class LocalRandom {
      *
      * @return The randomized index selection.
      */
-    public int nextIndex(@NotNull final Object array) {
+    public int nextIndex(@NonNull final Object array) {
         return nextInt(0, Array.getLength(array) - 1);
     }
 
@@ -75,7 +74,7 @@ public class LocalRandom {
      *
      * @return The random string.
      */
-    @NotNull
+    @NonNull
     public String nextString(int len, final boolean random_case) {
         val string = new StringBuilder(len);
 

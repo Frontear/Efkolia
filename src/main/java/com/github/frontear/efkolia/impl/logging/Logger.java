@@ -4,8 +4,8 @@ import static org.apache.logging.log4j.Level.*;
 
 import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.api.logging.ILogger;
-import com.github.frontear.internal.*;
-import lombok.val;
+import com.github.frontear.internal.Nullable;
+import lombok.*;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender.Target;
@@ -51,36 +51,36 @@ public final class Logger implements ILogger {
     private final String name;
     private final org.apache.logging.log4j.Logger logger;
 
-    public Logger(@NotNull final String name) {
+    public Logger(@NonNull final String name) {
         this.name = name;
         this.logger = context.getLogger(name);
     }
 
     @Override
-    public void info(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    public void info(@NonNull final Object to_string, @Nullable final Object... format_args) {
         logger.info(String.format(to_string.toString(), format_args));
     }
 
     @Override
-    public void warn(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    public void warn(@NonNull final Object to_string, @Nullable final Object... format_args) {
         logger.warn(String.format(to_string.toString(), format_args));
     }
 
     @Override
-    public void error(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    public void error(@NonNull final Object to_string, @Nullable final Object... format_args) {
         logger.error(String.format(to_string.toString(), format_args));
     }
 
     @Override
-    public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    public void debug(@NonNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.DEBUG) {
             logger.debug(String.format(to_string.toString(), format_args));
         }
     }
 
-    @NotNull
+    @NonNull
     @Override
-    public Logger child(@NotNull final String name) {
+    public Logger child(@NonNull final String name) {
         return new Logger(this.name + "/" + name);
     }
 }

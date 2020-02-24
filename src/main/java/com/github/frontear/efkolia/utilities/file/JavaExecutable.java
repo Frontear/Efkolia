@@ -1,9 +1,8 @@
 package com.github.frontear.efkolia.utilities.file;
 
-import com.github.frontear.internal.NotNull;
 import java.io.*;
 import java.util.zip.ZipFile;
-import lombok.SneakyThrows;
+import lombok.*;
 
 /**
  * A class that allows for self-introspection of the executing jar. It allows you to manage
@@ -22,8 +21,8 @@ public final class JavaExecutable {
      * @param target The class whose jar file you wish to view. This will not be the same depending
      *               on which class is chosen.
      */
-    @SneakyThrows({ IOException.class, ReflectiveOperationException.class })
-    public JavaExecutable(@NotNull final Class<?> target) {
+    @SneakyThrows(IOException.class)
+    public JavaExecutable(@NonNull final Class<?> target) {
         this.file = new ZipFile(
             new File(target.getProtectionDomain().getCodeSource().getLocation().getPath()));
     }
@@ -37,7 +36,7 @@ public final class JavaExecutable {
      * @return A {@link BufferedReader} pointing to the specific entry
      */
     @SneakyThrows(IOException.class)
-    public BufferedReader getResource(@NotNull final String entry) {
+    public BufferedReader getResource(@NonNull final String entry) {
         return new BufferedReader(new InputStreamReader(file.getInputStream(file.getEntry(entry))));
     }
 }

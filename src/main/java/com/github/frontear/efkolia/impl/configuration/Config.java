@@ -3,7 +3,7 @@ package com.github.frontear.efkolia.impl.configuration;
 import com.github.frontear.efkolia.api.configuration.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
-import com.github.frontear.internal.*;
+import com.github.frontear.internal.Nullable;
 import com.google.gson.*;
 import java.io.*;
 import java.lang.reflect.Type;
@@ -19,7 +19,7 @@ public final class Config implements IConfig {
     private final Path config;
 
     @SneakyThrows(IOException.class)
-    public Config(@NotNull final MinecraftMod mod, @NotNull final String parent) {
+    public Config(@NonNull final MinecraftMod mod, @NonNull final String parent) {
         this.logger = mod.getLogger("Config");
         this.config = Paths.get(parent, mod.getMetadata().getName().toLowerCase() + ".json");
 

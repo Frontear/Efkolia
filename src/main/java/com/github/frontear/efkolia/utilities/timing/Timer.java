@@ -1,7 +1,7 @@
 package com.github.frontear.efkolia.utilities.timing;
 
-import com.github.frontear.internal.NotNull;
 import java.util.concurrent.TimeUnit;
+import lombok.NonNull;
 
 /**
  * A utility which tracks certain durations to the accuracy of nanoseconds. It makes use of {@link
@@ -35,7 +35,7 @@ public final class Timer {
      *
      * @return Whether enough time has elapsed.
      */
-    public boolean hasElapsed(@NotNull final TimeUnit unit, final long time) {
+    public boolean hasElapsed(@NonNull final TimeUnit unit, final long time) {
         return getElapsed(unit) >= time;
     }
 
@@ -46,7 +46,7 @@ public final class Timer {
      *
      * @return An elapsed value converted into the specified units.
      */
-    public long getElapsed(@NotNull final TimeUnit unit) {
+    public long getElapsed(@NonNull final TimeUnit unit) {
         return unit.convert(System.nanoTime() - nanos, TimeUnit.NANOSECONDS);
     }
 
@@ -56,7 +56,7 @@ public final class Timer {
      *
      * @return A formatted time string.
      */
-    @NotNull
+    @NonNull
     @Override
     public String toString() {
         return String.format("%02d:%02d:%02d:%03d", getElapsed(TimeUnit.HOURS) % 24,

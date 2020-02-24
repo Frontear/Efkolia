@@ -3,11 +3,10 @@ package com.github.frontear.efkolia.utilities.system;
 import static com.github.frontear.efkolia.utilities.system.OperatingSystem.*;
 import static com.github.frontear.efkolia.utilities.system.SystemArchitecture.*;
 
-import com.github.frontear.internal.NotNull;
 import java.lang.management.ManagementFactory;
 import java.util.function.Function;
+import lombok.*;
 import lombok.experimental.UtilityClass;
-import lombok.val;
 
 /**
  * A utility class which allows easy access to detect operating system and architecture
@@ -46,7 +45,7 @@ public class LocalMachine {
      *
      * @return If the operating system has support and is equivalent.
      */
-    public boolean equalsOS(@NotNull final OperatingSystem system) {
+    public boolean equalsOS(@NonNull final OperatingSystem system) {
         return system.isSupported() && os == system;
     }
 
@@ -57,7 +56,7 @@ public class LocalMachine {
      *
      * @return If the system architecture has support and is equivalent.
      */
-    public boolean equalsArch(@NotNull final SystemArchitecture architecture) {
+    public boolean equalsArch(@NonNull final SystemArchitecture architecture) {
         return architecture.isSupported() && arch == architecture;
     }
 }

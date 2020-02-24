@@ -6,6 +6,7 @@ import com.github.frontear.efkolia.impl.events.EventExecutor;
 import com.github.frontear.efkolia.impl.info.Metadata;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.internal.*;
+import lombok.NonNull;
 
 public abstract class MinecraftMod implements IMinecraftMod {
     protected final Metadata metadata;
@@ -13,8 +14,8 @@ public abstract class MinecraftMod implements IMinecraftMod {
     protected final EventExecutor executor;
     protected final Config config;
 
-    public MinecraftMod(@NotNull final String name, @NotNull final String version,
-        @NotNull final String author, @Nullable final String... contributors) {
+    public MinecraftMod(@NonNull final String name, @NonNull final String version,
+        @NonNull final String author, @Nullable final String... contributors) {
         this.metadata = new Metadata(name, version, author, contributors);
         this.logger = new Logger(name);
         this.executor = new EventExecutor(this);
@@ -29,7 +30,7 @@ public abstract class MinecraftMod implements IMinecraftMod {
 
     @NotNull
     @Override
-    public Logger getLogger(@NotNull final String name) {
+    public Logger getLogger(@NonNull final String name) {
         return logger.child(name);
     }
 
