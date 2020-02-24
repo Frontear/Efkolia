@@ -39,7 +39,7 @@ public final class Logger implements ILogger {
     }
     
     private void log(@NotNull Consumer<String> callback, @NonNull final Object to_string, @Nullable final Object... format_args) {
-        callback.accept(name + String.format(to_string.toString(), args);
+        callback.accept(name + String.format(to_string.toString(), args));
     }
 
     @NotNull
