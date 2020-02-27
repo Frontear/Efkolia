@@ -79,7 +79,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
                 try {
                     method.invoke(event);
                 }
-                catch (@NonNull final Exception e) {
+                catch (final Exception e) {
                     logger.debug("%s failed with an exception %s", method,
                         e.getClass().getSimpleName());
                     e.printStackTrace();

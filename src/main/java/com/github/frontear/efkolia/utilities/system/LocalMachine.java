@@ -44,8 +44,12 @@ public class LocalMachine {
     }
 
     /**
-     * Grabs a {@link Path} based on a file url. It will automatically format path separators based on the operating system
-     * @param path The path to the file. This <b>must</b> use unix style path separators, they will be internally changed to reflect the correct system
+     * Grabs a {@link Path} based on a file url. It will automatically format path separators based
+     * on the operating system
+     *
+     * @param path The path to the file. This <b>must</b> use unix style path separators, they will
+     *             be internally changed to reflect the correct system
+     *
      * @return An instance of {@link Path} pointing to the file
      */
     @SneakyThrows(URISyntaxException.class)
@@ -57,6 +61,7 @@ public class LocalMachine {
 
     /**
      * Attempts to grab the local clipboard data, and return it as a string.
+     *
      * @return Clipboard data as a {@link String}
      */
     @SneakyThrows({ UnsupportedFlavorException.class, IOException.class })
@@ -68,6 +73,7 @@ public class LocalMachine {
 
     /**
      * Sets the local clipboard to a custom string, discarding any old data.
+     *
      * @param content The new clipboard text
      */
     public void setClipboard(@NonNull final String content) {
