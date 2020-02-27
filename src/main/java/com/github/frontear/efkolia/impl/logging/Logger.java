@@ -5,7 +5,7 @@ import com.github.frontear.efkolia.api.logging.ILogger;
 import com.github.frontear.internal.*;
 import java.util.function.Consumer;
 import lombok.NonNull;
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.*;
 
 public final class Logger implements ILogger {
     private final String name;
@@ -34,7 +34,7 @@ public final class Logger implements ILogger {
     @Override
     public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.DEBUG) {
-            this.log(logger::debug, to_string, format_args);
+            this.log(x -> logger.log(Level.OFF, x), to_string, format_args);
         }
     }
 
