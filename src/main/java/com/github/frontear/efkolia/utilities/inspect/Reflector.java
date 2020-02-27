@@ -1,16 +1,16 @@
 package com.github.frontear.efkolia.utilities.inspect;
 
+import com.github.frontear.efkolia.Properties;
 import com.github.frontear.internal.NotNull;
 import java.lang.reflect.*;
 import java.util.Arrays;
 import lombok.*;
 import lombok.experimental.UtilityClass;
 
-// todo: reflect in non-obfuscated + obfuscated (dev vs prod)
-
 /**
  * A simple reflection utility that allows for reflection in an obfuscated environment, where member
- * names differ from their source names.
+ * names differ from their source names. This makes the assumption that obfuscated mappings are only
+ * present when {@link Properties#DEBUG} is true.
  */
 @UtilityClass
 public class Reflector {
@@ -32,7 +32,7 @@ public class Reflector {
         @NonNull final MappingResolver resolver)
         throws NoSuchFieldException {
         val copy = type; // kept for being able to log it via exception later
-        val obf_name = resolver.resolveField(name);
+        val obf_name = Properties.DEBUG ? name : resolver.resolveField(name);
 
         do {
             val field = Arrays.stream(type.getDeclaredFields())
@@ -62,11 +62,11 @@ public class Reflector {
      * @throws NoSuchMethodException If no method matching the name is found
      */
     @NotNull
-    public Method getMethod(@NonNull Class<?> type, @NonNull final String name,
+    public Method getMethod(@NonNull Class<?> type, @NonNull String name,
         @NonNull final MappingResolver resolver)
         throws NoSuchMethodException {
         val copy = type; // kept for being able to log it via exception later
-        val obf_name = resolver.resolveField(name);
+        val obf_name = Properties.DEBUG ? name : resolver.resolveMethod(name);
 
         do {
             val method = Arrays.stream(type.getDeclaredMethods())
@@ -97,7 +97,7 @@ public class Reflector {
     @NotNull
     public Class<?> getClass(@NonNull final String pkg, @NonNull final String name,
         @NonNull final MappingResolver resolver) throws ClassNotFoundException {
-        val obf_name = resolver.resolveClass(pkg, name);
+        val obf_name = Properties.DEBUG ? pkg + "." + name : resolver.resolveClass(pkg, name);
 
         return Class.forName(obf_name);
     }
