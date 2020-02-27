@@ -78,7 +78,7 @@ public class Reflector {
         while ((type = type.getSuperclass()) != null);
 
         throw new NoSuchMethodException(String
-            .format("No field found with name %s in %s (or any superclasses)", name,
+            .format("No method found with name %s in %s (or any superclasses)", name,
                 copy.getSimpleName()));
     }
 
