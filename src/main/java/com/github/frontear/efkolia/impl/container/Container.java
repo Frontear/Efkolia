@@ -12,7 +12,7 @@ import lombok.*;
 
 public abstract class Container<T> implements IContainer<T> {
     private final Map<Class<? extends T>, T> objects;
-    private final Logger logger;
+    protected final Logger logger;
 
     @SneakyThrows(IOException.class)
     @SuppressWarnings("UnstableApiUsage")
