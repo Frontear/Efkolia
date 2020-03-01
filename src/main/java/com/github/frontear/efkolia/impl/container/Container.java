@@ -27,7 +27,7 @@ public abstract class Container<T> implements IContainer<T> {
             logger.debug("Found managed type: %s", type.getSimpleName());
 
             logger.debug("Searching package: %s", pkg);
-            for (val info : ClassPath.from(Thread.currentThread().getContextClassLoader())
+            for (val info : ClassPath.from(type.getClassLoader())
                 .getTopLevelClasses(pkg)) {
                 val target = info.load();
 
