@@ -9,10 +9,12 @@ import org.apache.logging.log4j.*;
 
 public final class Logger implements ILogger {
     private final String name;
+    private final String prefix;
     private final org.apache.logging.log4j.Logger logger;
 
     public Logger(@NonNull final String name) {
-        this.name = "[" + name + "] ";
+        this.name = name;
+        this.prefix = "[" + name + "] ";
         this.logger = LogManager.getLogger(name);
     }
 
@@ -40,7 +42,7 @@ public final class Logger implements ILogger {
 
     private void log(@NonNull Consumer<String> callback, @NonNull final Object to_string,
         @Nullable final Object... format_args) {
-        callback.accept(name + String.format(to_string.toString(), format_args));
+        callback.accept(prefix + String.format(to_string.toString(), format_args));
     }
 
     @NotNull
