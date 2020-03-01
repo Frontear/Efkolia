@@ -25,6 +25,12 @@ class MetadataTest {
     }
 
     @Test
+    void getFullName() {
+        assertNotNull(metadata.getFullName());
+        assertEquals(metadata.getFullName(), "Test v0.1");
+    }
+
+    @Test
     void getDevelopers() {
         assertNotNull(metadata.getDevelopers());
         assertEquals(metadata.getDevelopers(), "Frontear, and N/A");

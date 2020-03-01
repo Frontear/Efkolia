@@ -19,16 +19,15 @@ public abstract class Container<T> implements IContainer<T> {
     public Container(@NonNull final MinecraftMod mod, @NonNull final String pkg,
         @Nullable final Object... args) {
         this.logger = mod.getLogger(getClass().getSimpleName());
+        this.objects = new LinkedHashMap<>();
         {
-            val objects = new LinkedHashMap<Class<? extends T>, T>();
             //noinspection unchecked
             val type = (Class<T>) new TypeToken<T>(getClass()) {
             }.getRawType(); // hacky trick that works only for generics that are explicitly mentioned in abstract classes.
             logger.debug("Found managed type: %s", type.getSimpleName());
 
             logger.debug("Searching package: %s", pkg);
-            for (val info : ClassPath.from(type.getClassLoader())
-                .getTopLevelClasses(pkg)) {
+            for (val info : ClassPath.from(type.getClassLoader()).getTopLevelClasses(pkg)) {
                 val target = info.load();
 
                 if (type.isAssignableFrom(target)) {
@@ -48,8 +47,6 @@ public abstract class Container<T> implements IContainer<T> {
                     }
                 }
             }
-
-            this.objects = objects;
         }
     }
 

@@ -20,6 +20,14 @@ public interface IMetadata {
     String getVersion();
 
     /**
+     * @return The full name of the mod. This is simply the name + the version in the format: (%s v%s, name, version)
+     */
+    @NotNull
+    default String getFullName() {
+        return getName() + " v" + getVersion();
+    }
+
+    /**
      * @return The developers responsible for developing the mod. This includes the authors and any
      * contributors.
      */
