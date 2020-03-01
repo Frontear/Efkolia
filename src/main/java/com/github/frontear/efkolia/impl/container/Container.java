@@ -43,7 +43,7 @@ public abstract class Container<T> implements IContainer<T> {
                         objects.put(object, constructor.newInstance(args));
                     }
                     catch (final ReflectiveOperationException e) {
-                        logger.warn("An error has occurred during instantiation");
+                        logger.warn("An error has occurred during instantiation of %s", object.getSimpleName());
                         e.printStackTrace();
                     }
                 }
