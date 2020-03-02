@@ -14,7 +14,7 @@ public abstract class Container<T> implements IContainer<T> {
     private final Map<Class<? extends T>, T> objects;
     protected final Logger logger;
 
-    @SneakyThrows(IOException.class)
+    @SneakyThrows({ IOException.class, ClassNotFoundException.class })
     @SuppressWarnings("UnstableApiUsage")
     public Container(@NonNull final MinecraftMod mod, @NonNull final String pkg,
         @Nullable final Object... args) {
@@ -28,7 +28,7 @@ public abstract class Container<T> implements IContainer<T> {
 
             logger.debug("Searching package: %s", pkg);
             for (val info : ClassPath.from(type.getClassLoader()).getTopLevelClasses(pkg)) {
-                val target = info.load();
+                val target = type.getClassLoader().loadClass(info.getName()); // circumvent a weird VM bug where the class has a malformed identity
 
                 if (type.isAssignableFrom(target)) {
                     val object = target.asSubclass(type);
