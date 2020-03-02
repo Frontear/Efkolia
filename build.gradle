@@ -9,7 +9,7 @@ plugins {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 group = "com.github.frontear"
-version = "0.2.0"
+version = "0.2.1"
 
 repositories {
     mavenCentral()

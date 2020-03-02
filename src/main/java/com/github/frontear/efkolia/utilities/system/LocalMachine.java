@@ -47,8 +47,8 @@ public class LocalMachine {
      * Grabs a {@link Path} based on a file url. It will automatically format path separators based
      * on the operating system
      *
-     * @param path The path to the file. This <b>must</b> use unix style path separators, they will
-     *             be internally changed to reflect the correct system
+     * @param path The path to the file. This <b>must</b> use unix style path separators (/), they
+     *             will be internally changed to reflect the correct system
      *
      * @return An instance of {@link Path} pointing to the file
      */
