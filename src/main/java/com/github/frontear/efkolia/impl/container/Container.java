@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 import lombok.*;
 
 public abstract class Container<T> implements IContainer<T> {
-    private final Map<Class<? extends T>, T> objects;
     protected final Logger logger;
+    private final Map<Class<? extends T>, T> objects;
 
     @SneakyThrows({ IOException.class, ClassNotFoundException.class })
     @SuppressWarnings("UnstableApiUsage")
@@ -28,7 +28,8 @@ public abstract class Container<T> implements IContainer<T> {
 
             logger.debug("Searching package: %s", pkg);
             for (val info : ClassPath.from(type.getClassLoader()).getTopLevelClasses(pkg)) {
-                val target = type.getClassLoader().loadClass(info.getName()); // circumvent a weird VM bug where the class has a malformed identity
+                val target = type.getClassLoader().loadClass(
+                    info.getName()); // circumvent a weird VM bug where the class has a malformed identity
 
                 if (type.isAssignableFrom(target)) {
                     val object = target.asSubclass(type);
@@ -42,7 +43,8 @@ public abstract class Container<T> implements IContainer<T> {
                         objects.put(object, constructor.newInstance(args));
                     }
                     catch (final ReflectiveOperationException e) {
-                        logger.warn("An error has occurred during instantiation of %s", object.getSimpleName());
+                        logger.warn("An error has occurred during instantiation of %s",
+                            object.getSimpleName());
                         e.printStackTrace();
                     }
                 }

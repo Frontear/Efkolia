@@ -20,21 +20,10 @@ class ReflectorTest {
     @Test
     @SneakyThrows(ReflectiveOperationException.class)
     void getField() {
-        assertThrows(NullPointerException.class, () -> Reflector.getField(null, null, null));
-
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getField(TestClass.class, null, null));
-        assertThrows(NullPointerException.class, () -> Reflector.getField(null, "i", null));
-        assertThrows(NullPointerException.class, () -> Reflector.getField(null, null, resolver));
-
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getField(TestClass.class, "i", null));
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getField(TestClass.class, null, resolver));
-        assertThrows(NullPointerException.class, () -> Reflector.getField(null, "i", resolver));
+        assertThrows(NullPointerException.class, () -> Reflector.getField(null, null, null, null));
 
         Field field = assertDoesNotThrow(() -> {
-            val f = Reflector.getField(TestClass.class, "i", resolver);
+            val f = Reflector.getField(TestClass.class, "i", "I", resolver);
             f.setAccessible(true);
 
             return f;
@@ -45,7 +34,7 @@ class ReflectorTest {
         assertEquals(field.getInt(instance), 101);
 
         field = assertDoesNotThrow(() -> {
-            val f = Reflector.getField(TestClass.class, "s", resolver);
+            val f = Reflector.getField(TestClass.class, "s", "Ljava/lang/String;", resolver);
             f.setAccessible(true);
 
             return f;
@@ -56,27 +45,16 @@ class ReflectorTest {
         assertEquals(field.get(instance), "hello");
 
         assertThrows(NoSuchFieldException.class,
-            () -> Reflector.getField(TestSuperclass.class, "s", resolver));
+            () -> Reflector.getField(TestSuperclass.class, "s", "Ljava/lang/String;", resolver));
     }
 
     @Test
     @SneakyThrows(ReflectiveOperationException.class)
     void getMethod() {
-        assertThrows(NullPointerException.class, () -> Reflector.getMethod(null, null, null));
-
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getMethod(TestClass.class, null, null));
-        assertThrows(NullPointerException.class, () -> Reflector.getMethod(null, "i", null));
-        assertThrows(NullPointerException.class, () -> Reflector.getMethod(null, null, resolver));
-
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getMethod(TestClass.class, "i", null));
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getMethod(TestClass.class, null, resolver));
-        assertThrows(NullPointerException.class, () -> Reflector.getMethod(null, "i", resolver));
+        assertThrows(NullPointerException.class, () -> Reflector.getMethod(null, null, null, null));
 
         Method method = assertDoesNotThrow(() -> {
-            val m = Reflector.getMethod(TestClass.class, "i", resolver);
+            val m = Reflector.getMethod(TestClass.class, "i", "()I", resolver);
             m.setAccessible(true);
 
             return m;
@@ -87,7 +65,7 @@ class ReflectorTest {
         assertEquals(method.invoke(instance), 1);
 
         method = assertDoesNotThrow(() -> {
-            val m = Reflector.getMethod(TestClass.class, "s", resolver);
+            val m = Reflector.getMethod(TestClass.class, "s", "()Ljava/lang/String;", resolver);
             m.setAccessible(true);
 
             return m;
@@ -98,24 +76,12 @@ class ReflectorTest {
         assertEquals(method.invoke(instance), "hey");
 
         assertThrows(NoSuchMethodException.class,
-            () -> Reflector.getMethod(TestSuperclass.class, "s", resolver));
+            () -> Reflector.getMethod(TestSuperclass.class, "s", "()Ljava/lang/String;", resolver));
     }
 
     @Test
     void $getClass() {
         assertThrows(NullPointerException.class, () -> Reflector.getClass(null, null, null));
-
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getClass("com.github.frontear.efkolia.utilities.inspect", null, null));
-        assertThrows(NullPointerException.class, () -> Reflector.getClass(null, "TestClass", null));
-        assertThrows(NullPointerException.class, () -> Reflector.getClass(null, null, resolver));
-
-        assertThrows(NullPointerException.class, () -> Reflector
-            .getClass("com.github.frontear.efkolia.utilities.inspect", "TestClass", null));
-        assertThrows(NullPointerException.class, () -> Reflector
-            .getClass("com.github.frontear.efkolia.utilities.inspect", null, resolver));
-        assertThrows(NullPointerException.class,
-            () -> Reflector.getClass(null, "TestClass", resolver));
 
         Class<?> clazz = assertDoesNotThrow(() -> Reflector
             .getClass("com.github.frontear.efkolia.utilities.inspect", "TestClass", resolver));
