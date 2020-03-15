@@ -4,7 +4,7 @@ import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.NotNull;
-import java.lang.ref.WeakReference;
+import java.lang.ref.*;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.function.Consumer;
@@ -75,7 +75,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
         logger.debug("Firing listeners for %s", key.getSimpleName());
 
         if (listeners.containsKey(key)) {
-            val methods = new WeakReference<>(
+            val methods = new SoftReference<>(
                 new TreeSet<>(listeners.get(key))); // todo: memory impact
             //noinspection ConstantConditions
             for (val method : methods.get()) {
