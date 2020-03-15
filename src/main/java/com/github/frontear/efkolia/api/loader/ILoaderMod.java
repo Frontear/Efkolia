@@ -1,7 +1,7 @@
 package com.github.frontear.efkolia.api.loader;
 
 import com.github.frontear.efkolia.api.mod.IMinecraftMod;
-import com.github.frontear.internal.Nullable;
+import com.github.frontear.internal.*;
 
 /**
  * The common interface that defines the java file that loads the entire mod and its functionality
@@ -19,5 +19,6 @@ public interface ILoaderMod<T> {
      *
      * @return A type which will represent whether successful initialization occurred
      */
+    @NotNull
     T init(@Nullable String... args);
 }

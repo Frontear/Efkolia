@@ -2,20 +2,12 @@ package com.github.frontear.efkolia.utilities.network;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.utilities.network.responses.StringResponse;
 import java.net.*;
 import lombok.val;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
 class ConnectionTest {
-    Logger logger;
-
-    @BeforeEach
-    void setUp() {
-        logger = new Logger("Connection");
-    }
-
     @Test
     void get() {
         assertThrows(NullPointerException.class, () -> Connection.get(null, null));
@@ -28,7 +20,5 @@ class ConnectionTest {
         val response = assertDoesNotThrow(
             () -> Connection.get("http://httpbin.org/", new StringResponse()));
         assertNotNull(response);
-
-        logger.debug(response);
     }
 }

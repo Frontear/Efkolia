@@ -24,11 +24,12 @@ public abstract class Container<T> implements IContainer<T> {
             //noinspection unchecked
             val type = (Class<T>) new TypeToken<T>(getClass()) {
             }.getRawType(); // hacky trick that works only for generics that are explicitly mentioned in abstract classes.
+            val loader = type.getClassLoader();
             logger.debug("Found managed type: %s", type.getSimpleName());
 
             logger.debug("Searching package: %s", pkg);
-            for (val info : ClassPath.from(type.getClassLoader()).getTopLevelClasses(pkg)) {
-                val target = type.getClassLoader().loadClass(
+            for (val info : ClassPath.from(loader).getTopLevelClasses(pkg)) {
+                val target = loader.loadClass(
                     info.getName()); // circumvent a weird VM bug where the class has a malformed identity
 
                 if (type.isAssignableFrom(target)) {

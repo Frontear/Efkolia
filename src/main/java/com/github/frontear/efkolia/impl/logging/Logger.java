@@ -2,6 +2,7 @@ package com.github.frontear.efkolia.impl.logging;
 
 import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.api.logging.ILogger;
+import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.*;
 import java.util.function.Consumer;
 import lombok.NonNull;
@@ -12,10 +13,14 @@ public final class Logger implements ILogger {
     private final String prefix;
     private final org.apache.logging.log4j.Logger logger;
 
-    public Logger(@NonNull final String name) {
+    public Logger(@NonNull final MinecraftMod mod) {
+        this(mod.getMetadata().getName());
+    }
+
+    private Logger(@NonNull final String name) {
         this.name = name;
         this.prefix = "[" + name + "] ";
-        this.logger = LogManager.getLogger(name);
+        this.logger = LogManager.getLogger(name); // todo: param necessary?
     }
 
     @Override

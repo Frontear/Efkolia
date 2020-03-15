@@ -17,7 +17,7 @@ public abstract class MinecraftMod implements IMinecraftMod {
     public MinecraftMod(@NonNull final String name, @NonNull final String version,
         @NonNull final String author, @Nullable final String... contributors) {
         this.metadata = new Metadata(name, version, author, contributors);
-        this.logger = new Logger(name);
+        this.logger = new Logger(this);
         this.executor = new EventExecutor(this);
         this.config = new Config(this, System.getProperty("user.dir"));
     }
