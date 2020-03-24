@@ -21,7 +21,7 @@ public interface IMetadata {
 
     /**
      * @return The full name of the mod. This is simply the name + the version in the format: (%s
-     * v%s, name, version)
+     * v%s, name, version).
      */
     @NotNull
     default String getFullName() {

@@ -10,7 +10,7 @@ import com.github.frontear.internal.NotNull;
 public interface IConfig {
     /**
      * Registers an object for being configured. This object will have its internal state modified
-     * anytime {@link IConfig#load()} is run.
+     * anytime {@link #load()} is run.
      *
      * @param object The object to register.
      */
@@ -18,7 +18,7 @@ public interface IConfig {
 
     /**
      * Removes the registration of an object from being configured. The object will not have its
-     * internal state changed even when {@link IConfig#load()} is run.
+     * internal state changed even when {@link #load()} is run.
      *
      * @param object The object to unregister.
      */
@@ -26,12 +26,12 @@ public interface IConfig {
 
     /**
      * Attempts to read the configuration file into the program, then iterate on all {@link
-     * IConfig#register(IConfigurable)} elements to modify their internal state.
+     * #register(IConfigurable)} elements to modify their internal state.
      */
     void load();
 
     /**
-     * Saves the internal state of all {@link IConfig#register(IConfigurable)} elements to the
+     * Saves the internal state of all {@link #register(IConfigurable)} elements to the
      * configuration file.
      */
     void save();

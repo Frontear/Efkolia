@@ -10,6 +10,7 @@ import lombok.experimental.UtilityClass;
  * A simple utility class that allows you to grab various information from a website. It internally
  * makes use of {@link HttpURLConnection}.
  */
+// todo: logging
 @UtilityClass
 public class Connection {
     /**

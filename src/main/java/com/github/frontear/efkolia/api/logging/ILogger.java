@@ -4,11 +4,10 @@ import com.github.frontear.internal.*;
 
 /**
  * The common interface for an implementation of logging. The logger should be able to ideally run
- * {@link ILogger#info(Object, Object...)}, {@link ILogger#warn(Object, Object...)}, and {@link
- * ILogger#error(Object, Object...)} in a normal environment, and all three MUST be visible entries
- * in the logging system. Only {@link ILogger#debug(Object, Object...)} should depend on some
- * special behaviour. This needs to be a "debug" state for the program, and should NOT do anything
- * in other situations.
+ * {@link #info(Object, Object...)}, {@link #warn(Object, Object...)}, and {@link #error(Object,
+ * Object...)} in a normal environment, and all three MUST be visible entries in the logging system.
+ * Only {@link #debug(Object, Object...)} should depend on some special behaviour. This needs to be
+ * a "debug" state for the program, and should NOT do anything in other situations.
  */
 public interface ILogger {
     /**

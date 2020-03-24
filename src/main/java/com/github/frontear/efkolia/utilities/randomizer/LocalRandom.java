@@ -11,13 +11,14 @@ import lombok.experimental.UtilityClass;
 
 /**
  * A utility class which generates random numbers in a fully thread-safe manner. By default, it will
- * internally use {@link ThreadLocalRandom} to generate pseudo-random, however setting the property
- * "efkolia.secure.random" to true will enable the usage of {@link SecureRandom}.
+ * internally use {@link ThreadLocalRandom} to generate pseudo-random. {@link
+ * Properties#SECURE_RANDOM} can be set to make use of {@link SecureRandom}.
  */
 @UtilityClass
 public class LocalRandom {
     private final Random random =
         Properties.SECURE_RANDOM ? new SecureRandom(SecureRandom.getSeed(512))
+            // todo: too many bytes?
             : ThreadLocalRandom.current();
     private final char[] alphas = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
@@ -68,12 +69,12 @@ public class LocalRandom {
 
     /**
      * Generates a random string based on a specified length. It internally makes use of {@link
-     * LocalRandom#nextChar(boolean)} to achieve this.
+     * #nextChar(boolean)} to achieve this.
      *
      * @param len         The length of the string.
      * @param random_case Whether the string should have randomized casing or not.
      *
-     * @return The random string.
+     * @return The randomly generated string.
      */
     @NotNull
     public String nextString(int len, final boolean random_case) {

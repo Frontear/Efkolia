@@ -14,8 +14,8 @@ import lombok.*;
 import lombok.experimental.UtilityClass;
 
 /**
- * A utility class which allows easy access to detect operating system and architecture
- * information.
+ * A utility class which allows easy access to detect operating system and architecture information
+ * as well as specific procedure information specialized for each OS.
  */
 @UtilityClass
 public class LocalMachine {
@@ -45,12 +45,12 @@ public class LocalMachine {
 
     /**
      * Grabs a {@link Path} based on a file url. It will automatically format path separators based
-     * on the operating system
+     * on the operating system.
      *
-     * @param path The path to the file. This <b>must</b> use unix style path separators (/), they
-     *             will be internally changed to reflect the correct system
+     * @param path The path to the file. This <b>must</b> use unix style path separators ('/'), they
+     *             will be internally changed to reflect the correct system.
      *
-     * @return An instance of {@link Path} pointing to the file
+     * @return An instance of {@link Path} pointing to the file.
      */
     @SneakyThrows(URISyntaxException.class)
     public Path getFile(@NonNull final String path) {
@@ -62,7 +62,7 @@ public class LocalMachine {
     /**
      * Attempts to grab the local clipboard data, and return it as a string.
      *
-     * @return Clipboard data as a {@link String}
+     * @return Clipboard data as a {@link String}.
      */
     @SneakyThrows({ UnsupportedFlavorException.class, IOException.class })
     public String getClipboard() {
@@ -74,7 +74,7 @@ public class LocalMachine {
     /**
      * Sets the local clipboard to a custom string, discarding any old data.
      *
-     * @param content The new clipboard text
+     * @param content The new clipboard text.
      */
     public void setClipboard(@NonNull final String content) {
         val toolkit = Toolkit.getDefaultToolkit();
@@ -89,10 +89,10 @@ public class LocalMachine {
      *
      * @param system The expected operating system.
      *
-     * @return If the operating system has support and is equivalent.
+     * @return If the operating system has support and is equivalent to what was determined.
      */
     public boolean equalsOS(@NonNull final OperatingSystem system) {
-        return system.isSupported() && os == system;
+        return system.isSupported() && os == system; // todo: implications of isSupported
     }
 
     /**
@@ -100,9 +100,10 @@ public class LocalMachine {
      *
      * @param architecture The expected system architecture.
      *
-     * @return If the system architecture has support and is equivalent.
+     * @return If the system architecture has support and is equivalent to what was determined.
      */
     public boolean equalsArch(@NonNull final SystemArchitecture architecture) {
-        return architecture.isSupported() && arch == architecture;
+        return architecture.isSupported()
+            && arch == architecture; // todo: implications of isSupported
     }
 }

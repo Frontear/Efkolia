@@ -18,14 +18,14 @@ public class Reflector {
      * instance of {@link Field} is returned with no additional modifications.
      *
      * @param type       The type to search from initially, and to {@link Class#getSuperclass()}
-     *                   later
-     * @param name       The name of the field
-     * @param descriptor The descriptor of the method, such as I for a int field
-     * @param resolver   The mapping resolver for this specific environment
+     *                   later.
+     * @param name       The name of the field.
+     * @param descriptor The descriptor of the method, such as I for a int field.
+     * @param resolver   The mapping resolver for this specific environment.
      *
-     * @return An instance of {@link Field} if an applicable field is found
+     * @return An instance of {@link Field} if an applicable field is found.
      *
-     * @throws NoSuchFieldException If no field matching the name is found
+     * @throws NoSuchFieldException If no field matching the name is found.
      */
     @NotNull
     @SneakyThrows(NoSuchMappingException.class)
@@ -54,14 +54,14 @@ public class Reflector {
      * instance of {@link Method} is returned with no additional modifications.
      *
      * @param type       The type to search from initially, and to {@link Class#getSuperclass()}
-     *                   later
-     * @param name       The name of the method
-     * @param descriptor The descriptor of the method, such as ()V for a void, no parameter method
-     * @param resolver   The mapping resolver for this specific environment
+     *                   later.
+     * @param name       The name of the method.
+     * @param descriptor The descriptor of the method, such as ()V for a void, no parameter method.
+     * @param resolver   The mapping resolver for this specific environment.
      *
-     * @return An instance of {@link Field} if an applicable method is found
+     * @return An instance of {@link Field} if an applicable method is found.
      *
-     * @throws NoSuchMethodException If no method matching the name is found
+     * @throws NoSuchMethodException If no method matching the name is found.
      */
     @NotNull
     @SneakyThrows(NoSuchMappingException.class)
@@ -89,13 +89,13 @@ public class Reflector {
      * Search for a class in the JVM. If the class is found, an instance of {@link Class} is
      * returned with no additional modifications.
      *
-     * @param pkg      The package in which the class resides
-     * @param name     The name of the class
-     * @param resolver The mapping resolver for this specific environment
+     * @param pkg      The package in which the class resides.
+     * @param name     The name of the class.
+     * @param resolver The mapping resolver for this specific environment.
      *
-     * @return An instance of {@link Class} if an applicable field is found
+     * @return An instance of {@link Class} if an applicable field is found.
      *
-     * @throws ClassNotFoundException If no class matching the signature is found
+     * @throws ClassNotFoundException If no class matching the signature is found.
      */
     @NotNull
     @SneakyThrows(NoSuchMappingException.class)

@@ -11,7 +11,7 @@ public enum OperatingSystem {
     UNKNOWN;
 
     /**
-     * @return If the property has support, basically if it isn't {@link OperatingSystem#UNKNOWN}.
+     * @return If the property has support, basically if it isn't {@link #UNKNOWN}.
      */
     public boolean isSupported() {
         return this != UNKNOWN;

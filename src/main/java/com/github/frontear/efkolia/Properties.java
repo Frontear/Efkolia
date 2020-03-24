@@ -6,14 +6,13 @@ import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import lombok.NonNull;
 
 /**
- * A utility class for the properties efkolia supports. All properties must start with "-Defkolia".
+ * A utility class for the properties efkolia supports. All properties are prefixed with "efkolia",
+ * properties are all lowercase and all cases of '_' are replaced with '.' in the JVM flags.
  */
 public final class Properties {
     /**
-     * The debugging property. Useful for when you need certain aspects of the client to be exposed
-     * in a more thorough manner. For more specialized/isolated debugging, please see the remaining
-     * debug flags. This will enable <b>all</b> of the other debugging flags, so exercise caution
-     * when using it.
+     * The global debugging property. It will automatically enable all other debugging flags,
+     * irrespective of whether they have been set or not.
      */
     public static final boolean DEBUG = get("debug");
 
@@ -31,7 +30,7 @@ public final class Properties {
 
     /**
      * The secure random property. This triggers the more secure functionality of {@link
-     * LocalRandom} This property should be set via "-Defkolia.secure.random=true/false".
+     * LocalRandom}.
      */
     public static final boolean SECURE_RANDOM = get("secure.random");
 

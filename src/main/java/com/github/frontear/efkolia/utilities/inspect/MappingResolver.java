@@ -17,15 +17,14 @@ public interface MappingResolver {
      * <p>
      * e.g: - Development: com.abc.Main - Production: c.a.M
      * <p>
-     * In this situation, {@link MappingResolver#resolveClass(String, String)} should return
-     * "c.a.M"
+     * In this situation, {@link #resolveClass(String, String)} should return "c.a.M".
      *
-     * @param pkg  The package where the class resides in
-     * @param name The name of the class
+     * @param pkg  The package where the class resides in.
+     * @param name The name of the class.
      *
-     * @return The package + class name in its obfuscated form
+     * @return The package + class name in its obfuscated form.
      *
-     * @throws NoSuchMappingException if the specified mapping could not be found
+     * @throws NoSuchMappingException if the specified mapping could not be found.
      */
     @NotNull
     String resolveClass(@NotNull final String pkg, @NotNull final String name)
@@ -36,17 +35,16 @@ public interface MappingResolver {
      * <p>
      * e.g: - Development: format() - Production: f()
      * <p>
-     * In this situation, {@link MappingResolver#resolveMethod(String, String, String)} should
-     * return "f"
+     * In this situation, {@link #resolveMethod(String, String, String)} should return "f".
      *
      * @param clazz      The obfuscated name of the class, received from {@link
-     *                   MappingResolver#resolveClass(String, String)}
-     * @param name       The name of the method
-     * @param descriptor The descriptor of the method, such as ()V for a void, no parameter method
+     *                   #resolveClass(String, String)}.
+     * @param name       The name of the method.
+     * @param descriptor The descriptor of the method, such as ()V for a void, no parameter method.
      *
-     * @return The method name in its obfuscated form
+     * @return The method name in its obfuscated form.
      *
-     * @throws NoSuchMappingException if the specified mapping could not be found
+     * @throws NoSuchMappingException if the specified mapping could not be found.
      */
     @NotNull
     String resolveMethod(@NotNull final String clazz, @NotNull final String name,
@@ -57,17 +55,16 @@ public interface MappingResolver {
      * <p>
      * e.g: - Development: number - Production: n
      * <p>
-     * In this situation, {@link MappingResolver#resolveField(String, String, String)} should return
-     * "n"
+     * In this situation, {@link #resolveField(String, String, String)} should return "n".
      *
      * @param clazz      The obfuscated name of the class, received from {@link
-     *                   MappingResolver#resolveClass(String, String)}
-     * @param name       The name of the field
-     * @param descriptor The descriptor of the method, such as I for a int field
+     *                   #resolveClass(String, String)}.
+     * @param name       The name of the field.
+     * @param descriptor The descriptor of the method, such as I for a int field.
      *
-     * @return The field name in its obfuscated form
+     * @return The field name in its obfuscated form.
      *
-     * @throws NoSuchMappingException if the specified mapping could not be found
+     * @throws NoSuchMappingException if the specified mapping could not be found.
      */
     @NotNull
     String resolveField(@NotNull final String clazz, @NotNull final String name,

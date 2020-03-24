@@ -3,7 +3,7 @@ package com.github.frontear.efkolia.api.graphics;
 /**
  * An object that represents the drawing of a graphic through OpenGL. It should only be used in the
  * situation that it possess a valid context, which is created via {@link IRenderer}. The object
- * should ideally be immutable, and not be modified in terms of dimensions
+ * should ideally be immutable, and not be modified in terms of dimensions.
  */
 public interface IRenderable {
     /**

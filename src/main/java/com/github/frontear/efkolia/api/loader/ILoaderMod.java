@@ -17,7 +17,7 @@ public interface ILoaderMod<T> {
      *
      * @param args The starting arguments for the application.
      *
-     * @return A type which will represent whether successful initialization occurred
+     * @return A type which will represent whether successful initialization occurred.
      */
     @NotNull
     T init(@Nullable String... args);

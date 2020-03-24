@@ -13,7 +13,7 @@ public final class Timer {
     private long nanos;
 
     /**
-     * Creates a new instance of a timer. It will internally invoke {@link Timer#reset()}.
+     * Creates a new instance of a timer and invokes {@link #reset()}.
      */
     public Timer() {
         this.reset();
@@ -28,11 +28,10 @@ public final class Timer {
 
     /**
      * Checks if the elapsed nano seconds are equivalent to a specific point of time. This
-     * internally uses {@link Timer#getElapsed(TimeUnit)}.
+     * internally uses {@link #getElapsed(TimeUnit)}.
      *
-     * @param unit The unit to compare with. Internally calls {@link TimeUnit#convert(long,
-     *             TimeUnit)}.
-     * @param time The elapsed value, this MUST match the specified unit.
+     * @param unit The unit to compare with.
+     * @param time The elapsed value. This MUST match the specified unit.
      *
      * @return Whether enough time has elapsed.
      */

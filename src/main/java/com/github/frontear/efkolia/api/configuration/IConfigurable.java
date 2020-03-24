@@ -6,7 +6,7 @@ import com.github.frontear.internal.NotNull;
  * The interface given to all items that are to be internally modified via {@link IConfig}.
  *
  * @param <E> The value {@link IConfig#load()} will give to your object. You then set the state
- *            through {@link IConfigurable#load(IConfigurable)}.
+ *            through {@link #load(IConfigurable)}.
  */
 public interface IConfigurable<E extends IConfigurable<E>> {
     /**
