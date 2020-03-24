@@ -1,11 +1,10 @@
-package com.github.frontear.efkolia.utilities.inspect.resolvers;
+package com.github.frontear.efkolia.utilities.inspect;
 
-import com.github.frontear.efkolia.utilities.inspect.MappingResolver;
 import com.github.frontear.efkolia.utilities.inspect.exceptions.NoSuchMappingException;
 import com.github.frontear.internal.NotNull;
 import lombok.NonNull;
 
-public final class DummyResolver implements MappingResolver {
+class TestResolver implements MappingResolver {
     @NotNull
     @Override
     public String resolveClass(@NonNull final String pkg, @NonNull final String name)
