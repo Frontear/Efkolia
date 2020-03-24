@@ -75,7 +75,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
         logger.debug("Firing listeners for %s", key.getSimpleName());
 
         if (listeners.containsKey(key)) {
-            val methods = new SoftReference<>(
+            val methods = new WeakReference<>(
                 new TreeSet<>(listeners.get(key))); // todo: memory impact
             //noinspection ConstantConditions
             for (val method : methods.get()) {
