@@ -1,6 +1,7 @@
 package com.github.frontear.efkolia.utilities.file;
 
 import java.io.*;
+import java.util.jar.Manifest;
 import java.util.zip.ZipFile;
 import lombok.*;
 
@@ -39,5 +40,14 @@ public final class JavaExecutable {
     @SneakyThrows(IOException.class)
     public BufferedReader getResource(@NonNull final String entry) {
         return new BufferedReader(new InputStreamReader(file.getInputStream(file.getEntry(entry))));
+    }
+
+    /**
+     * @return The jar manifest.
+     */
+    @SneakyThrows(IOException.class)
+    public Manifest getManifest() {
+        val manifest = file.getInputStream(file.getEntry("META-INF/MANIFEST.MF"));
+        return new Manifest(manifest);
     }
 }
