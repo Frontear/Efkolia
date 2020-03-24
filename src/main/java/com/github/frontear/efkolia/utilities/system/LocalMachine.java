@@ -92,7 +92,7 @@ public class LocalMachine {
      * @return If the operating system has support and is equivalent to what was determined.
      */
     public boolean equalsOS(@NonNull final OperatingSystem system) {
-        return system.isSupported() && os == system; // todo: implications of isSupported
+        return system.isSupported() && os == system;
     }
 
     /**
@@ -104,6 +104,6 @@ public class LocalMachine {
      */
     public boolean equalsArch(@NonNull final SystemArchitecture architecture) {
         return architecture.isSupported()
-            && arch == architecture; // todo: implications of isSupported
+            && arch == architecture;
     }
 }
