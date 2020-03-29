@@ -17,10 +17,14 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class LocalRandom {
     private final Random random =
-        Properties.SECURE_RANDOM ? new SecureRandom(SecureRandom.getSeed(512))
-            // todo: too many bytes?
+        Properties.SECURE_RANDOM ? new SecureRandom()
             : ThreadLocalRandom.current();
     private final char[] alphas = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+
+    static {
+        val dummy = new byte[1];
+        random.nextBytes(dummy); // force seeding
+    }
 
     /**
      * Generates a random integer value between the min and max, inclusive.
