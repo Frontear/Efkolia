@@ -66,11 +66,14 @@ modifyPom {
 }
 
 test {
+    final randBool = { ThreadLocalRandom.current().nextBoolean() }
+
     final props = [
-        "-Defkolia.debug=${ThreadLocalRandom.current().nextBoolean()}",
-        "-Defkolia.config.debug=${ThreadLocalRandom.current().nextBoolean()}",
-        "-Defkolia.event.debug=${ThreadLocalRandom.current().nextBoolean()}",
-        "-Defkolia.secure.random=${ThreadLocalRandom.current().nextBoolean()}"
+        "-Defkolia.debug=${randBool()}",
+        "-Defkolia.config.debug=${randBool()}",
+        "-Defkolia.container.debug=${randBool()}",
+        "-Defkolia.event.debug=${randBool()}",
+        "-Defkolia.secure.random=${randBool()}"
     ]
 
     jvmArgs props
