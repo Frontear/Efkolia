@@ -78,6 +78,7 @@ test {
 
     jvmArgs props
     useJUnitPlatform()
+    testLogging.showStandardStreams = true
 
     doFirst {
         props.each { println it }
