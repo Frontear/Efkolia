@@ -8,11 +8,10 @@ import com.github.frontear.internal.*;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Modifier;
 import java.util.*;
-import java.util.function.Consumer;
 import lombok.*;
 
 public final class EventExecutor implements IEventExecutor<Event> {
-    private final Map<Class<? extends Event>, Set<EventMethod<?>>> listeners = new HashMap<>();
+    private final Map<Class<? extends Event>, Set<EventMethod>> listeners = new HashMap<>();
     private final Logger logger;
 
     public EventExecutor(@NonNull final MinecraftMod mod) {
@@ -33,7 +32,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
 
             methods.forEach(x -> {
                 val key = x.getParameterTypes()[0].asSubclass(Event.class);
-                val value = new EventMethod<>(instance, x);
+                val value = new EventMethod(instance, x);
                 this.debug("Adding a listener for %s", key.getSimpleName());
 
                 listeners.putIfAbsent(key, new TreeSet<>());
@@ -44,29 +43,10 @@ public final class EventExecutor implements IEventExecutor<Event> {
     }
 
     @Override
-    public <E1 extends Event> void register(@NonNull final Class<E1> event,
-        @NonNull final Consumer<E1> listener) {
-        this.debug("Registering %s to %s", listener, event.getSimpleName());
-
-        listeners.putIfAbsent(event, new TreeSet<>());
-        listeners.get(event).add(new EventMethod<>(listener));
-    }
-
-    @Override
     public void unregister(@NonNull final Object instance) {
         this.debug("Unregistering %s", instance.getClass().getSimpleName());
 
-        listeners.forEach((k, v) -> v.removeIf(x -> x.hash == instance.hashCode()));
-    }
-
-    @Override
-    public <E1 extends Event> void unregister(@NonNull final Class<E1> event,
-        @NonNull final Consumer<E1> listener) {
-        this.debug("Unregistering %s from %s", listener, event);
-
-        if (listeners.containsKey(event)) {
-            listeners.get(event).removeIf(x -> x.hash == listener.hashCode());
-        }
+        listeners.forEach((k, v) -> v.removeIf(x -> x.isFrom(instance)));
     }
 
     @NotNull
@@ -94,6 +74,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
                     break;
                 }
             }
+
+            methods.clear();
         }
         else {
             this.debug("No listeners found");

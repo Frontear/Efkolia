@@ -2,42 +2,31 @@ package com.github.frontear.efkolia.impl.events;
 
 import com.github.frontear.efkolia.api.events.*;
 import java.lang.reflect.Method;
-import java.util.function.Consumer;
 import lombok.*;
 
 @EqualsAndHashCode
-final class EventMethod<E extends Event> implements Comparable<EventMethod<?>> {
-    final int hash;
-    private final Consumer<Event> listener;
+final class EventMethod implements Comparable<EventMethod> {
+    private final Object instance;
+    private final Method callback;
     private final Priority priority;
 
-    public EventMethod(@NonNull final Object instance, @NonNull final Method method) {
-        this.hash = instance.hashCode();
-        this.listener = new Consumer<Event>() {
-            @Override
-            @SneakyThrows(ReflectiveOperationException.class)
-            public void accept(final Event event) {
-                method.invoke(instance, event);
-            }
-        };
-        this.priority = method.getAnnotation(Listener.class).value();
-
-        method.setAccessible(true);
+    public EventMethod(@NonNull final Object instance, @NonNull final Method callback) {
+        this.instance = instance;
+        (this.callback = callback).setAccessible(true);
+        this.priority = callback.getAnnotation(Listener.class).value();
     }
 
-    public EventMethod(@NonNull final Consumer<E> listener) {
-        this.hash = listener.hashCode();
-        //noinspection unchecked
-        this.listener = x -> listener.accept((E) x);
-        this.priority = Priority.NORMAL;
-    }
-
+    @SneakyThrows(ReflectiveOperationException.class)
     public void invoke(@NonNull final Event event) {
-        listener.accept(event);
+        callback.invoke(instance, event);
     }
 
     @Override
-    public int compareTo(@NonNull final EventMethod<?> other) {
+    public int compareTo(@NonNull final EventMethod other) {
         return other.priority.compareTo(this.priority);
+    }
+
+    public boolean isFrom(@NonNull final Object instance) {
+        return this.instance == instance;
     }
 }
