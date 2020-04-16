@@ -11,7 +11,7 @@ import java.util.*;
 import lombok.*;
 
 public final class EventExecutor implements IEventExecutor<Event> {
-    private final Map<Class<? extends Event>, Set<EventMethod>> listeners = new HashMap<>();
+    private final Map<Class<? extends Event>, List<EventMethod>> listeners = new HashMap<>();
     private final Logger logger;
 
     public EventExecutor(@NonNull final MinecraftMod mod) {
@@ -35,11 +35,13 @@ public final class EventExecutor implements IEventExecutor<Event> {
                 val value = new EventMethod(instance, x);
                 this.debug("Adding a listener for %s", key.getSimpleName());
 
-                listeners.putIfAbsent(key, new TreeSet<>());
+                listeners.putIfAbsent(key, new ArrayList<>());
                 listeners.get(key).add(value);
             });
         }
         while ((type = type.getSuperclass()) != Object.class);
+
+        listeners.values().forEach(Collections::sort);
     }
 
     @Override
@@ -47,6 +49,8 @@ public final class EventExecutor implements IEventExecutor<Event> {
         this.debug("Unregistering %s", instance.getClass().getSimpleName());
 
         listeners.forEach((k, v) -> v.removeIf(x -> x.isFrom(instance)));
+
+        listeners.values().forEach(Collections::sort);
     }
 
     @NotNull
@@ -57,7 +61,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
 
         if (listeners.containsKey(key)) {
             val methods = new WeakReference<>(
-                new TreeSet<>(listeners.get(key))); // todo: memory impact
+                new ArrayList<>(listeners.get(key))); // todo: memory impact
             //noinspection ConstantConditions
             for (val method : methods.get()) {
                 try {
