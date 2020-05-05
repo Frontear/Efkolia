@@ -5,12 +5,16 @@ import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import lombok.NonNull;
 
 class TestObject {
+    static final boolean throwing;
+
+    static {
+        throwing = LocalRandom.nextBoolean();
+    }
+
     final boolean unregister;
-    final boolean throwing;
 
     public TestObject() {
         this.unregister = LocalRandom.nextBoolean();
-        this.throwing = LocalRandom.nextBoolean();
     }
 
     @Listener(Priority.HIGH)

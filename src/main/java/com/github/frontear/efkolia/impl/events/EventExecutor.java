@@ -5,7 +5,6 @@ import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.*;
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import lombok.*;
@@ -60,10 +59,11 @@ public final class EventExecutor implements IEventExecutor<Event> {
         this.debug("Firing listeners for %s", key.getSimpleName());
 
         if (listeners.containsKey(key)) {
-            val methods = new WeakReference<>(
-                new ArrayList<>(listeners.get(key))); // todo: memory impact
-            //noinspection ConstantConditions
-            for (val method : methods.get()) {
+            val ls = listeners.get(key);
+
+            for (var i = 0; i < ls.size(); ++i) {
+                val method = ls.get(i);
+
                 try {
                     method.invoke(event);
                 }
@@ -78,8 +78,6 @@ public final class EventExecutor implements IEventExecutor<Event> {
                     break;
                 }
             }
-
-            methods.clear();
         }
         else {
             this.debug("No listeners found");

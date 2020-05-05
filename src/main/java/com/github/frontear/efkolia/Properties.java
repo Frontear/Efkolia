@@ -37,7 +37,9 @@ public final class Properties {
     public static final boolean EVENT_DEBUG = DEBUG || get("event.debug");
 
     /**
-     * Enables a legacy functionality in {@link Logger} that forces a prefix to each log entry. This isn't necessary in the newer fabric environments, as they modify the logger config to support this
+     * Enables a legacy functionality in {@link Logger} that forces a prefix to each log entry. This
+     * isn't necessary in the newer fabric environments, as they modify the logger config to support
+     * this
      */
     public static final boolean LEGACY_LOGGER = get("legacy.logger");
 
