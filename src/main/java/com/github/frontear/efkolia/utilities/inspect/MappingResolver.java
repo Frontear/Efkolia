@@ -10,6 +10,7 @@ import com.github.frontear.internal.NotNull;
  * through your own methodology. Furthermore, this requires custom logic to determine whether the
  * current environment has obfuscated fields (dev vs prod).
  */
+// todo: make simpler for the end-user (ie remove descriptors)
 public interface MappingResolver {
     /**
      * Resolves an obfuscated package/class combination. It should correctly format and return the
