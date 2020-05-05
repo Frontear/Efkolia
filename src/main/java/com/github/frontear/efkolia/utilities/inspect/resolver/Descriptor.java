@@ -1,13 +1,24 @@
 package com.github.frontear.efkolia.utilities.inspect.resolver;
 
-import lombok.*;
+import com.github.frontear.internal.NotNull;
+import lombok.NonNull;
 
 abstract class Descriptor {
-    @Getter protected final String descriptor;
-    @Getter private final String name;
+    protected final String descriptor;
+    private final String name;
 
     protected Descriptor(@NonNull final String name, @NonNull final String descriptor) {
         this.descriptor = descriptor;
         this.name = name;
+    }
+
+    @NotNull
+    public String getDescriptor() {
+        return descriptor;
+    }
+
+    @NotNull
+    public String getName() {
+        return name;
     }
 }

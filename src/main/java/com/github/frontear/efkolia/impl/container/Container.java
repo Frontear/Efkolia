@@ -67,7 +67,7 @@ public abstract class Container<T> implements IContainer<T> {
         return objects.values().stream();
     }
 
-    private void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    private void debug(@NonNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.CONTAINER_DEBUG) {
             logger.debug(to_string, format_args);
         }

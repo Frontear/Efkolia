@@ -56,7 +56,7 @@ public class Reflector {
      */
     @NotNull
     @SneakyThrows(NoSuchMappingException.class)
-    public Method getMethod(@NonNull Class<?> type, @NonNull String name)
+    public Method getMethod(@NonNull Class<?> type, @NonNull final String name)
         throws NoSuchMethodException {
         val copy = type; // kept for being able to log it via exception later
 

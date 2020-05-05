@@ -4,7 +4,7 @@ import com.github.frontear.efkolia.Properties;
 import com.github.frontear.efkolia.api.configuration.*;
 import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.impl.mod.MinecraftMod;
-import com.github.frontear.internal.*;
+import com.github.frontear.internal.Nullable;
 import com.google.gson.*;
 import java.io.*;
 import java.lang.reflect.Type;
@@ -93,7 +93,7 @@ public final class Config implements IConfig {
         }
     }
 
-    private void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    private void debug(@NonNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.CONFIG_DEBUG) {
             logger.debug(to_string, format_args);
         }

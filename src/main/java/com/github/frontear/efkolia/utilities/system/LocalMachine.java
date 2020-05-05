@@ -3,6 +3,7 @@ package com.github.frontear.efkolia.utilities.system;
 import static com.github.frontear.efkolia.utilities.system.OperatingSystem.*;
 import static com.github.frontear.efkolia.utilities.system.SystemArchitecture.*;
 
+import com.github.frontear.internal.NotNull;
 import java.awt.Toolkit;
 import java.awt.datatransfer.*;
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class LocalMachine {
      *
      * @return An instance of {@link Path} pointing to the file.
      */
+    @NotNull
     @SneakyThrows(URISyntaxException.class)
     public Path getFile(@NonNull final String path) {
         val path_url = equalsOS(WINDOWS) ? path.replace('/', '\\') : path;
@@ -64,6 +66,7 @@ public class LocalMachine {
      *
      * @return Clipboard data as a {@link String}.
      */
+    @NotNull
     @SneakyThrows({ UnsupportedFlavorException.class, IOException.class })
     public String getClipboard() {
         val toolkit = Toolkit.getDefaultToolkit();

@@ -1,5 +1,6 @@
 package com.github.frontear.efkolia.utilities.file;
 
+import com.github.frontear.internal.NotNull;
 import java.io.*;
 import java.util.jar.Manifest;
 import java.util.zip.ZipFile;
@@ -37,6 +38,7 @@ public final class JavaExecutable {
      *
      * @return A {@link BufferedReader} pointing to the specific entry.
      */
+    @NotNull
     @SneakyThrows(IOException.class)
     public BufferedReader getResource(@NonNull final String entry) {
         return new BufferedReader(new InputStreamReader(file.getInputStream(file.getEntry(entry))));
@@ -45,6 +47,7 @@ public final class JavaExecutable {
     /**
      * @return The jar manifest.
      */
+    @NotNull
     @SneakyThrows(IOException.class)
     public Manifest getManifest() {
         val manifest = file.getInputStream(file.getEntry("META-INF/MANIFEST.MF"));

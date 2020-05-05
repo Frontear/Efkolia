@@ -1,6 +1,7 @@
 package com.github.frontear.efkolia.utilities.network;
 
 import com.github.frontear.internal.NotNull;
+import lombok.NonNull;
 
 /**
  * Handles the conversion of a connection response.
@@ -16,5 +17,5 @@ public interface Response<T> {
      * @return The converted response as an object.
      */
     @NotNull
-    T parse(@NotNull final String response);
+    T parse(@NonNull final String response);
 }

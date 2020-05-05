@@ -61,6 +61,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
         if (listeners.containsKey(key)) {
             val ls = listeners.get(key);
 
+            //noinspection ForLoopReplaceableByForEach
             for (var i = 0; i < ls.size(); ++i) {
                 val method = ls.get(i);
 
@@ -86,7 +87,7 @@ public final class EventExecutor implements IEventExecutor<Event> {
         return event;
     }
 
-    private void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
+    private void debug(@NonNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.EVENT_DEBUG) {
             logger.debug(to_string, format_args);
         }
