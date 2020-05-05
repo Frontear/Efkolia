@@ -1,30 +1,22 @@
 package com.github.frontear.efkolia.utilities.inspect;
 
 import com.github.frontear.efkolia.utilities.inspect.exceptions.NoSuchMappingException;
-import com.github.frontear.internal.NotNull;
-import lombok.NonNull;
+import com.github.frontear.efkolia.utilities.inspect.resolver.*;
 
 class TestResolver implements MappingResolver {
-    @NotNull
     @Override
-    public String resolveClass(@NonNull final String pkg, @NonNull final String name)
+    public TypeDescriptor resolveClass(final String pkg, final String name)
         throws NoSuchMappingException {
-        return pkg + "." + name;
+        return new TypeDescriptor(pkg, name);
     }
 
-    @NotNull
     @Override
-    public String resolveMethod(@NonNull final String clazz, @NonNull final String name,
-        @NonNull final String descriptor)
-        throws NoSuchMappingException {
-        return name;
+    public String resolveMethod(final MethodDescriptor descriptor) throws NoSuchMappingException {
+        return descriptor.getName();
     }
 
-    @NotNull
     @Override
-    public String resolveField(@NonNull final String clazz, @NonNull final String name,
-        @NonNull final String descriptor)
-        throws NoSuchMappingException {
-        return name;
+    public String resolveField(final FieldDescriptor descriptor) throws NoSuchMappingException {
+        return descriptor.getName();
     }
 }

@@ -34,11 +34,6 @@ class EventExecutorTest {
     void fire() {
         assertThrows(NullPointerException.class, () -> executor.fire(null));
 
-        if (TestObject.throwing) {
-            assertThrows(TestEventException.class, () -> executor.fire(event));
-        }
-        else {
-            assertDoesNotThrow(() -> executor.fire(event));
-        }
+        assertDoesNotThrow(() -> executor.fire(event));
     }
 }

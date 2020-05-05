@@ -16,8 +16,7 @@ final class EventMethod implements Comparable<EventMethod> {
         this.priority = callback.getAnnotation(Listener.class).value();
     }
 
-    @SneakyThrows(ReflectiveOperationException.class)
-    public void invoke(@NonNull final Event event) {
+    public void invoke(@NonNull final Event event) throws Exception {
         callback.invoke(instance, event);
     }
 

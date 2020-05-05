@@ -2,6 +2,8 @@ package com.github.frontear.efkolia.utilities.inspect;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.frontear.efkolia.utilities.inspect.resolver.MethodDescriptor;
+import com.github.frontear.efkolia.utilities.inspect.resolver.*;
 import java.lang.reflect.*;
 import lombok.*;
 import org.junit.jupiter.api.*;
@@ -22,10 +24,9 @@ class ReflectorTest {
         assertThrows(NullPointerException.class, () -> Reflector.getField(null, null));
 
         Field field = assertDoesNotThrow(() -> {
-            val obf_name = resolver.resolveField(
+            val obf_name = resolver.resolveField(new FieldDescriptor(
                 resolver.resolveClass("com.github.frontear.efkolia.utilities.inspect",
-                    "TestSuperclass"),
-                "i", "I");
+                    "TestSuperclass"), "i", TypeDescriptor.INT));
             val f = Reflector.getField(TestClass.class, obf_name);
             f.setAccessible(true);
 
@@ -37,9 +38,9 @@ class ReflectorTest {
         assertEquals(field.getInt(instance), 101);
 
         field = assertDoesNotThrow(() -> {
-            val obf_name = resolver.resolveField(
+            val obf_name = resolver.resolveField(new FieldDescriptor(
                 resolver.resolveClass("com.github.frontear.efkolia.utilities.inspect", "TestClass"),
-                "s", "Ljava/lang/String;");
+                "s", new TypeDescriptor(String.class)));
             val f = Reflector.getField(TestClass.class, obf_name);
             f.setAccessible(true);
 
@@ -51,9 +52,9 @@ class ReflectorTest {
         assertEquals(field.get(instance), "hello");
 
         assertThrows(NoSuchFieldException.class, () -> {
-            val obf_name = resolver.resolveField(
-                resolver.resolveClass("com.github.frontear.efkolia.utilities.inspect",
-                    "TestSuperclass"), "s", "Ljava/lang/String;");
+            val obf_name = resolver.resolveField(new FieldDescriptor(resolver
+                .resolveClass("com.github.frontear.efkolia.utilities.inspect", "TestSuperclass"),
+                "s", new TypeDescriptor(String.class)));
             Reflector.getField(TestSuperclass.class, obf_name);
         });
     }
@@ -64,10 +65,9 @@ class ReflectorTest {
         assertThrows(NullPointerException.class, () -> Reflector.getMethod(null, null));
 
         Method method = assertDoesNotThrow(() -> {
-            val obf_name = resolver.resolveMethod(
+            val obf_name = resolver.resolveMethod(new MethodDescriptor(
                 resolver.resolveClass("com.github.frontear.efkolia.utilities.inspect",
-                    "TestSuperclass"),
-                "i", "()I");
+                    "TestSuperclass"), "i", TypeDescriptor.INT));
             val m = Reflector.getMethod(TestClass.class, obf_name);
             m.setAccessible(true);
 
@@ -79,9 +79,9 @@ class ReflectorTest {
         assertEquals(method.invoke(instance), 1);
 
         method = assertDoesNotThrow(() -> {
-            val obf_name = resolver.resolveMethod(
+            val obf_name = resolver.resolveMethod(new MethodDescriptor(
                 resolver.resolveClass("com.github.frontear.efkolia.utilities.inspect", "TestClass"),
-                "s", "()Ljava/lang/String;");
+                "s", new TypeDescriptor(String.class)));
             val m = Reflector.getMethod(TestClass.class, obf_name);
             m.setAccessible(true);
 
@@ -93,10 +93,9 @@ class ReflectorTest {
         assertEquals(method.invoke(instance), "hey");
 
         assertThrows(NoSuchMethodException.class, () -> {
-            val obf_name = resolver.resolveMethod(
+            val obf_name = resolver.resolveMethod(new MethodDescriptor(
                 resolver.resolveClass("com.github.frontear.efkolia.utilities.inspect",
-                    "TestSuperclass"),
-                "s", "()Ljava/lang/String;");
+                    "TestSuperclass"), "s", new TypeDescriptor(String.class)));
             Reflector.getMethod(TestSuperclass.class, obf_name);
         });
     }
@@ -108,7 +107,7 @@ class ReflectorTest {
         Class<?> clazz = assertDoesNotThrow(() -> {
             val obf_name = resolver
                 .resolveClass("com.github.frontear.efkolia.utilities.inspect", "TestClass");
-            return Reflector.getClass(obf_name);
+            return Reflector.getClass(obf_name.getName());
         });
 
         assertSame(clazz, TestClass.class);
@@ -116,14 +115,14 @@ class ReflectorTest {
         clazz = assertDoesNotThrow(() -> {
             val obf_name = resolver
                 .resolveClass("com.github.frontear.efkolia.utilities.inspect", "TestSuperclass");
-            return Reflector.getClass(obf_name);
+            return Reflector.getClass(obf_name.getName());
         });
 
         assertSame(clazz, TestSuperclass.class);
 
         assertThrows(ClassNotFoundException.class, () -> {
             val obf_name = resolver.resolveClass("com.abc", "Main");
-            Reflector.getClass(obf_name);
+            Reflector.getClass(obf_name.getName());
         });
     }
 }
