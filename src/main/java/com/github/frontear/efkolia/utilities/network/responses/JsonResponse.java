@@ -5,12 +5,12 @@ import com.github.frontear.internal.NotNull;
 import com.google.gson.*;
 import lombok.NonNull;
 
-public final class JsonResponse implements Response<JsonObject> {
+public final class JsonResponse implements Response<JsonElement> {
     private final JsonParser parser = new JsonParser();
 
     @NotNull
     @Override
-    public JsonObject parse(@NonNull final String response) {
-        return parser.parse(response).getAsJsonObject();
+    public JsonElement parse(@NonNull final String response) {
+        return parser.parse(response);
     }
 }

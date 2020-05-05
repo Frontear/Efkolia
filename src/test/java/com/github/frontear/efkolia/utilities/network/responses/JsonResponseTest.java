@@ -10,7 +10,7 @@ class JsonResponseTest {
 
     @Test
     void parse() {
-        val json = new JsonResponse().parse(test);
+        val json = new JsonResponse().parse(test).getAsJsonObject();
 
         assertNotNull(json);
         assertTrue(json.has("property"));
