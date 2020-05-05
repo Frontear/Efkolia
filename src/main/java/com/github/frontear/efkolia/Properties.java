@@ -3,6 +3,7 @@ package com.github.frontear.efkolia;
 import com.github.frontear.efkolia.impl.configuration.Config;
 import com.github.frontear.efkolia.impl.container.Container;
 import com.github.frontear.efkolia.impl.events.EventExecutor;
+import com.github.frontear.efkolia.impl.logging.Logger;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import lombok.NonNull;
 
@@ -34,6 +35,11 @@ public final class Properties {
      * EventExecutor}.
      */
     public static final boolean EVENT_DEBUG = DEBUG || get("event.debug");
+
+    /**
+     * Enables a legacy functionality in {@link Logger} that forces a prefix to each log entry. This isn't necessary in the newer fabric environments, as they modify the logger config to support this
+     */
+    public static final boolean LEGACY_LOGGER = get("legacy.logger");
 
     /**
      * The secure random property. This triggers the more secure functionality of {@link

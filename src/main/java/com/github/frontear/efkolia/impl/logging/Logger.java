@@ -19,8 +19,8 @@ public final class Logger implements ILogger {
 
     private Logger(@NonNull final String name) {
         this.name = name;
-        this.prefix = "[" + name + "] ";
-        this.logger = LogManager.getLogger(name); // todo: param necessary?
+        this.prefix = Properties.LEGACY_LOGGER ? "[" + name + "]" : "";
+        this.logger = LogManager.getLogger(name);
     }
 
     @Override
