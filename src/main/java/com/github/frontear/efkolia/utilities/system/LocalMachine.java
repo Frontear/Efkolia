@@ -18,6 +18,7 @@ import lombok.experimental.UtilityClass;
  * A utility class which allows easy access to detect operating system and architecture information
  * as well as specific procedure information specialized for each OS.
  */
+@Deprecated
 @UtilityClass
 public class LocalMachine {
     private final OperatingSystem os;

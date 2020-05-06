@@ -5,29 +5,31 @@ import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 
 /**
- * A utility which tracks certain durations to the accuracy of nanoseconds. It makes use of {@link
- * System#nanoTime()} to achieve high precision duration timing. Furthermore, it allows you to
- * seamlessly convert the time information into other types, by making use of {@link TimeUnit}.
+ * A utility which tracks lapses of time to the accuracy of nanoseconds. It makes use of {@link
+ * System#nanoTime()} to achieve high precision timing. Furthermore, it allows you to seamlessly
+ * convert the time information into other types, by making use of {@link TimeUnit}.
  */
+// todo: incorporate duration
 public final class Timer {
     private long nanos;
 
     /**
-     * Creates a new instance of a timer and invokes {@link #reset()}.
+     * Creates a new instance of a timer, setting the initial time to the current value of {@link
+     * System#nanoTime()}.
      */
     public Timer() {
         this.reset();
     }
 
     /**
-     * Resets the internal nanos to the most recent value received from {@link System#nanoTime()}.
+     * Resets the initial time to the most recent value received from {@link System#nanoTime()}.
      */
     public void reset() {
         this.nanos = System.nanoTime();
     }
 
     /**
-     * Checks if the elapsed nano seconds are equivalent to a specific point of time. This
+     * Checks if the elapsed time is equivalent to a specific unit of time and its duration. This
      * internally uses {@link #getElapsed(TimeUnit)}.
      *
      * @param unit The unit to compare with.
@@ -40,7 +42,7 @@ public final class Timer {
     }
 
     /**
-     * Converts the elapsed nanosecond time to a specified {@link TimeUnit}.
+     * Converts the elapsed time to a specified {@link TimeUnit}.
      *
      * @param unit The specified unit type.
      *

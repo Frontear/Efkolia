@@ -13,39 +13,33 @@ import lombok.NonNull;
  */
 public final class Properties {
     /**
-     * The global debugging property. It will automatically enable all other debugging flags,
-     * irrespective of whether they have been set or not.
+     * The main debugging flag which will enable {@link Logger#debug(Object, Object...)}. This
+     * automatically enables all other debugging flags.
      */
     public static final boolean DEBUG = get("debug");
 
     /**
-     * The configuration debugging property. This enables extremely verbose logging of {@link
-     * Config}.
+     * Enables verbose logging and information from {@link Config}.
      */
     public static final boolean CONFIG_DEBUG = DEBUG || get("config.debug");
 
     /**
-     * The container debugging property. This enables extremely verbose logging of {@link
-     * Container}
+     * Enables verbose logging and information from {@link Container}.
      */
     public static final boolean CONTAINER_DEBUG = DEBUG || get("container.debug");
 
     /**
-     * The events debugging property. This enables extremely verbose logging of {@link
-     * EventExecutor}.
+     * Enables verbose logging and information from {@link EventExecutor}.
      */
     public static final boolean EVENT_DEBUG = DEBUG || get("event.debug");
 
     /**
-     * Enables a legacy functionality in {@link Logger} that forces a prefix to each log entry. This
-     * isn't necessary in the newer fabric environments, as they modify the logger config to support
-     * this
+     * Enables a legacy functionality in {@link Logger} that forces a prefix to each log entry.
      */
     public static final boolean LEGACY_LOGGER = get("legacy.logger");
 
     /**
-     * The secure random property. This triggers the more secure functionality of {@link
-     * LocalRandom}.
+     * Enables the secure randomization functionality of {@link LocalRandom}.
      */
     public static final boolean SECURE_RANDOM = get("secure.random");
 

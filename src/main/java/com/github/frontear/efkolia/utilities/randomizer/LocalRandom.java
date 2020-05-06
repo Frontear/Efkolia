@@ -11,7 +11,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * A utility class which generates random numbers in a fully thread-safe manner. By default, it will
- * internally use {@link ThreadLocalRandom} to generate pseudo-random. {@link
+ * internally use {@link ThreadLocalRandom} to generate pseudo-random, though {@link
  * Properties#SECURE_RANDOM} can be set to make use of {@link SecureRandom}.
  */
 @UtilityClass
