@@ -5,6 +5,7 @@ import com.github.frontear.efkolia.api.events.*;
 import com.github.frontear.efkolia.api.info.IMetadata;
 import com.github.frontear.efkolia.api.logging.ILogger;
 import com.github.frontear.internal.NotNull;
+import java.nio.file.Path;
 
 /**
  * The interface which defines a minecraft mod. This should ideally contain all of your objects, and
@@ -12,6 +13,13 @@ import com.github.frontear.internal.NotNull;
  * functionality of your mod depends upon and derives from.
  */
 public interface IMinecraftMod {
+    /**
+     * All files pertaining to this mod should be stored in here.
+     *
+     * @return An instance of {@link Path} to the directory owned and managed by this mod.
+     */
+    Path getDirectory();
+
     /**
      * The metadata of the mod. This contains all the information that would be necessary to display
      * to the user.
