@@ -41,7 +41,7 @@ public final class Logger implements ILogger {
     @Override
     public void debug(@NotNull final Object to_string, @Nullable final Object... format_args) {
         if (Properties.DEBUG) {
-            this.log(x -> logger.log(Level.OFF, x), to_string, format_args);
+            this.info(to_string, format_args);
         }
     }
 
