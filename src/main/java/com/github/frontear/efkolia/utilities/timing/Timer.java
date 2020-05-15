@@ -9,7 +9,6 @@ import lombok.NonNull;
  * System#nanoTime()} to achieve high precision timing. Furthermore, it allows you to seamlessly
  * convert the time information into other types, by making use of {@link TimeUnit}.
  */
-// todo: incorporate duration
 public final class Timer {
     private long nanos;
 
