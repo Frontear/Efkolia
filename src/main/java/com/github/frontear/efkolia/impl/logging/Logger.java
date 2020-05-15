@@ -6,7 +6,7 @@ import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.*;
 import java.util.function.Consumer;
 import lombok.NonNull;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
 
 public final class Logger implements ILogger {
     private final String name;

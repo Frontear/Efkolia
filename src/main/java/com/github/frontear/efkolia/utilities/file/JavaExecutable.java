@@ -15,6 +15,7 @@ import lombok.*;
  * program is executed from a jar file. This means it will almost certainly fail during production
  * testing, unless your testing environment allows for compilation into a jar, then execution.
  */
+// todo: use NIO
 public final class JavaExecutable {
     private final ZipFile file;
 
