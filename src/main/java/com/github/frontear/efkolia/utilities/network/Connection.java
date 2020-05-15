@@ -3,6 +3,7 @@ package com.github.frontear.efkolia.utilities.network;
 import com.github.frontear.internal.NotNull;
 import java.io.*;
 import java.net.*;
+import java.nio.file.*;
 import lombok.*;
 import lombok.experimental.UtilityClass;
 
@@ -37,5 +38,19 @@ public class Connection {
         }
 
         return type.parse(response.toString());
+    }
+
+    /**
+     * Attempts to download a specified file from a url to a source path. It will replace any
+     * similarly named file.
+     *
+     * @param url  The url of the file to download.
+     * @param path The path to download it to.
+     */
+    @SneakyThrows(IOException.class)
+    public void download(@NonNull final String url, @NonNull final Path path) {
+        try (val stream = new URL(url).openStream()) {
+            Files.copy(stream, path, StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 }
