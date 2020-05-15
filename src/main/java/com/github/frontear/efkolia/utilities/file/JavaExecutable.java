@@ -2,9 +2,12 @@ package com.github.frontear.efkolia.utilities.file;
 
 import com.github.frontear.internal.NotNull;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.*;
 import java.util.jar.Manifest;
-import java.util.zip.ZipFile;
 import lombok.*;
+import lombok.experimental.Delegate;
 
 /**
  * A class that allows for self-introspection of the executing jar. It allows you to manage
@@ -15,9 +18,8 @@ import lombok.*;
  * program is executed from a jar file. This means it will almost certainly fail during production
  * testing, unless your testing environment allows for compilation into a jar, then execution.
  */
-// todo: use NIO
-public final class JavaExecutable {
-    private final ZipFile file;
+public final class JavaExecutable implements Closeable {
+    @Delegate(types = Closeable.class) private final FileSystem system;
 
     /**
      * Loads a java jar. Currently, this targets the executing jar. It requires a valid class in
@@ -25,10 +27,10 @@ public final class JavaExecutable {
      *
      * @param target The class whose jar file you wish to view.
      */
-    @SneakyThrows(IOException.class)
+    @SneakyThrows({ IOException.class, URISyntaxException.class })
     public JavaExecutable(@NonNull final Class<?> target) {
-        this.file = new ZipFile(
-            new File(target.getProtectionDomain().getCodeSource().getLocation().getPath()));
+        val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
+        this.system = FileSystems.newFileSystem(path, null);
     }
 
     /**
@@ -42,7 +44,7 @@ public final class JavaExecutable {
     @NotNull
     @SneakyThrows(IOException.class)
     public BufferedReader getResource(@NonNull final String entry) {
-        return new BufferedReader(new InputStreamReader(file.getInputStream(file.getEntry(entry))));
+        return Files.newBufferedReader(this.getEntry(entry));
     }
 
     /**
@@ -51,7 +53,13 @@ public final class JavaExecutable {
     @NotNull
     @SneakyThrows(IOException.class)
     public Manifest getManifest() {
-        val manifest = file.getInputStream(file.getEntry("META-INF/MANIFEST.MF"));
-        return new Manifest(manifest);
+        return new Manifest(Files.newInputStream(this.getEntry("/META-INF/MANIFEST.MF")));
+    }
+
+    @NotNull
+    private Path getEntry(@NonNull String entry) {
+        entry = entry.startsWith("/") ? entry : "/" + entry; // FileSystem considers the jar to be the root path, so this is necessary
+
+        return system.getPath(entry);
     }
 }
