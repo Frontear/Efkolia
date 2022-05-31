@@ -30,7 +30,7 @@ public final class JavaExecutable implements Closeable {
     @SneakyThrows({ IOException.class, URISyntaxException.class })
     public JavaExecutable(@NonNull final Class<?> target) {
         val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
-        this.system = FileSystems.newFileSystem(path, null);
+        this.system = FileSystems.newFileSystem(path, (ClassLoader) null);
     }
 
     /**

@@ -1,27 +1,29 @@
 import java.util.concurrent.ThreadLocalRandom
 
 plugins {
+    /*
     id "io.codearte.nexus-staging" version "0.21.1"
     id "com.bmuschko.nexus" version "2.3.1"
-    id "io.freefair.lombok" version "4.1.6"
+     */
+    id "io.freefair.lombok" version "6.4.3"
     id "java"
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_17
 group = "com.github.frontear"
-version = "0.2.7"
+version = "0.2.8"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.apache.logging.log4j:log4j-core:2.8.1")
-    implementation("com.google.code.gson:gson:2.8.0")
-    implementation("com.google.guava:guava:21.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.17.2")
+    implementation("com.google.code.gson:gson:2.9.0")
+    implementation("com.google.guava:guava:31.1-jre")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 }
 
 // https://docs.freefair.io/gradle-plugins/4.1.6/reference/#_lombok_plugins
@@ -34,6 +36,7 @@ lombok {
     config["lombok.toString.doNotUseGetters"] = "true"
 }
 
+/*
 //noinspection GroovyAssignabilityCheck
 modifyPom {
     //noinspection GroovyAssignabilityCheck
@@ -64,6 +67,7 @@ modifyPom {
         }
     }
 }
+ */
 
 test {
     final randBool = { ThreadLocalRandom.current().nextBoolean() }
@@ -87,9 +91,9 @@ test {
 
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = "6.0.1"
+    gradleVersion = "7.4"
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
 }
