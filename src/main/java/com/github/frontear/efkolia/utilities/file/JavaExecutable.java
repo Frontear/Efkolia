@@ -18,8 +18,10 @@ import lombok.experimental.Delegate;
  * program is executed from a jar file. This means it will almost certainly fail during production
  * testing, unless your testing environment allows for compilation into a jar, then execution.
  */
+@Deprecated
 public final class JavaExecutable implements Closeable {
     @Delegate(types = Closeable.class) private final FileSystem system;
+    private final Class<?> target;
 
     /**
      * Loads a java jar. Currently, this targets the executing jar. It requires a valid class in
@@ -29,8 +31,10 @@ public final class JavaExecutable implements Closeable {
      */
     @SneakyThrows({ IOException.class, URISyntaxException.class })
     public JavaExecutable(@NonNull final Class<?> target) {
-        val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
-        this.system = FileSystems.newFileSystem(path, (ClassLoader) null);
+        //val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
+        //this.system = FileSystems.newFileSystem(path, (ClassLoader) null);
+        this.system = null;
+        this.target = target;
     }
 
     /**
@@ -44,7 +48,7 @@ public final class JavaExecutable implements Closeable {
     @NotNull
     @SneakyThrows(IOException.class)
     public BufferedReader getResource(@NonNull final String entry) {
-        return Files.newBufferedReader(this.getEntry(entry));
+        return new BufferedReader(new InputStreamReader(this.getEntry(entry)));
     }
 
     /**
@@ -53,13 +57,14 @@ public final class JavaExecutable implements Closeable {
     @NotNull
     @SneakyThrows(IOException.class)
     public Manifest getManifest() {
-        return new Manifest(Files.newInputStream(this.getEntry("/META-INF/MANIFEST.MF")));
+        return new Manifest(this.getEntry("/META-INF/MANIFEST.MF"));
     }
 
     @NotNull
-    private Path getEntry(@NonNull String entry) {
+    private InputStream getEntry(@NonNull String entry) {
         entry = entry.startsWith("/") ? entry : "/" + entry; // FileSystem considers the jar to be the root path, so this is necessary
 
-        return system.getPath(entry);
+        //return system.getPath(entry);
+        return target.getResourceAsStream(entry);
     }
 }
