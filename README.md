@@ -6,7 +6,7 @@ My minecraft modding framework, contains all the necessities that I deem importa
 
 - Clone this repository via `git clone https://github.com/Frontear/Efkolia.git Efkolia`
 - Import the project into [IntelliJ IDEA](https://jetbrains.com/idea)
-- Create a *gradle.properties* (or update the one at `~/.gradle/gradle.properties`) with your `nexusUsername`, `nexusPassword` (nexus usertokens), `signing.keyId` (last 8 characters of key), and `signing.password`. Do NOT share this file publicly.
+- Create a *gradle.properties* (or update the one at `~/.gradle/gradle.properties`) with your `sonatypeUsername`, `sonatypePassword` (nexus usertokens), `signing.keyId` (last 8 characters of key), and `signing.password`. Do NOT share this file publicly.
 
 ## Usage
 

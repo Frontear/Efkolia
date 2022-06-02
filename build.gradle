@@ -5,7 +5,11 @@ plugins {
     id "io.codearte.nexus-staging" version "0.21.1"
     id "com.bmuschko.nexus" version "2.3.1"
      */
+    id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
     id "io.freefair.lombok" version "6.4.3"
+
+    id "maven-publish"
+    id "signing"
     id "java"
 }
 
@@ -39,38 +43,54 @@ lombok {
     config["lombok.toString.doNotUseGetters"] = "true"
 }
 
-/*
-//noinspection GroovyAssignabilityCheck
-modifyPom {
-    //noinspection GroovyAssignabilityCheck
-    project {
-        name = "Efkolia"
-        description = "A simple framework designed for Minecraft modding"
-        url = "https://github.com/frontear/efkolia"
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
-        scm {
-            url = "https://github.com/frontear/efkolia"
-            connection = "scm:https://frontear@github.com/frontear/efkolia.git"
-            developerConnection = "scm:git://github.com/frontear/efkolia.git"
-        }
+nexusPublishing {
+    repositories {
+        sonatype()
+    }
+}
 
-        licenses {
-            license {
-                name = "GNU General Public License v3.0"
-                url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
-                distribution = "repo"
-            }
-        }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = "Efkolia"
+                description = "A simple framework designed for Minecraft modding"
+                url = "https://github.com/frontear/efkolia"
 
-        developers {
-            developer {
-                id = "Frontear"
-                name = "Ali Rizvi"
+                scm {
+                    url = "https://github.com/frontear/efkolia"
+                    connection = "scm:https://frontear@github.com/frontear/efkolia.git"
+                    developerConnection = "scm:git://github.com/frontear/efkolia.git"
+                }
+
+                licenses {
+                    license {
+                        name = "GNU General Public License v3.0"
+                        url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
+                        distribution = "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "Frontear"
+                        name = "Ali Rizvi"
+                    }
+                }
             }
         }
     }
 }
- */
+
+signing {
+    sign publishing.publications.mavenJava
+}
 
 test {
     final randBool = { ThreadLocalRandom.current().nextBoolean() }
