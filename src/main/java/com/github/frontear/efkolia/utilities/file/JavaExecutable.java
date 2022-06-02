@@ -2,9 +2,7 @@ package com.github.frontear.efkolia.utilities.file;
 
 import com.github.frontear.internal.NotNull;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
-import java.nio.file.*;
 import java.util.jar.Manifest;
 import lombok.*;
 import lombok.experimental.Delegate;
@@ -29,7 +27,7 @@ public final class JavaExecutable implements Closeable {
      *
      * @param target The class whose jar file you wish to view.
      */
-    @SneakyThrows({ IOException.class, URISyntaxException.class })
+    //@SneakyThrows({ IOException.class, URISyntaxException.class })
     public JavaExecutable(@NonNull final Class<?> target) {
         //val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
         //this.system = FileSystems.newFileSystem(path, (ClassLoader) null);
@@ -38,15 +36,15 @@ public final class JavaExecutable implements Closeable {
     }
 
     /**
-     * Attempts to find a resource within the jar file, and return an instance of {@link
-     * BufferedReader} for easy reading.
+     * Attempts to find a resource within the jar file, and return an instance of
+     * {@link BufferedReader} for easy reading.
      *
      * @param entry The resource to find.
      *
      * @return A {@link BufferedReader} pointing to the specific entry.
      */
     @NotNull
-    @SneakyThrows(IOException.class)
+    //@SneakyThrows(IOException.class)
     public BufferedReader getResource(@NonNull final String entry) {
         return new BufferedReader(new InputStreamReader(this.getEntry(entry)));
     }
@@ -62,7 +60,8 @@ public final class JavaExecutable implements Closeable {
 
     @NotNull
     private InputStream getEntry(@NonNull String entry) {
-        entry = entry.startsWith("/") ? entry : "/" + entry; // FileSystem considers the jar to be the root path, so this is necessary
+        entry = entry.startsWith("/") ? entry
+            : "/" + entry; // FileSystem considers the jar to be the root path, so this is necessary
 
         //return system.getPath(entry);
         return target.getResourceAsStream(entry);

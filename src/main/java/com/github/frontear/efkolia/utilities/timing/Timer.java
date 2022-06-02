@@ -5,16 +5,16 @@ import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 
 /**
- * A utility which tracks lapses of time to the accuracy of nanoseconds. It makes use of {@link
- * System#nanoTime()} to achieve high precision timing. Furthermore, it allows you to seamlessly
- * convert the time information into other types, by making use of {@link TimeUnit}.
+ * A utility which tracks lapses of time to the accuracy of nanoseconds. It makes use of
+ * {@link System#nanoTime()} to achieve high precision timing. Furthermore, it allows you to
+ * seamlessly convert the time information into other types, by making use of {@link TimeUnit}.
  */
 public final class Timer {
     private long nanos;
 
     /**
-     * Creates a new instance of a timer, setting the initial time to the current value of {@link
-     * System#nanoTime()}.
+     * Creates a new instance of a timer, setting the initial time to the current value of
+     * {@link System#nanoTime()}.
      */
     public Timer() {
         this.reset();

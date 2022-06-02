@@ -14,8 +14,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Connection {
     /**
-     * Performs a GET request to a specific site, and returns a response in a compatible {@link
-     * Response} format.
+     * Performs a GET request to a specific site, and returns a response in a compatible
+     * {@link Response} format.
      *
      * @param url  The site URL. This is wrapped with {@link URL} internally.
      * @param type The response type. This is used to easily convert responses into objects.

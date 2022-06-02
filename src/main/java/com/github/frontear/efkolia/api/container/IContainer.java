@@ -5,9 +5,9 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * A container for a collection of items. This is similar to a java collection, such as a {@link
- * List}, however it extends more functionality beyond simple containment. Ideally, it serves to
- * control the full lifecycle of the objects, as well as control various functionality of the
+ * A container for a collection of items. This is similar to a java collection, such as a
+ * {@link List}, however it extends more functionality beyond simple containment. Ideally, it serves
+ * to control the full lifecycle of the objects, as well as control various functionality of the
  * objects. It should not expose the objects core functionality or its own functionality.
  *
  * @param <T> The type of the contained object. Expected to be a parent class of sorts.

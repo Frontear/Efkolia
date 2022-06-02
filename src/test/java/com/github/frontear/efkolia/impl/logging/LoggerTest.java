@@ -3,7 +3,7 @@ package com.github.frontear.efkolia.impl.logging;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.frontear.efkolia.Properties;
-import com.github.frontear.efkolia.common.DummyMod;
+import com.github.frontear.efkolia.impl.mod.ModTest;
 import com.github.frontear.efkolia.utilities.randomizer.LocalRandom;
 import com.github.frontear.internal.NotNull;
 import java.util.*;
@@ -14,7 +14,7 @@ class LoggerTest {
 
     @BeforeAll
     static void beforeAll() {
-        logger = DummyMod.getInstance().getLogger("Logger");
+        logger = ModTest.getInstance().getLogger("Logger");
     }
 
     @Test

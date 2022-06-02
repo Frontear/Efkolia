@@ -2,8 +2,8 @@ package com.github.frontear.efkolia.impl.container;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.common.DummyMod;
 import com.github.frontear.efkolia.impl.container.impl.*;
+import com.github.frontear.efkolia.impl.mod.ModTest;
 import org.junit.jupiter.api.*;
 
 class ContainerTest {
@@ -11,7 +11,7 @@ class ContainerTest {
 
     @BeforeAll
     static void beforeAll() {
-        container = new TestParentContainer(DummyMod.getInstance());
+        container = new TestParentContainer(ModTest.getInstance());
     }
 
     @Test

@@ -22,7 +22,8 @@ class TimerTest {
     @Test
     void reset() {
         timer.reset();
-        assertEquals(0, timer.getElapsed(TimeUnit.MILLISECONDS)); // the nanoseconds can be slightly inaccurate based on system performance
+        assertEquals(0, timer.getElapsed(
+            TimeUnit.MILLISECONDS)); // the nanoseconds can be slightly inaccurate based on system performance
     }
 
     @Test
@@ -44,7 +45,8 @@ class TimerTest {
     @Test
     void testToString() {
         this.sleep();
-        assertEquals("00:00:01", timer.toString().substring(0, 8)); // the milliseconds can be slightly inaccurate based on system performance
+        assertEquals("00:00:01", timer.toString().substring(0,
+            8)); // the milliseconds can be slightly inaccurate based on system performance
     }
 
     @SneakyThrows(InterruptedException.class)

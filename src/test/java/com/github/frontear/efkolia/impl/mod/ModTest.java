@@ -1,21 +1,20 @@
-package com.github.frontear.efkolia.common;
+package com.github.frontear.efkolia.impl.mod;
 
-import com.github.frontear.efkolia.impl.mod.MinecraftMod;
 import com.github.frontear.internal.NotNull;
 import lombok.val;
 
-public final class DummyMod extends MinecraftMod {
+public final class ModTest extends MinecraftMod {
     private static final MinecraftMod instance;
 
     static {
         val temp = System.getProperty("user.dir");
         System.setProperty("user.dir", System.getProperty("java.io.tmpdir"));
-        instance = new DummyMod();
+        instance = new ModTest();
         System.out.println(instance.getDirectory());
         System.setProperty("user.dir", temp);
     }
 
-    public DummyMod() {
+    public ModTest() {
         super("Test", "0.11235", "Frontear");
     }
 

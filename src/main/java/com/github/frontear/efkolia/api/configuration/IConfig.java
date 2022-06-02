@@ -25,8 +25,8 @@ public interface IConfig {
     void unregister(@NotNull final IConfigurable<?> object);
 
     /**
-     * Attempts to read the configuration file into the program, then iterate on all {@link
-     * #register(IConfigurable)} elements to modify their internal state.
+     * Attempts to read the configuration file into the program, then iterate on all
+     * {@link #register(IConfigurable)} elements to modify their internal state.
      */
     void load();
 

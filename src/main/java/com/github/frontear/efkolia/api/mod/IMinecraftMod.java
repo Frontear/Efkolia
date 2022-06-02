@@ -30,9 +30,9 @@ public interface IMinecraftMod {
     IMetadata getMetadata();
 
     /**
-     * The logging system of the mod. This creates a "child" of a previously configured {@link
-     * ILogger}, and will provide the user with it. This does NOT return the original instance,
-     * rather it uses {@link ILogger#child(String)}.
+     * The logging system of the mod. This creates a "child" of a previously configured
+     * {@link ILogger}, and will provide the user with it. This does NOT return the original
+     * instance, rather it uses {@link ILogger#child(String)}.
      *
      * @param name The name of the child logger.
      *

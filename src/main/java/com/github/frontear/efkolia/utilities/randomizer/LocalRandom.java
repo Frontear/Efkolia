@@ -11,8 +11,8 @@ import lombok.experimental.UtilityClass;
 
 /**
  * A utility class which generates random numbers in a fully thread-safe manner. By default, it will
- * internally use {@link ThreadLocalRandom} to generate pseudo-random, though {@link
- * Properties#SECURE_RANDOM} can be set to make use of {@link SecureRandom}.
+ * internally use {@link ThreadLocalRandom} to generate pseudo-random, though
+ * {@link Properties#SECURE_RANDOM} can be set to make use of {@link SecureRandom}.
  */
 @UtilityClass
 public class LocalRandom {
@@ -72,8 +72,8 @@ public class LocalRandom {
     }
 
     /**
-     * Generates a random string based on a specified length. It internally makes use of {@link
-     * #nextChar(boolean)} to achieve this.
+     * Generates a random string based on a specified length. It internally makes use of
+     * {@link #nextChar(boolean)} to achieve this.
      *
      * @param len         The length of the string.
      * @param random_case Whether the string should have randomized casing or not.

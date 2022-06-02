@@ -2,7 +2,7 @@ package com.github.frontear.efkolia.utilities.randomizer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import lombok.*;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 class LocalRandomTest {

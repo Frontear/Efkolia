@@ -2,7 +2,7 @@ package com.github.frontear.efkolia.utilities.network;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.frontear.efkolia.common.DummyMod;
+import com.github.frontear.efkolia.impl.mod.ModTest;
 import com.github.frontear.efkolia.utilities.network.responses.StringResponse;
 import java.net.*;
 import java.nio.file.Path;
@@ -14,7 +14,7 @@ class ConnectionTest {
 
     @BeforeAll
     static void beforeAll() {
-        file = DummyMod.getInstance().getDirectory().resolve("100MB.bin");
+        file = ModTest.getInstance().getDirectory().resolve("100MB.bin");
     }
 
     @Test
