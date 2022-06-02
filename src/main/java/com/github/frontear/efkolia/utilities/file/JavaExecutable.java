@@ -2,24 +2,24 @@ package com.github.frontear.efkolia.utilities.file;
 
 import com.github.frontear.internal.NotNull;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
+import java.nio.file.*;
+import java.util.Objects;
 import java.util.jar.Manifest;
 import lombok.*;
 import lombok.experimental.Delegate;
 
 /**
- * A class that allows for self-introspection of the executing jar. It allows you to manage
- * resources and read them from the jar file. This exists because resources are tied to the
- * ClassLoader. They can be forbidden and become a pain to work with, especially in environments
- * like Fabric (try using {@link Class#getResource(String)}) or such and you'll get a null return,
- * even for assets that should exist). As such, this is a necessity. This will only work if the
- * program is executed from a jar file. This means it will almost certainly fail during production
- * testing, unless your testing environment allows for compilation into a jar, then execution.
+ * A class that allows for self-introspection of a jar. It allows you to manage resources and read
+ * them from the jar file. This exists because resources are tied to the ClassLoader. They can be
+ * forbidden and become a pain to work with, especially in environments like Fabric (try using
+ * {@link Class#getResource(String)} or such, and you'll get a null return, even for assets that
+ * should exist).
  */
-@Deprecated
 public final class JavaExecutable implements Closeable {
-    @Delegate(types = Closeable.class) private final FileSystem system;
     private final Class<?> target;
+    @Delegate(types = Closeable.class) private final FileSystem system;
 
     /**
      * Loads a java jar. Currently, this targets the executing jar. It requires a valid class in
@@ -27,12 +27,19 @@ public final class JavaExecutable implements Closeable {
      *
      * @param target The class whose jar file you wish to view.
      */
-    //@SneakyThrows({ IOException.class, URISyntaxException.class })
+    @SneakyThrows({ IOException.class, URISyntaxException.class })
     public JavaExecutable(@NonNull final Class<?> target) {
-        //val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
-        //this.system = FileSystems.newFileSystem(path, (ClassLoader) null);
-        this.system = null;
         this.target = target;
+
+        val path = Paths.get(target.getProtectionDomain().getCodeSource().getLocation().toURI());
+        if (path.toAbsolutePath().endsWith(
+            ".jar")) { // will create a ZipFileStore internally and allow us to traverse the jar
+            //noinspection RedundantCast
+            this.system = FileSystems.newFileSystem(path, (ClassLoader) null);
+        }
+        else {
+            this.system = null; // likely in a development environment, in which the files are not in a jar
+        }
     }
 
     /**
@@ -44,9 +51,9 @@ public final class JavaExecutable implements Closeable {
      * @return A {@link BufferedReader} pointing to the specific entry.
      */
     @NotNull
-    //@SneakyThrows(IOException.class)
+    @SneakyThrows(IOException.class)
     public BufferedReader getResource(@NonNull final String entry) {
-        return new BufferedReader(new InputStreamReader(this.getEntry(entry)));
+        return Files.newBufferedReader(this.getEntry(entry));
     }
 
     /**
@@ -55,15 +62,20 @@ public final class JavaExecutable implements Closeable {
     @NotNull
     @SneakyThrows(IOException.class)
     public Manifest getManifest() {
-        return new Manifest(this.getEntry("/META-INF/MANIFEST.MF"));
+        return new Manifest(Files.newInputStream(this.getEntry("/META-INF/MANIFEST.MF")));
     }
 
     @NotNull
-    private InputStream getEntry(@NonNull String entry) {
-        entry = entry.startsWith("/") ? entry
+    @SneakyThrows(URISyntaxException.class)
+    private Path getEntry(@NonNull String entry) {
+        val sanitized = entry.startsWith("/") ? entry
             : "/" + entry; // FileSystem considers the jar to be the root path, so this is necessary
 
-        //return system.getPath(entry);
-        return target.getResourceAsStream(entry);
+        if (system == null) {
+            return Paths.get(Objects.requireNonNull(target.getResource(sanitized)).toURI());
+        }
+        else {
+            return system.getPath(entry);
+        }
     }
 }
