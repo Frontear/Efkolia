@@ -19,7 +19,7 @@ import lombok.experimental.Delegate;
  */
 public final class JavaExecutable implements Closeable {
     private final Class<?> target;
-    @Delegate(types = Closeable.class) private final FileSystem system;
+    private final FileSystem system;
 
     /**
      * Loads a java jar. Currently, this targets the executing jar. It requires a valid class in
@@ -76,6 +76,14 @@ public final class JavaExecutable implements Closeable {
         }
         else {
             return system.getPath(entry);
+        }
+    }
+
+    @Override
+    @SneakyThrows(IOException.class)
+    public void close() {
+        if (system != null) {
+            system.close();
         }
     }
 }
