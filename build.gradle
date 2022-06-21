@@ -1,46 +1,28 @@
-import java.util.concurrent.ThreadLocalRandom
-
 plugins {
-    /*
-    id "io.codearte.nexus-staging" version "0.21.1"
-    id "com.bmuschko.nexus" version "2.3.1"
-     */
     id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
-    id "io.freefair.lombok" version "6.4.3"
 
     id "maven-publish"
     id "signing"
     id "java"
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+archivesBaseName = "Efkolia"
 group = "com.github.frontear"
-version = "0.2.8"
+version = "0.1"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    //noinspection GradlePackageUpdate
-    implementation("org.apache.logging.log4j:log4j-core:2.17.0")
-    //noinspection GradlePackageUpdate
-    implementation("com.google.code.gson:gson:2.8.9")
-    //noinspection GradlePackageUpdate
+    implementation("org.slf4j:slf4j-api:1.8.0-beta4'")
+    implementation("org.apache.logging.log4j:log4j-slf4j18-impl:2.17.0")
     implementation("com.google.guava:guava:31.0.1-jre")
+    implementation("com.google.code.gson:gson:2.8.9")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-}
-
-// https://docs.freefair.io/gradle-plugins/4.1.6/reference/#_lombok_plugins
-lombok {
-    config["lombok.addJavaxGeneratedAnnotation"] = "true"
-    config["lombok.experimental.flagUsage"] = "WARNING"
-    config["lombok.extensionMethod.flagUsage"] = "ERROR"
-    config["lombok.fieldDefaults.flagUsage"] = "WARNING"
-    config["lombok.sneakyThrows.flagUsage"] = "WARNING"
-    config["lombok.toString.doNotUseGetters"] = "true"
 }
 
 java {
@@ -93,28 +75,8 @@ signing {
 }
 
 test {
-    final randBool = { ThreadLocalRandom.current().nextBoolean() }
-
-    final props = [
-        "-Defkolia.debug=${randBool()}",
-        "-Defkolia.config.debug=${randBool()}",
-        "-Defkolia.container.debug=${randBool()}",
-        "-Defkolia.event.debug=${randBool()}",
-        "-Defkolia.secure.random=${randBool()}"
-    ]
-
-    jvmArgs props
     useJUnitPlatform()
     testLogging.showStandardStreams = true
-
-    doFirst {
-        props.each { println it }
-    }
-}
-
-wrapper {
-    distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = "7.4"
 }
 
 tasks.withType(JavaCompile).configureEach {
