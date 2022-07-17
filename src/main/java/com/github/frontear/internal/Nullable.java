@@ -1,13 +1,11 @@
 package com.github.frontear.internal;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
 
 /**
- * Represents something which may be null. This can be used on parameters, and/or methods. Please
- * see <a>https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html#nullable</a> for
- * more information, including how to set these up for IntelliJ IDEA.
+ * Represents an element in code that can be null. Developers should consider the possibility and implement null-safety
+ * checks if necessary for the operation of their code.
  */
-@Target({ ElementType.PARAMETER, ElementType.METHOD })
-@Retention(RetentionPolicy.SOURCE)
+@Documented
 public @interface Nullable {
 }

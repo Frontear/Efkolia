@@ -1,9 +1,6 @@
 pluginManagement {
     repositories {
-        jcenter()
         mavenCentral()
         gradlePluginPortal()
     }
 }
-
-rootProject.name = "Efkolia"
